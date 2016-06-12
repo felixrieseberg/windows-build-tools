@@ -1,6 +1,6 @@
 {
   "name": "windows-build-tools",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "lib/index.js",
   "scripts": {
@@ -13,7 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/felixrieseberg/windows-build-tools.git"
   },
-  "os": [ "win32" ],
+  "os": [
+    "win32"
+  ],
   "keywords": [
     "Windows",
     "Build Tools",
@@ -21,7 +23,9 @@
     "native",
     "c++"
   ],
-  "engines" : { "node" : ">=4.0.0" },
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "author": "Felix Rieseberg <felix@felixrieseberg.com>",
   "license": "MIT",
   "bugs": {
