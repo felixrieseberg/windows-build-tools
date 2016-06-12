@@ -9,7 +9,7 @@ environment:
 
 # Install scripts. (runs after repo cloning)
 install:
-  - npm install
+  - npm install --ignore-scripts
 
 # Post-install test scripts.
 test_script:
