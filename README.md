@@ -7,6 +7,8 @@ On Windows? Want to compile native Node modules? Install the build tools with th
 npm install --global --production windows-build-tools
 ```
 
+![Gif](https://cloud.githubusercontent.com/assets/1426799/15993939/2bbb470a-30aa-11e6-9cde-94c39b3f35cb.gif)
+
 After installation, npm will automatically execute this module, which downloads and installs Visual C++ Build Tools 2015, provided free of charge by Microsoft. These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
 
 > :warning: If you don't have Python installed, you will likely also have to install [Python 2.7](https://www.python.org/download/releases/2.7/).
