@@ -42,6 +42,8 @@ function install () {
       }
     })
 
+    console.log(chalk.green('Starting installation...'))
+
     return launchInstaller()
       .then(() => tailer.start())
       .catch((error) => console.log(error))
