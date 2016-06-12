@@ -1,4 +1,5 @@
 # Windows-Build-Tools
+<a href="https://ci.appveyor.com/project/felixrieseberg/windows-build-tools"><img src="https://ci.appveyor.com/api/projects/status/gpna6y54wnfp07xr?svg=true" /></a>
 
 On Windows? Want to compile native Node modules? Install the build tools with this one-liner:
 

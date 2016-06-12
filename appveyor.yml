@@ -1,0 +1,30 @@
+init:
+  - git config --global core.autocrlf input
+
+# Test against these versions of Node.js.
+environment:
+  matrix:
+    - nodejs_version: "4.0"
+    - nodejs_version: "6.0"
+
+# Install scripts. (runs after repo cloning)
+install:
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
+
+# Set build version format here instead of in the admin panel.
+version: "{build}"
+
+cache:
+  - node_modules                    # local npm modules
+  - '%APPDATA%\npm-cache'           # npm cache
