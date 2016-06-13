@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard \"src/*.js\" && mocha",
     "postinstall": "node ./lib/index.js",
-    "build": "babel src --preset es2015 -d lib",
+    "build": "babel src -d lib",
     "prepublish": "npm run build"
   },
   "repository": {
