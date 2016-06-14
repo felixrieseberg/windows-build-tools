@@ -36,6 +36,9 @@ function launchInstaller () {
         console.log(chalk.bold.red('Please restart this script from an administrative PowerShell!'))
         console.log('The build tools cannot be installed without administrative rights.')
         console.log('To fix, right-click on PowerShell and run "as Administrator".')
+
+        // Bail out
+        process.exit(1)
       }
     })
 
