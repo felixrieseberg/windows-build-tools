@@ -31,7 +31,7 @@ describe('Install - Tailer', () => {
     const tailer = new Tailer()
 
     tailer.logFile.should.be.ok
-    tailer.logFile.should.equal(path.join(process.env.USERPROFILE, '.windows-build-tools', 'log.txt'))
+    tailer.logFile.should.equal(path.join(process.env.USERPROFILE || process.env.HOME, '.windows-build-tools', 'log.txt'))
   })
 
   it('waitForLogFile() should resolve when the logfile exists', (done) => {
@@ -41,7 +41,7 @@ describe('Install - Tailer', () => {
     tailer.waitForLogFile().should.be.fulfilled
       .then((stat) => {
         passedFile.should.be.ok
-        passedFile.should.equal(path.join(process.env.USERPROFILE, '.windows-build-tools', 'log.txt'))
+        passedFile.should.equal(path.join(process.env.USERPROFILE || process.env.HOME, '.windows-build-tools', 'log.txt'))
       })
       .should.notify(done)
   })

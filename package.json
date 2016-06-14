@@ -4,7 +4,7 @@
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "lib/index.js",
   "scripts": {
-    "test": "standard \"src/*.js\" && mocha",
+    "test": "standard \"src/*.js\" && npm run build && mocha",
     "postinstall": "node ./lib/index.js",
     "build": "babel src -d lib",
     "prepublish": "npm run build"
