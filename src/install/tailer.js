@@ -52,8 +52,10 @@ class Tailer extends EventEmitter {
         debug(`Tail start: Could not read logfile ${this.logFile}`)
       } else {
         const parsedData = data.toString()
-
-        if (parsedData.includes('Variable: IsInstalled = 1')) {
+        
+        if (parsedData.includes('Variable: IsInstalled = 1') ||
+            parsedData.includes('Variable: BuildTools_Core_Installed = ') ||
+            parsedData.includes('WixBundleInstalled = 1')) {
           this.stop('success')
           return
         }

@@ -2,6 +2,7 @@
 
 const path = require('path')
 const spawn = require('child_process').spawn
+const chalk = require('chalk')
 const debug = require('debug')('windows-build-tools')
 
 const utils = require('../utils')
