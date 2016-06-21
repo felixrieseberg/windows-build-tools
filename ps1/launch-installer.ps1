@@ -29,6 +29,17 @@ function runInstaller
     }
 }
 
+function runPythonInstaller
+{
+    if (Test-Path $path)
+    {
+        cd $path
+        $pyParams = '/i', 'python-2.7.11.amd64.msi', '/quiet', '/L', 'pyLog.txt'
+        echo $pyParams
+        msiexec.exe $pyParams
+    }
+}
+
 # Check Elevation
 if (!(IsAdministrator))
 {
@@ -38,3 +49,4 @@ if (!(IsAdministrator))
 }
 
 runInstaller;
+runPythonInstaller;
