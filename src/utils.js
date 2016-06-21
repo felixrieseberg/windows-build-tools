@@ -35,6 +35,24 @@ function getInstallerPath () {
   return {
     path: path.join(directory, constants.installerName),
     filename: constants.installerName,
+    url: constants.buildToolsUrl,
+    directory
+  }
+}
+
+/**
+ * Ensures that %USERPROFILE%/.windows-build-tools exists
+ * and returns the path to it
+ *
+ * @returns {Object} - Object containing path and filename of installer for python
+ */
+function getPythonInstallerPath () {
+  const directory = getWorkDirectory()
+
+  return {
+    path: path.join(directory, constants.pythonInstallerName),
+    filename: constants.pythonInstallerName,
+    url: constants.pythonUrl,
     directory
   }
 }
@@ -75,6 +93,7 @@ function executeChildProcess (fileName, args) {
 module.exports = {
   getWorkDirectory,
   getInstallerPath,
+  getPythonInstallerPath,
   ensureWindows,
   executeChildProcess
 }
