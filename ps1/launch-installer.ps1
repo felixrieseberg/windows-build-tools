@@ -23,7 +23,7 @@ function runInstaller
 {
     if (Test-Path $path)
     {
-        $params = '/NoRestart', '/S', '/L', 'log.txt'
+        $params = "/NoRestart", "/S", "/L", "log.txt"
         cd $path
         ./BuildTools_Full.exe $params
     }
@@ -34,8 +34,7 @@ function runPythonInstaller
     if (Test-Path $path)
     {
         cd $path
-        $pyParams = '/i', 'python-2.7.11.amd64.msi', '/quiet', '/L', 'pyLog.txt'
-        echo $pyParams
+        $pyParams = "/i", "python-2.7.11.amd64.msi TARGETDIR=$path\python2.4 ALLUSERS=0", "/qn", "/L", "pyLog.txt"
         msiexec.exe $pyParams
     }
 }
