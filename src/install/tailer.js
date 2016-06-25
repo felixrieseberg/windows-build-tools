@@ -6,20 +6,18 @@ const debug = require('debug')('windows-build-tools')
 const EventEmitter = require('events')
 
 const utils = require('../utils')
-const installer = utils.getInstallerPath()
 
 class Tailer extends EventEmitter {
   constructor() {
     super()
-    this.logFile = path.join(installer.directory, 'log.txt')
   }
   
   /**
    * Starts watching a the logfile
    */
-  start() {
+  start(logfile) {
+    this.logFile = logfile
     debug(`Tail: Waiting for log file to appear in ${this.logFile}`)
-
     this.waitForLogFile()
       .then(() => this.tail())
   }
@@ -47,15 +45,25 @@ class Tailer extends EventEmitter {
    * Handle data and see if there's something we'd like to report
    */
   handleData(data) {
+    console.log(data)
     fs.readFile(this.logFile, (err, data) => {
       if (err) {
         debug(`Tail start: Could not read logfile ${this.logFile}`)
       } else {
         const parsedData = data.toString()
         
+        // Success strings for build tools
         if (parsedData.includes('Variable: IsInstalled = 1') ||
             parsedData.includes('Variable: BuildTools_Core_Installed = ') ||
             parsedData.includes('WixBundleInstalled = 1')) {
+          this.stop('success')
+          return
+        }
+
+        // Success strings for python
+        if (parsedData.includes('INSTALL. Return value 1') ||
+            parsedData.includes('Installation completed successfully') ||
+            parsedData.includes('Configuration completed successfully')) {
           this.stop('success')
           return
         }
