@@ -22,6 +22,7 @@ function install () {
     const tailer = new Tailer()
 
     tailer.on('exit', (result, details) => {
+      console.log("tailer exited");
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
         reject(err)
@@ -45,7 +46,8 @@ function install () {
     console.log(chalk.green('Starting installation...'))
 
     return launchInstaller()
-      .then(() => tailer.start())
+      // .then(() => tailer.start(path.join(installer.directory, 'build-tools-log.txt')))
+      .then(() => tailer.start(path.join(installer.directory, 'py-log.txt')))
       .catch((error) => console.log(error))
   })
 }
