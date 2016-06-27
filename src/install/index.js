@@ -19,10 +19,13 @@ const installer = utils.getInstallerPath()
  */
 function install () {
   return new Promise((resolve, reject) => {
-    const tailer = new Tailer()
+    const buid_tools_tailer = new Tailer(path.join(installer.directory, 'build-tools-log.txt'))
+    // The log file for msiexe is utf-16
+    const python_tailer = new Tailer(path.join(installer.directory, 'python-log.txt'), 'ucs2')
 
-    tailer.on('exit', (result, details) => {
-      console.log("tailer exited");
+
+    buid_tools_tailer.on('exit', (result, details) => {
+      debug("build tools tailer exited");
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
         reject(err)
@@ -30,7 +33,7 @@ function install () {
 
       if (result === 'success') {
         console.log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
-        debug('Installer: Successfully installed according to tailer')
+        debug('Installer: Successfully installed Visual Studio Build Tools according to tailer')
         resolve()
       }
 
@@ -43,11 +46,33 @@ function install () {
       }
     })
 
+    python_tailer.on('exit', (result, details) => {
+      debug("python tailer exited");
+      if (result === 'error') {
+        debug('Installer: Tailer found error with installer', details)
+        reject(err)
+      }
+
+      if (result === 'success') {
+        console.log(chalk.bold.green('Successfully installed Python 2.7'))
+        debug('Installer: Successfully installed Python 2.7 according to tailer')
+        resolve()
+      }
+
+      if (result === 'failure') {
+        console.log(chalk.bold.red('Could not install  Python 2.7.'))
+        console.log('Please find more details in the log files, which can be found at')
+        console.log(path.join(installer.directory))
+        debug('Installer: Failed to install Python 2.7 according to tailer')
+        resolve()
+      }
+    })
+
     console.log(chalk.green('Starting installation...'))
 
     return launchInstaller()
-      .then(() => tailer.start(path.join(installer.directory, 'build-tools-log.txt')))
-      .then(() => tailer.start(path.join(installer.directory, 'python-log.txt')))
+      .then(() => buid_tools_tailer.start())
+      .then(() => python_tailer.start())
       .catch((error) => console.log(error))
   })
 }
