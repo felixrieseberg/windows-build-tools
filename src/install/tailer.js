@@ -8,15 +8,16 @@ const EventEmitter = require('events')
 const utils = require('../utils')
 
 class Tailer extends EventEmitter {
-  constructor() {
+  constructor(logfile, encoding = 'utf8') {
     super()
+    this.logFile = logfile
+    this.encoding = encoding
   }
   
   /**
    * Starts watching a the logfile
    */
-  start(logfile) {
-    this.logFile = logfile
+  start() {
     debug(`Tail: Waiting for log file to appear in ${this.logFile}`)
     this.waitForLogFile()
       .then(() => this.tail())
@@ -45,12 +46,12 @@ class Tailer extends EventEmitter {
    * Handle data and see if there's something we'd like to report
    */
   handleData(data) {
-    fs.readFile(this.logFile, (err, data) => {
+    fs.readFile(this.logFile, this.encoding, (err, data) => {
       if (err) {
-        debug(`Tail start: Could not read logfile ${this.logFile}`)
+        debug(`Tail start: Could not read logfile ${this.logFile}: ${err}`)
       } else {
         const parsedData = data.toString()
-        
+
         // Success strings for build tools
         if (parsedData.includes('Variable: IsInstalled = 1') ||
             parsedData.includes('Variable: BuildTools_Core_Installed = ') ||
