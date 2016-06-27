@@ -46,8 +46,8 @@ function install () {
     console.log(chalk.green('Starting installation...'))
 
     return launchInstaller()
-      // .then(() => tailer.start(path.join(installer.directory, 'build-tools-log.txt')))
-      .then(() => tailer.start(path.join(installer.directory, 'py-log.txt')))
+      .then(() => tailer.start(path.join(installer.directory, 'build-tools-log.txt')))
+      .then(() => tailer.start(path.join(installer.directory, 'python-log.txt')))
       .catch((error) => console.log(error))
   })
 }

@@ -34,7 +34,7 @@ function runPythonInstaller
     if (Test-Path $path)
     {
         cd $path
-        $pyParams = "/i", "python-2.7.11.amd64.msi", "TARGETDIR=$path\python2.7", "ALLUSERS=0", "/qn", "/L", "py-log.txt"
+        $pyParams = "/i", "python-2.7.11.amd64.msi", "TARGETDIR=$path\python2.7", "ALLUSERS=0", "/qn", "/L", "$path\python-log.txt"
         msiexec.exe $pyParams
     }
 }

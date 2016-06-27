@@ -45,7 +45,6 @@ class Tailer extends EventEmitter {
    * Handle data and see if there's something we'd like to report
    */
   handleData(data) {
-    console.log(data)
     fs.readFile(this.logFile, (err, data) => {
       if (err) {
         debug(`Tail start: Could not read logfile ${this.logFile}`)
