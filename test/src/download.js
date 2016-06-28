@@ -5,10 +5,10 @@ const mockery = require('mockery')
 
 const constants = require('../../src/constants')
 
-describe('Download', () => {
+describe('DownloadTools', () => {
   afterEach(() => mockery.deregisterAll())
 
-  describe('download()', () => {
+  describe('downloadTools (installer)', () => {
     it('should attempt to download the build tools', (done) => {
       const nuggetMock = function (url, options, cb) {
         url.should.equal(constants.buildToolsUrl)
