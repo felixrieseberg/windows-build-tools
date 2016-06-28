@@ -27,7 +27,7 @@ function getWorkDirectory () {
  * Ensures that %USERPROFILE%/.windows-build-tools exists
  * and returns the path to it
  *
- * @returns {Object} - Object containing path and filename of installer
+ * @returns {Object} - Object containing path and fileName of installer
  */
 function getBuitToolsInstallerPath () {
   const directory = getWorkDirectory()
@@ -35,7 +35,7 @@ function getBuitToolsInstallerPath () {
 
   return {
     path: path.join(directory, buildTools.installerName),
-    filename: buildTools.installerName,
+    fileName: buildTools.installerName,
     url: buildTools.installerUrl,
     logPath: path.join(directory, buildTools.logName),
     directory
@@ -46,7 +46,7 @@ function getBuitToolsInstallerPath () {
  * Ensures that %USERPROFILE%/.windows-build-tools exists
  * and returns the path to it
  *
- * @returns {Object} - Object containing path and filename of installer for python
+ * @returns {Object} - Object containing path and fileName of installer for python
  */
 function getPythonInstallerPath () {
   const directory = getWorkDirectory()
@@ -54,7 +54,7 @@ function getPythonInstallerPath () {
 
   return {
     path: path.join(directory, python.installerName),
-    filename: python.pythonInstallerName,
+    fileName: python.pythonInstallerName,
     url: python.installerUrl,
     logPath: path.join(directory, python.logName),
     targetPath: path.join(directory, python.targetName),

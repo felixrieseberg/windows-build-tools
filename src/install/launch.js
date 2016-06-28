@@ -19,7 +19,7 @@ function launchInstaller () {
     const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' }`
     const args = ['-NoProfile', '-NoLogo', psArgs]
 
-    debug(`Installer: Launching installer in ${installer.directory} with file ${installer.filename}`)
+    debug(`Installer: Launching installer in ${installer.directory} with file ${installer.fileName}`)
 
     let child
 

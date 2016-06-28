@@ -22,14 +22,14 @@ function download () {
 /**
  * Downloads specified file with a url from the installer.
  *
- * @param installer            - An object with filename, directory, url,
+ * @param installer            - An object with fileName, directory, url,
  *                                  and destination path of the file to be downloaded
  * @returns {Promise.<string>} - Promise resolving with the path to the downloaded file
  */
 function downloadTools (installer) {
   return new Promise((resolve, reject) => {
     const nuggetOptions = {
-      target: installer.filename,
+      target: installer.fileName,
       dir: installer.directory,
       resume: true,
       verbose: true,
@@ -44,11 +44,11 @@ function downloadTools (installer) {
         if (error.message.indexOf('404') === -1) {
           return reject(error)
         } else {
-          return reject(`Could not find ${installer.filename} at ${installer.url}`)
+          return reject(`Could not find ${installer.fileName} at ${installer.url}`)
         }
       }
 
-      console.log(`Downloaded ${installer.filename}. Saved to ${installer.path}.`)
+      console.log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`)
       resolve(installer.path)
     })
   })
