@@ -8,6 +8,8 @@ const ChildProcessMock = require('../../fixtures/child_process')
 describe('Install - Tailer', () => {
   let passedFile
 
+  const logPath = require('../../../src/utils').getBuitToolsInstallerPath().logPath
+
   const fsMock = {
     lstat(_file, _cb) {
       passedFile = _file
@@ -28,20 +30,20 @@ describe('Install - Tailer', () => {
 
   it('should register the location of the logfile', () => {
     const Tailer = require('../../../lib/install/tailer')
-    const tailer = new Tailer()
+    const tailer = new Tailer(logPath)
 
     tailer.logFile.should.be.ok
-    tailer.logFile.should.equal(path.join(process.env.USERPROFILE || process.env.HOME, '.windows-build-tools', 'log.txt'))
+    tailer.logFile.should.equal(logPath)
   })
 
   it('waitForLogFile() should resolve when the logfile exists', (done) => {
     const Tailer = require('../../../lib/install/tailer')
-    const tailer = new Tailer()
+    const tailer = new Tailer(logPath)
 
     tailer.waitForLogFile().should.be.fulfilled
       .then((stat) => {
         passedFile.should.be.ok
-        passedFile.should.equal(path.join(process.env.USERPROFILE || process.env.HOME, '.windows-build-tools', 'log.txt'))
+        passedFile.should.equal(logPath)
       })
       .should.notify(done)
   })
