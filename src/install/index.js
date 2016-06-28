@@ -9,7 +9,6 @@ const chalk = require('chalk')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 const utils = require('../utils')
-const installer = utils.getInstallerPath()
 
 /**
  * Installs the build tools, tailing the installation log file
@@ -19,9 +18,8 @@ const installer = utils.getInstallerPath()
  */
 function install () {
   return new Promise((resolve, reject) => {
-    const buid_tools_tailer = new Tailer(path.join(installer.directory, 'build-tools-log.txt'))
-    // The log file for msiexe is utf-16
-    const python_tailer = new Tailer(path.join(installer.directory, 'python-log.txt'), 'ucs2')
+    const buid_tools_tailer = new Tailer(utils.getBuitToolsInstallerPath().logPath)
+    const python_tailer = new Tailer(utils.getPythonInstallerPath().logPath, 'ucs2') // The log file for msiexe is utf-16
 
 
     buid_tools_tailer.on('exit', (result, details) => {
@@ -40,7 +38,7 @@ function install () {
       if (result === 'failure') {
         console.log(chalk.bold.red('Could not install Visual Studio Build Tools.'))
         console.log('Please find more details in the log files, which can be found at')
-        console.log(path.join(installer.directory))
+        console.log(utils.getWorkDirectory())
         debug('Installer: Failed to install according to tailer')
         resolve()
       }
@@ -56,13 +54,14 @@ function install () {
       if (result === 'success') {
         console.log(chalk.bold.green('Successfully installed Python 2.7'))
         debug('Installer: Successfully installed Python 2.7 according to tailer')
-        resolve()
+        // TODO: Actually get the path from the log file. This is for the case that python 2.7 is already installed 
+        resolve({pythonPath: utils.getPythonInstallerPath().targetPath})
       }
 
       if (result === 'failure') {
         console.log(chalk.bold.red('Could not install  Python 2.7.'))
         console.log('Please find more details in the log files, which can be found at')
-        console.log(path.join(installer.directory))
+        console.log(utils.getWorkDirectory())
         debug('Installer: Failed to install Python 2.7 according to tailer')
         resolve()
       }

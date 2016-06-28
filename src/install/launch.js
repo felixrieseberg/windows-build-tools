@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const debug = require('debug')('windows-build-tools')
 
 const utils = require('../utils')
-const installer = utils.getInstallerPath()
+const installer = utils.getBuitToolsInstallerPath()
 
 /**
  * Launches the installer, using a PS1 script as a middle-man

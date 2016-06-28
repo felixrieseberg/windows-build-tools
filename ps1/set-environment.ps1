@@ -1,7 +1,7 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$True)]
-    [string]$path
+    [string]$pythonPath
 )
 
 # Setting the MSVS Version
@@ -9,4 +9,4 @@ Param(
 npm config set msvs_version 2015
 
 # Setting python path
-npm config set python $path/python2.7
+npm config set python $pythonPath
