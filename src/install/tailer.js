@@ -39,7 +39,7 @@ class Tailer extends EventEmitter {
     debug(`Tail: Tailing ${this.logFile}`)
     this.tail = setInterval(() => {
       this.handleData()
-    }, 1000)
+    }, 5000)
   }
 
   /**

@@ -1,7 +1,6 @@
 'use strict'
 
 const path = require('path')
-
 const utils = require('./utils')
 
 /**
@@ -13,6 +12,7 @@ const utils = require('./utils')
  * @returns {Promise}
  */
 function setEnvironment (variables) {
+  const pythonPath = path.join(variables.python.python, 'python.exe');
   const scriptPath = path.join(__dirname, '..', 'ps1', 'set-environment.ps1')
   const psArgs = `& {& '${scriptPath}' -pythonPath '${variables.python.pythonPath}' }`
   const args = ['-NoProfile', '-NoLogo', psArgs]
