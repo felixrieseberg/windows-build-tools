@@ -15,7 +15,7 @@ function setEnvironment (variables) {
   const pythonPath = path.join(variables.python.pythonPath, 'python.exe')
   const scriptPath = path.join(__dirname, '..', 'ps1', 'set-environment.ps1')
   const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' }`
-  const args = ['-NoProfile', '-NoLogo', psArgs]
+  const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
   return utils.executeChildProcess('powershell.exe', args)
 }

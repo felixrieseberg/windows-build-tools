@@ -17,7 +17,7 @@ function launchInstaller () {
   return new Promise((resolve, reject) => {
     const scriptPath = path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1')
     const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' }`
-    const args = ['-NoProfile', '-NoLogo', psArgs]
+    const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
     debug(`Installer: Launching installer in ${installer.directory} with file ${installer.fileName}`)
 
