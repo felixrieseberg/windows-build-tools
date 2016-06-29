@@ -54,7 +54,7 @@ function getPythonInstallerPath () {
 
   return {
     path: path.join(directory, python.installerName),
-    fileName: python.pythonInstallerName,
+    fileName: python.installerName,
     url: python.installerUrl,
     logPath: path.join(directory, python.logName),
     targetPath: path.join(directory, python.targetName),

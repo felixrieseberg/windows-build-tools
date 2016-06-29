@@ -38,7 +38,7 @@ function installBuildTools () {
     const tailer = new Tailer(utils.getBuitToolsInstallerPath().logPath)
 
     tailer.on('exit', (result, details) => {
-      debug("build tools tailer exited");
+      debug('build tools tailer exited');
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
         reject(err)
@@ -69,7 +69,7 @@ function installPython () {
     const tailer = new Tailer(utils.getPythonInstallerPath().logPath, 'ucs2')
 
     tailer.on('exit', (result, details) => {
-      debug("python tailer exited");
+      debug('python tailer exited');
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
         reject(err)
@@ -86,7 +86,7 @@ function installPython () {
       }
 
       if (result === 'failure') {
-        console.log(chalk.bold.red('Could not install  Python 2.7.'))
+        console.log(chalk.bold.red('Could not install Python 2.7.'))
         console.log('Please find more details in the log files, which can be found at')
         console.log(utils.getWorkDirectory())
         debug('Installer: Failed to install Python 2.7 according to tailer')
