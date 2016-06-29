@@ -38,7 +38,7 @@ describe('Environment', () => {
         const pythonPath = path.join(variables.python.pythonPath, 'python.exe')
         const expectedScriptPath = path.join(__dirname, '..', '..', 'ps1', 'set-environment.ps1')
         const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${pythonPath}' }`
-        const expectedArgs = ['-NoProfile', '-NoLogo', expectedPsArgs]
+        const expectedArgs = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', expectedPsArgs]
 
         passedProcess.should.equal('powershell.exe')
         passedArgs.should.deep.equal(expectedArgs)
