@@ -88,7 +88,7 @@ class Tailer extends EventEmitter {
     fs.lstat(this.logFile, (err, stats) => {
       if (err && err.code === 'ENOENT') {
         debug('Tail: waitForFile: still waiting')
-        setTimeout(this.waitForLogFile, 2000)
+        setTimeout(this.waitForLogFile.bind(this), 2000)
       } else if (err) {
         debug('Tail: waitForFile: Unexpected error', err)
         throw new Error(err);
