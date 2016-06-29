@@ -40,11 +40,8 @@ describe('Install - Tailer', () => {
     const Tailer = require('../../../lib/install/tailer')
     const tailer = new Tailer(logPath)
 
-    tailer.waitForLogFile().should.be.fulfilled
-      .then((stat) => {
-        passedFile.should.be.ok
-        passedFile.should.equal(logPath)
-      })
-      .should.notify(done)
+    tailer.tail = () => done()
+
+    tailer.waitForLogFile()
   })
 })
