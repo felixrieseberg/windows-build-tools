@@ -8,7 +8,7 @@ const ChildProcessMock = require('../../fixtures/child_process')
 describe('Install - Tailer', () => {
   let passedFile
 
-  const logPath = require('../../../src/utils').getBuitToolsInstallerPath().logPath
+  const logPath = require('../../../src/utils').getBuildToolsInstallerPath().logPath
 
   const fsMock = {
     lstat(_file, _cb) {

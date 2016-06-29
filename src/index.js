@@ -4,7 +4,10 @@ const download = require('./download')
 const install = require('./install')
 const environment = require('./environment')
 
-download()
-  .then(() => install())
-  .then((variables) => environment(variables))
-  .catch((error) => console.log(error))
+// Here lie the bodies of promises, killed in 
+// the name of better garbage collection
+download(function () {
+  install(function (variables) {
+    environment(variables)
+  })
+})

@@ -10,13 +10,11 @@ const utils = require('./utils')
  *
  * @returns {Promise} - Promise
  */
-function download () {
-  return new Promise((resolve, reject) => {
-    downloadTools(utils.getBuitToolsInstallerPath())
-      .then(() => downloadTools(utils.getPythonInstallerPath()))
-      .then(() => resolve())
-      .catch((error) => reject(error))
-  })
+function download (cb) {
+  downloadTools(utils.getBuildToolsInstallerPath())
+    .then(() => downloadTools(utils.getPythonInstallerPath()))
+    .then(() => cb())
+    .catch((error) => console.log(error))
 }
 
 /**

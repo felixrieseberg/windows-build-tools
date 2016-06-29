@@ -17,25 +17,24 @@ const utils = require('../utils')
  * @returns {Promise.<Object>} - Promise that resolves with the installation result
  */
 
-function install () {
+function install (cb) {
   console.log(chalk.green('Starting installation...'))
-  return new Promise((resolve, reject) => {
-    launchInstaller()
-      .then(() => Promise.all([installBuildTools(), installPython()]))
-      .then((paths) => {
-        var variables = {
-          buildTools: paths[0],
-          python: paths[1]
-        }
-        resolve(variables)
-      })
-      .catch((error) => reject(error))
-  })
+
+  launchInstaller()
+    .then(() => Promise.all([installBuildTools(), installPython()]))
+    .then((paths) => {
+      var variables = {
+        buildTools: paths[0],
+        python: paths[1]
+      }
+      cb(variables)
+    })
+    .catch((error) => console.log(error))
 }
 
 function installBuildTools () {
   return new Promise((resolve, reject) => {
-    const tailer = new Tailer(utils.getBuitToolsInstallerPath().logPath)
+    const tailer = new Tailer(utils.getBuildToolsInstallerPath().logPath)
 
     tailer.on('exit', (result, details) => {
       debug('build tools tailer exited');

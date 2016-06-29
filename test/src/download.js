@@ -9,7 +9,7 @@ describe('DownloadTools', () => {
 
   describe('downloadTools (installer)', () => {
     it('should attempt to download the installer', (done) => {
-      const installer = require('../../src/utils').getBuitToolsInstallerPath()
+      const installer = require('../../src/utils').getBuildToolsInstallerPath()
       const nuggetMock = function (url, options, cb) {
         url.should.equal(installer.url)
         options.should.be.ok

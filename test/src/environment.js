@@ -35,8 +35,9 @@ describe('Environment', () => {
     mockery.registerMock('child_process', cpMock)
     require('../../lib/environment')(variables).should.be.fulfilled
       .then(() => {
+        const pythonPath = path.join(variables.python.pythonPath, 'python.exe')
         const expectedScriptPath = path.join(__dirname, '..', '..', 'ps1', 'set-environment.ps1')
-        const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${variables.python.pythonPath}' }`
+        const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${pythonPath}' }`
         const expectedArgs = ['-NoProfile', '-NoLogo', expectedPsArgs]
 
         passedProcess.should.equal('powershell.exe')
