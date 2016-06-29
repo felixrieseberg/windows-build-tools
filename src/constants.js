@@ -5,8 +5,8 @@ var buildTools = {
 }
 
 var python = {
-  installerName: 'python-2.7.11.amd64.msi',
-  installerUrl: 'https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi',
+  installerName: 'python-2.7.11.msi',
+  installerUrl: 'https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi',
   targetName: 'python27',
   logName: 'python-log.txt'
 }
