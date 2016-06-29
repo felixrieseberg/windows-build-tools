@@ -9,7 +9,7 @@ const constants = require('./constants')
  * Ensures that %USERPROFILE%/.windows-build-tools exists
  * and returns the path to it
  *
- * @returns {string} - Path to windows-buildt-tools working dir
+ * @returns {string} - Path to windows-build-tools working dir
  */
 function getWorkDirectory () {
   const homeDir = process.env.USERPROFILE || require('os').homedir()
@@ -27,14 +27,37 @@ function getWorkDirectory () {
  * Ensures that %USERPROFILE%/.windows-build-tools exists
  * and returns the path to it
  *
- * @returns {Object} - Object containing path and filename of installer
+ * @returns {Object} - Object containing path and fileName of installer
  */
-function getInstallerPath () {
+function getBuitToolsInstallerPath () {
   const directory = getWorkDirectory()
+  const buildTools = constants.buildTools
 
   return {
-    path: path.join(directory, constants.installerName),
-    filename: constants.installerName,
+    path: path.join(directory, buildTools.installerName),
+    fileName: buildTools.installerName,
+    url: buildTools.installerUrl,
+    logPath: path.join(directory, buildTools.logName),
+    directory
+  }
+}
+
+/**
+ * Ensures that %USERPROFILE%/.windows-build-tools exists
+ * and returns the path to it
+ *
+ * @returns {Object} - Object containing path and fileName of installer for python
+ */
+function getPythonInstallerPath () {
+  const directory = getWorkDirectory()
+  const python = constants.python
+
+  return {
+    path: path.join(directory, python.installerName),
+    fileName: python.pythonInstallerName,
+    url: python.installerUrl,
+    logPath: path.join(directory, python.logName),
+    targetPath: path.join(directory, python.targetName),
     directory
   }
 }
@@ -74,7 +97,8 @@ function executeChildProcess (fileName, args) {
 
 module.exports = {
   getWorkDirectory,
-  getInstallerPath,
+  getBuitToolsInstallerPath,
+  getPythonInstallerPath,
   ensureWindows,
   executeChildProcess
 }

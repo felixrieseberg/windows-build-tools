@@ -2,25 +2,25 @@
 
 const path = require('path')
 const mockery = require('mockery')
+const fs = require('fs')
 
-const constants = require('../../src/constants')
-
-describe('Download', () => {
+describe('DownloadTools', () => {
   afterEach(() => mockery.deregisterAll())
 
-  describe('download()', () => {
-    it('should attempt to download the build tools', (done) => {
+  describe('downloadTools (installer)', () => {
+    it('should attempt to download the installer', (done) => {
+      const installer = require('../../src/utils').getBuitToolsInstallerPath()
       const nuggetMock = function (url, options, cb) {
-        url.should.equal(constants.buildToolsUrl)
+        url.should.equal(installer.url)
         options.should.be.ok
-        options.target.should.be.ok
-        options.dir.should.be.ok
-
+        options.target.should.equal(installer.fileName)
+        options.dir.should.equal(installer.directory)
         cb()
       }
 
       mockery.registerMock('nugget', nuggetMock)
-      require('../../lib/download')().should.be.fulfilled.and.notify(done)
+      require('rewire')('../../src/download').__get__('downloadTools')(installer)
+        .should.be.fulfilled.and.notify(done)
     })
   })
 })

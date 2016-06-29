@@ -5,6 +5,6 @@ const install = require('./install')
 const environment = require('./environment')
 
 download()
-  .then((result) => install())
-  .then(() => environment())
+  .then(() => install())
+  .then((variables) => environment(variables))
   .catch((error) => console.log(error))

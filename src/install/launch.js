@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const debug = require('debug')('windows-build-tools')
 
 const utils = require('../utils')
-const installer = utils.getInstallerPath()
+const installer = utils.getBuitToolsInstallerPath()
 
 /**
  * Launches the installer, using a PS1 script as a middle-man
@@ -19,7 +19,7 @@ function launchInstaller () {
     const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' }`
     const args = ['-NoProfile', '-NoLogo', psArgs]
 
-    debug(`Installer: Launching installer in ${installer.directory} with file ${installer.filename}`)
+    debug(`Installer: Launching installer in ${installer.directory} with file ${installer.fileName}`)
 
     let child
 

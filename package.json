@@ -7,7 +7,8 @@
     "test": "standard \"src/*.js\" && npm run build && mocha",
     "postinstall": "node ./lib/index.js",
     "build": "babel src -d lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "start": "npm run build && npm run postinstall"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "chai-as-promised": "^5.3.0",
     "mocha": "^2.5.3",
     "mockery": "^1.7.0",
+    "rewire": "^2.5.1",
     "standard": "^7.1.2"
   },
   "dependencies": {

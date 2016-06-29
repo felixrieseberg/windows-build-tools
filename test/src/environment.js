@@ -9,6 +9,13 @@ describe('Environment', () => {
   let passedArgs
   let passedProcess
 
+  const variables = {
+    buildTools: undefined,
+    python: {
+      pythonPath: require('../../src/utils').getPythonInstallerPath().targetPath
+    }
+  }
+
   const cpMock = {
     spawn(_process, _args) {
       passedProcess = _process
@@ -26,10 +33,10 @@ describe('Environment', () => {
 
   it('should attempt to lauch the environment script', (done) => {
     mockery.registerMock('child_process', cpMock)
-    require('../../lib/environment')().should.be.fulfilled
+    require('../../lib/environment')(variables).should.be.fulfilled
       .then(() => {
         const expectedScriptPath = path.join(__dirname, '..', '..', 'ps1', 'set-environment.ps1')
-        const expectedPsArgs = `& {& '${expectedScriptPath}'}`
+        const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${variables.python.pythonPath}' }`
         const expectedArgs = ['-NoProfile', '-NoLogo', expectedPsArgs]
 
         passedProcess.should.equal('powershell.exe')
