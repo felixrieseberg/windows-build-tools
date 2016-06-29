@@ -13,7 +13,7 @@ class Tailer extends EventEmitter {
     this.logFile = logfile
     this.encoding = encoding
   }
-  
+
   /**
    * Starts watching a the logfile
    */
@@ -50,25 +50,30 @@ class Tailer extends EventEmitter {
       if (err) {
         debug(`Tail start: Could not read logfile ${this.logFile}: ${err}`)
       } else {
-        const parsedData = data.toString()
 
         // Success strings for build tools
-        if (parsedData.includes('Variable: IsInstalled = 1') ||
-            parsedData.includes('Variable: BuildTools_Core_Installed = ') ||
-            parsedData.includes('WixBundleInstalled = 1')) {
+        if (data.includes('Variable: IsInstalled = 1') ||
+            data.includes('Variable: BuildTools_Core_Installed = ') ||
+            data.includes('WixBundleInstalled = 1')) {
           this.stop('success')
           return
         }
 
         // Success strings for python
-        if (parsedData.includes('INSTALL. Return value 1') ||
-            parsedData.includes('Installation completed successfully') ||
-            parsedData.includes('Configuration completed successfully')) {
-          this.stop('success')
+        if (data.includes('INSTALL. Return value 1') ||
+            data.includes('Installation completed successfully') ||
+            data.includes('Configuration completed successfully')) {
+          // Finding the python installation path from the log file
+          var matches = data.match(/Property\(S\): TARGETDIR = (.*)\r\n/)
+          var pythonPath = undefined
+          if (matches) {
+            pythonPath = matches[1]
+          }
+          this.stop('success', pythonPath)
           return
         }
 
-        if (parsedData.includes('Shutting down, exit code:')) {
+        if (data.includes('Shutting down, exit code:')) {
           this.stop('failure')
           return
         }
@@ -78,7 +83,7 @@ class Tailer extends EventEmitter {
 
   /**
    * Waits for a given file, resolving when it's available
-   * 
+   *
    * @param file {string} - Path to file
    * @returns {Promise.<Object>} - Promise resolving with fs.stats object
    */

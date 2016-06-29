@@ -14,7 +14,7 @@ const utils = require('./utils')
  */
 function setEnvironment (variables) {
   const scriptPath = path.join(__dirname, '..', 'ps1', 'set-environment.ps1')
-  const psArgs = `& {& '${scriptPath}' -pythonPath '${variables.pythonPath}' }`
+  const psArgs = `& {& '${scriptPath}' -pythonPath '${variables.python.pythonPath}' }`
   const args = ['-NoProfile', '-NoLogo', psArgs]
 
   return utils.executeChildProcess('powershell.exe', args)

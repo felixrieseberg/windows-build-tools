@@ -10,7 +10,10 @@ describe('Environment', () => {
   let passedProcess
 
   const variables = {
-    pythonPath: require('../../src/utils').getPythonInstallerPath().targetPath
+    buildTools: undefined,
+    python: {
+      pythonPath: require('../../src/utils').getPythonInstallerPath().targetPath
+    }
   }
 
   const cpMock = {
@@ -33,7 +36,7 @@ describe('Environment', () => {
     require('../../lib/environment')(variables).should.be.fulfilled
       .then(() => {
         const expectedScriptPath = path.join(__dirname, '..', '..', 'ps1', 'set-environment.ps1')
-        const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${variables.pythonPath}' }`
+        const expectedPsArgs = `& {& '${expectedScriptPath}' -pythonPath '${variables.python.pythonPath}' }`
         const expectedArgs = ['-NoProfile', '-NoLogo', expectedPsArgs]
 
         passedProcess.should.equal('powershell.exe')
