@@ -54,6 +54,7 @@ function launchSpinner() {
 
   spinner = new Spinner(`Waiting for installers... %s`)
   spinner.setSpinnerDelay(180)
+  spinner.start()
 }
 
 function installBuildTools () {
