@@ -5,10 +5,13 @@ const path = require('path')
 const spawn = require('child_process').spawn
 const debug = require('debug')('windows-build-tools')
 const chalk = require('chalk')
+const Spinner = require('cli-spinner').Spinner
 
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 const utils = require('../utils')
+
+let spinner
 
 /**
  * Installs the build tools, tailing the installation log file
@@ -21,15 +24,36 @@ function install (cb) {
   console.log(chalk.green('Starting installation...'))
 
   launchInstaller()
+    .then(() => launchSpinner())
     .then(() => Promise.all([installBuildTools(), installPython()]))
     .then((paths) => {
-      var variables = {
+      stopSpinner()
+
+      const variables = {
         buildTools: paths[0],
         python: paths[1]
       }
       cb(variables)
     })
-    .catch((error) => console.log(error))
+    .catch((error) => {
+      stopSpinner()
+  
+      console.log(error)
+    })
+}
+
+function stopSpinner() {
+  if (spinner) {
+    spinner.stop(false)
+  }
+}
+
+function launchSpinner() {
+  console.log('Launched installers, now waiting for them to finish.')
+  console.log('This will likely take some time - please be patient!')
+
+  spinner = new Spinner(`Waiting for installers... %s`)
+  spinner.setSpinnerDelay(180)
 }
 
 function installBuildTools () {
