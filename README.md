@@ -15,6 +15,17 @@ After installation, npm will automatically execute this module, which downloads 
  
 Both installations are conflict-free, meaning that they do not mess with existing installations of Visual Studio, C++ Build Tools, or Python. If you see anything that indiciates otherwise, please file a bug.
 
+## Contents
+
+ - Visual C++ Compilers (targeting x86, X64 and ARM)
+ - Visual C++ headers & libraries (CRT & STL)
+ - Visual C++ build scripts (targeting Windows desktop)
+ - Microsoft Build Tools 2015 (MSBuild)
+ - Windows SDK 8.1 (optional, on by default)
+ - Windows SDK 10 (optional, off by default)
+ - ATL and MFC (optional, off by default)
+ - C++ Build tools specific command prompts
+
 ## Support & Help
 This package currently only handles the most common use case, none of the edge cases. If you encounter errors, we'd greatly appreciate [error reports](https://github.com/felixrieseberg/windows-build-tools) (and even pull requests). This is currently tested on Windows 10.
 
