@@ -31,7 +31,8 @@ function downloadTools (installer) {
       dir: installer.directory,
       resume: true,
       verbose: true,
-      strictSSL: false
+      strictSSL: false,
+      proxy: process.env.PROXY || undefined
     }
 
     nugget(installer.url, nuggetOptions, (errors) => {
