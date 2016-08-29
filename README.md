@@ -27,9 +27,17 @@ Both installations are conflict-free, meaning that they do not mess with existin
  - C++ Build tools specific command prompts
 
 ## Support & Help
+
 This package currently only handles the most common use case, none of the edge cases. If you encounter errors, we'd greatly appreciate [error reports](https://github.com/felixrieseberg/windows-build-tools) (and even pull requests). This is currently tested on Windows 10.
 
+#### Where is Python installed?
+It's saved under `%USERPROFILE%\.windows-build-tools\python27`.
+
+#### 'Python' is not recognized as a command
+To not mess with your machine in unnecessary ways, Python is only installed to disk and configured with npm. If you'd like for the `python` command to work in `cmd.exe` and PowerShell, add the folder `%USERPROFILE%\.windows-build-tools\python27` to your environment variables.
+
 ## License & Credits
+
 The Python installation was made possible by [Ali Hajimirza](https://github.com/A92hm), who kindly wrestled with Python's MSIs until they surrendered.
 
 Copyright (C) 2016 Felix Rieseberg and Microsoft Corporation. Licensed MIT. For more details, please see LICENSE.
