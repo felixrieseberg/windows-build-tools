@@ -4,7 +4,7 @@
 On Windows? Want to compile native Node modules? Install the build tools with this one-liner:
 
 ```
-npm install --global --production windows-build-tools
+npm install --global windows-build-tools
 ```
 
 ![Gif](https://cloud.githubusercontent.com/assets/1426799/15993939/2bbb470a-30aa-11e6-9cde-94c39b3f35cb.gif)
