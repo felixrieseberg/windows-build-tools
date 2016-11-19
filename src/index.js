@@ -1,5 +1,7 @@
 'use strict'
 
+require('./compatible')
+
 const download = require('./download')
 const install = require('./install')
 const environment = require('./environment')
