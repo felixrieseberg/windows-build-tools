@@ -29,6 +29,9 @@ Both installations are conflict-free, meaning that they do not mess with existin
 ## Proxy
 If you're behind a proxy, set a `PROXY` environment variable first. To do that with PowerShell, simply run `$env:PROXY = "Your proxy"`.
 
+## Mirror
+To use a mirror of the python, set a `PYTHON_MIRROR` environment variable first. To do that with PowerShell, simply run `$env:PYTHON_MIRROR = "https://npm.taobao.org/mirrors/python/"`.
+
 ## Support & Help
 
 This package currently only handles the most common use case, none of the edge cases. If you encounter errors, we'd greatly appreciate [error reports](https://github.com/felixrieseberg/windows-build-tools) (and even pull requests). This is currently tested on Windows 10.
