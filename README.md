@@ -30,7 +30,7 @@ Both installations are conflict-free, meaning that they do not mess with existin
 If you're behind a proxy, set a `PROXY` environment variable first. To do that with PowerShell, simply run `$env:PROXY = "Your proxy"`.
 
 ## Mirror
-Microsoft's build tools should be fast across the world, but to use a mirror to download Python, set a `PYTHON_MIRROR` environment variable. To do that with PowerShell, simply run `$env:PYTHON_MIRROR = "https://npm.taobao.org/mirrors/python/"`.
+Microsoft's build tools should be fast across the world, but to use a mirror to download Python, set a `PYTHON_MIRROR` environment variable. To do that with PowerShell, simply run `npm install --global windows-build-tools --python_mirror=https://npm.taobao.org/mirrors/python/`.
 
 ## Support & Help
 
