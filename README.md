@@ -35,7 +35,7 @@ npm [--python-mirror=''] [--proxy=''] [--verbose] [--strict-ssl] [--resume] [--s
 Optional arguments:
  - `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
  - `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
- - `--verbose`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
+ - `--debug`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
  - `--strict-ssl`: Enables "Strict SSL" mode. Defaults to false.
  - `--resume`: By default, `windows-build-tools` will resume aborted downloads. Set to `false` to disable.
  - `--sockets`: Specifies the number of http sockets to use at once (this controls concurrency). Defaults to infinity.
@@ -62,10 +62,10 @@ selectable item to be installed, just pass in this switch without any value.
  - `/Uninstall`: Uninstall the product.
  - `/Uninstall /Force`: Uninstall the product and features shared with other products.
 
- Supply parameters to `windows-build-tools` as a JSON array. Here's quick example:
+ Supply parameters to `windows-build-tools` as a JSON array. Here's quick example (note the double quotes):
 
  ```
- npm --vcc-build-tools-parameters='["/InstallSelectableItems", "item1;item2;item3"]' install --global windows-build-tools
+ npm --vcc-build-tools-parameters='[""/InstallSelectableItems"", ""item1;item2;item3""]' install --global windows-build-tools
  ```
 
 ## Support & Help

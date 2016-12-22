@@ -25,7 +25,7 @@ function runInstaller
     if (Test-Path $path)
     {
         $params = "/NoRestart", "/S", "/L", "`"$path\build-tools-log.txt`""
-        $extraParams = $extraBuildToolsParameters -split "%+; "
+        $extraParams = $extraBuildToolsParameters -split "%_; "
 
         if ($extraParams.count -gt 0)
         {
@@ -37,6 +37,7 @@ function runInstaller
 
         cd $path
         ./BuildTools_Full.exe $params
+
     }
 }
 
@@ -64,8 +65,8 @@ runPythonInstaller;
 # SIG # Begin signature block
 # MIINQAYJKoZIhvcNAQcCoIINMTCCDS0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUl0NIyhrZ6kKRa7QvSCM4Jhln
-# Hj6gggp+MIIFJzCCBA+gAwIBAgIQBicsjH4LxacitIAMXdcrMDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHZNLBoIXNfE5bv0qDrFM3cCc
+# OL6gggp+MIIFJzCCBA+gAwIBAgIQBicsjH4LxacitIAMXdcrMDANBgkqhkiG9w0B
 # AQsFADB2MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
 # VQQLExB3d3cuZGlnaWNlcnQuY29tMTUwMwYDVQQDEyxEaWdpQ2VydCBTSEEyIEhp
 # Z2ggQXNzdXJhbmNlIENvZGUgU2lnbmluZyBDQTAeFw0xNjA3MjkwMDAwMDBaFw0x
@@ -126,11 +127,11 @@ runPythonInstaller;
 # Z2lDZXJ0IFNIQTIgSGlnaCBBc3N1cmFuY2UgQ29kZSBTaWduaW5nIENBAhAGJyyM
 # fgvFpyK0gAxd1yswMAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgACh
 # AoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAM
-# BgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBQHv2nFUGp640qkBnyLHKSG1Fy8
-# 6zANBgkqhkiG9w0BAQEFAASCAQATP3X/OVaxGQMmd5XOEKyTlffBRph9rAkbpoW/
-# uHR+Lc3gEaNQqs5uOWdaxQmoTtHNXUKBd4AwOIAeC6saAxiCv5yyiJs9jA9YLvph
-# teyufqBSh27KWH4uGWAYEO5b4Pl/GZwtoiasPzIIC1qoFciukQ3VQ6gBSDrumyDX
-# wPDDUL8bk7CSw/qyx+wOWLW3Xk82I6oKKRQDao7u6T3TxKZUL+9kdfMsob7kbCYK
-# pku4U2IJ96uf1pmqL/dFcE6fIQwC3gZ7cczakDUWGtSSXUgi9PgAFG3pT2DFnoa4
-# Z8ogaNp2fKuRgESraJjlGFR5GSXHdaHc8RgewX+0RgiNoDg1
+# BgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBQiLPk3N6rpLHc+zJpSXqV7NkDH
+# rDANBgkqhkiG9w0BAQEFAASCAQCId+ESBkhigxShLezY4Yx7mL4pF9+lk+0C7UND
+# 0okepr7gR1nqH9HY4TgNHSa6ThQ3LNp9ghtoSZSedlp9WdpWMVw090EDuglBKvyt
+# f/WC/NnBE4BIx7H3YrutT4dfHWMYCcCcIgpLkgQfal6flNMvF4omgJJaMAmR3xtV
+# KnT0y78B3VJ7448Jxbenn+rJ4z049k6MTcLK54hA7v/U3e2sm/l00/YUiTncMTwn
+# bXC8okSr2rZdW90T5pdA6SE6/BmvZVsyhC/NHvItpAifV2yJnTdZoXwv5y0ImBcH
+# aMO/SUJlEPnNcm6DvtNrpxtOQ8J4Un1JO9srNhhHyRWp7t9t
 # SIG # End signature block
