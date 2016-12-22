@@ -1,7 +1,7 @@
 'use strict'
 
 // Set verbose mode
-if (process.env['npm_config_verbose']) {
+if (process.env.npm_config_verbose) {
   process.env.DEBUG = '*'
 }
 

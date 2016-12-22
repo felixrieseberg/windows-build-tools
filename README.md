@@ -28,13 +28,16 @@ Both installations are conflict-free, meaning that they do not mess with existin
 
 ## Usage
 ```
-npm install --global windows-build-tools
+npm install [--python-mirror=""] [--proxy=""] [--verbose] [--strict-ssl] [--resume] [--sockets=5] --global windows-build-tools
 ```
 
 Optional arguments:
  - `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
  - `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
  - `--verbose`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
+ - `--strict-ssl`: Enables "Strict SSL" mode. Defaults to false.
+ - `--resume`: By default, `windows-build-tools` will resume aborted downloads. Set to `false` to disable.
+ - `--sockets`: Specifies the number of http sockets to use at once (this controls concurrency). Defaults to infinity.
 
 ## Support & Help
 

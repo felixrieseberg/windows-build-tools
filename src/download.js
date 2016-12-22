@@ -29,10 +29,11 @@ function downloadTools (installer) {
     const nuggetOptions = {
       target: installer.fileName,
       dir: installer.directory,
-      resume: true,
+      resume: process.env.npm_config_resume || true,
       verbose: true,
-      strictSSL: false,
-      proxy: process.env['npm_config_proxy'] || process.env.PROXY || undefined
+      strictSSL: process.env.npm_config_strict_ssl || false,
+      proxy: process.env.npm_config_proxy || process.env.PROXY || undefined,
+      sockets: process.env.npm_config_sockets || undefined
     }
 
     nugget(installer.url, nuggetOptions, (errors) => {
