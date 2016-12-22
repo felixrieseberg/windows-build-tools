@@ -1,8 +1,8 @@
-var pythonMirror = process.env.npm_config_python_mirror || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
+var pythonMirror = process.env['npm_config_python_mirror'] || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
 
 var buildTools = {
   installerName: 'BuildTools_Full.exe',
-  installerUrl: 'http://download.microsoft.com/download/5/f/7/5f7acaeb-8363-451f-9425-68a90f98b238/visualcppbuildtools_full.exe',
+  installerUrl: 'https://download.microsoft.com/download/5/f/7/5f7acaeb-8363-451f-9425-68a90f98b238/visualcppbuildtools_full.exe',
   logName: 'build-tools-log.txt'
 }
 

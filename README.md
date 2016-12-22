@@ -26,11 +26,47 @@ Both installations are conflict-free, meaning that they do not mess with existin
  - ATL and MFC (optional, off by default)
  - C++ Build tools specific command prompts
 
-## Proxy
-If you're behind a proxy, set a `PROXY` environment variable first. To do that with PowerShell, simply run `$env:PROXY = "Your proxy"`.
+## Usage
 
-## Mirror
-Microsoft's build tools should be fast across the world, but to use a mirror to download Python, set a `PYTHON_MIRROR` environment variable. To do that with PowerShell, simply run `npm install --global windows-build-tools --python_mirror=https://npm.taobao.org/mirrors/python/`.
+```
+npm [--python-mirror=''] [--proxy=''] [--verbose] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] install --global windows-build-tools
+```
+
+Optional arguments:
+ - `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
+ - `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
+ - `--debug`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
+ - `--strict-ssl`: Enables "Strict SSL" mode. Defaults to false.
+ - `--resume`: By default, `windows-build-tools` will resume aborted downloads. Set to `false` to disable.
+ - `--sockets`: Specifies the number of http sockets to use at once (this controls concurrency). Defaults to infinity.
+ - `--vcc-build-tools-parameters`: Specifies additional parameters for the Visual C++ Build Tools 2015. See below for more detailed usage instructions.
+
+## Supplying Parameters to the VCC Build Tools
+You can pass additional parameters directly to the VCC Build Tools installer. This tool does not check if the parameters make sense - passing incorrect parameters might break the whole installation. As of January 2017, the following parameters are available:
+
+ - `/AdminFile`: <filename> Specifies the installation control file.
+ - `/CreateAdminFile`: <filename> Specifies the location to create a control file that can then be used
+ - `/CustomInstallPath`: <path> Set Custom install location.
+ - `/ForceRestart`: Always restart the system after installation.
+ - `/Full`: Install all product features.
+ - `/InstallSelectableItems`: <item1;item2;...;itemN> Choose which selectable item(s) to be installed.
+selectable item to be installed, just pass in this switch without any value.
+ - `/Layout`: Create a copy of the media in specified folder.
+ - `/NoRefresh`: Prevent setup checking for updates from the internet.
+ - `/NoRestart`: Do not restart during or after installation.
+ - `/NoWeb`: Prevent setup downloading from the internet.
+ - `/Passive`: Display progress but do not wait for user input.
+ - `/ProductKey`: <25-character product key> Set custom product key (no dashes).
+ - `/PromptRestart`: Prompt the user before restarting the system.
+ - `/Repair`: Repair the product.
+ - `/Uninstall`: Uninstall the product.
+ - `/Uninstall /Force`: Uninstall the product and features shared with other products.
+
+ Supply parameters to `windows-build-tools` as a JSON array. Here's quick example (note the double quotes):
+
+ ```
+ npm --vcc-build-tools-parameters='[""/InstallSelectableItems"", ""item1;item2;item3""]' install --global windows-build-tools
+ ```
 
 ## Support & Help
 
