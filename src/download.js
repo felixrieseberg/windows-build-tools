@@ -32,7 +32,7 @@ function downloadTools (installer) {
       resume: true,
       verbose: true,
       strictSSL: false,
-      proxy: process.env.PROXY || undefined
+      proxy: process.env['npm_config_proxy'] || process.env.PROXY || undefined
     }
 
     nugget(installer.url, nuggetOptions, (errors) => {

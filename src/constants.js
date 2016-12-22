@@ -1,4 +1,4 @@
-var pythonMirror = process.env.npm_config_python_mirror || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
+var pythonMirror = process.env['npm_config_python-mirror'] || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
 
 var buildTools = {
   installerName: 'BuildTools_Full.exe',

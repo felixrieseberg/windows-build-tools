@@ -26,11 +26,15 @@ Both installations are conflict-free, meaning that they do not mess with existin
  - ATL and MFC (optional, off by default)
  - C++ Build tools specific command prompts
 
-## Proxy
-If you're behind a proxy, set a `PROXY` environment variable first. To do that with PowerShell, simply run `$env:PROXY = "Your proxy"`.
+## Usage
+```
+npm install --global windows-build-tools
+```
 
-## Mirror
-Microsoft's build tools should be fast across the world, but to use a mirror to download Python, set a `PYTHON_MIRROR` environment variable. To do that with PowerShell, simply run `npm install --global windows-build-tools --python_mirror=https://npm.taobao.org/mirrors/python/`.
+Optional arguments:
+ - `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
+ - `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
+ - `--verbose`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
 
 ## Support & Help
 
