@@ -15,8 +15,24 @@ const installer = utils.getBuildToolsInstallerPath()
  */
 function launchInstaller () {
   return new Promise((resolve, reject) => {
+    let extraArgs = ''
+    let parsedArgs = {}
+
+    if (process.env.npm_config_vcc_build_tools_parameters) {
+      try {
+        parsedArgs = JSON.parse(process.env.npm_config_vcc_build_tools_parameters)
+
+        if (parsedArgs && parsedArgs.length > 0) {
+          extraArgs = parsedArgs.join('%+; ')
+        }
+      } catch (e) {
+        debug(`Installer: Parsing additional arguments for VCC build tools failed: ${JSON.stringify(e)}`)
+      }
+    }
+
+
     const scriptPath = path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1')
-    const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' }`
+    const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' -extraBuildToolsParameters '${extraArgs}' }`
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
     debug(`Installer: Launching installer in ${installer.directory} with file ${installer.fileName}`)

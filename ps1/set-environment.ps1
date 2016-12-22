@@ -10,6 +10,7 @@ npm config set msvs_version 2015
 
 # Setting python path
 npm config set python $pythonPath
+
 # SIG # Begin signature block
 # MIINQAYJKoZIhvcNAQcCoIINMTCCDS0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR

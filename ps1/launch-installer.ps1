@@ -1,7 +1,8 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$True)]
-    [string]$path
+    [string]$path,
+    [string]$extraBuildToolsParameters
 )
 
 # Returns whether or not the current user has administrative privileges
@@ -24,6 +25,16 @@ function runInstaller
     if (Test-Path $path)
     {
         $params = "/NoRestart", "/S", "/L", "`"$path\build-tools-log.txt`""
+        $extraParams = $extraBuildToolsParameters -split "%+; "
+
+        if ($extraParams.count -gt 0)
+        {
+            foreach ($element in $extraParams)
+            {
+                $params += $element
+            }
+        }
+
         cd $path
         ./BuildTools_Full.exe $params
     }
