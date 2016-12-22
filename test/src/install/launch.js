@@ -30,7 +30,7 @@ describe('Install - Launch', () => {
       .then(() => {
         const expectedScriptPath = path.join(__dirname, '..', '..', '..', 'ps1', 'launch-installer.ps1')
         const expectedInstallerPath = path.join(process.env.USERPROFILE || process.env.HOME, '.windows-build-tools')
-        const expectedPsArgs = `& {& '${expectedScriptPath}' -path '${expectedInstallerPath}' }`
+        const expectedPsArgs = `& {& '${expectedScriptPath}' -path '${expectedInstallerPath}' -extraBuildToolsParameters '' }`
         const expectedArgs = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', expectedPsArgs]
 
         passedProcess.should.equal('powershell.exe')
