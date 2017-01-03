@@ -19,7 +19,7 @@ function getWorkDirectory () {
     fs.ensureDirSync(workDir)
     return workDir
   } catch (err) {
-    console.log(err)
+    log(err)
   }
 }
 
@@ -68,7 +68,7 @@ function getPythonInstallerPath () {
  */
 function ensureWindows () {
   if (process.platform !== 'win32') {
-    console.log('This tool requires Windows.\n')
+    log('This tool requires Windows.\n')
     process.exit(1)
   }
 }
@@ -95,10 +95,40 @@ function executeChildProcess (fileName, args) {
   })
 }
 
+/**
+ * Log, unless logging is disabled. Parameters identical with console.log.
+ */
+function log () {
+  if (!process.env.npm_config_disable_logging) {
+    console.log.apply(this, arguments)
+  }
+}
+
+/**
+ * Warn, unless logging is disabled. arameters identical with console.error.
+ */
+function warn () {
+  if (!process.env.npm_config_disable_logging) {
+    console.warn.apply(this, arguments)
+  }
+}
+
+/**
+ * Error, unless logging is disabled. arameters identical with console.error.
+ */
+function error () {
+  if (!process.env.npm_config_disable_logging) {
+    console.error.apply(this, arguments)
+  }
+}
+
 module.exports = {
   getWorkDirectory,
   getBuildToolsInstallerPath,
   getPythonInstallerPath,
   ensureWindows,
-  executeChildProcess
+  executeChildProcess,
+  log,
+  warn,
+  error
 }

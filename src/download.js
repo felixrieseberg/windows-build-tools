@@ -14,7 +14,7 @@ function download (cb) {
   downloadTools(utils.getBuildToolsInstallerPath())
     .then(() => downloadTools(utils.getPythonInstallerPath()))
     .then(() => cb())
-    .catch((error) => console.log(error))
+    .catch((error) => utils.log(error))
 }
 
 /**
@@ -48,7 +48,7 @@ function downloadTools (installer) {
         }
       }
 
-      console.log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`)
+      utils.log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`)
       resolve(installer.path)
     })
   })

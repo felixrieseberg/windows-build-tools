@@ -21,7 +21,7 @@ let spinner
  */
 
 function install (cb) {
-  console.log(chalk.green('Starting installation...'))
+  utils.log(chalk.green('Starting installation...'))
 
   launchInstaller()
     .then(() => launchSpinner())
@@ -37,8 +37,8 @@ function install (cb) {
     })
     .catch((error) => {
       stopSpinner()
-  
-      console.log(error)
+
+      utils.log(error)
     })
 }
 
@@ -49,8 +49,8 @@ function stopSpinner() {
 }
 
 function launchSpinner() {
-  console.log('Launched installers, now waiting for them to finish.')
-  console.log('This will likely take some time - please be patient!')
+  utils.log('Launched installers, now waiting for them to finish.')
+  utils.log('This will likely take some time - please be patient!')
 
   spinner = new Spinner(`Waiting for installers... %s`)
   spinner.setSpinnerDelay(180)
@@ -69,15 +69,15 @@ function installBuildTools () {
       }
 
       if (result === 'success') {
-        console.log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
+        utils.log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer')
         resolve()
       }
 
       if (result === 'failure') {
-        console.log(chalk.bold.red('Could not install Visual Studio Build Tools.'))
-        console.log('Please find more details in the log files, which can be found at')
-        console.log(utils.getWorkDirectory())
+        utils.log(chalk.bold.red('Could not install Visual Studio Build Tools.'))
+        utils.log('Please find more details in the log files, which can be found at')
+        utils.log(utils.getWorkDirectory())
         debug('Installer: Failed to install according to tailer')
         resolve()
       }
@@ -100,7 +100,7 @@ function installPython () {
       }
 
       if (result === 'success') {
-        console.log(chalk.bold.green('Successfully installed Python 2.7'))
+        utils.log(chalk.bold.green('Successfully installed Python 2.7'))
         debug('Installer: Successfully installed Python 2.7 according to tailer')
 
         var variables = {
@@ -110,9 +110,9 @@ function installPython () {
       }
 
       if (result === 'failure') {
-        console.log(chalk.bold.red('Could not install Python 2.7.'))
-        console.log('Please find more details in the log files, which can be found at')
-        console.log(utils.getWorkDirectory())
+        utils.log(chalk.bold.red('Could not install Python 2.7.'))
+        utils.log('Please find more details in the log files, which can be found at')
+        utils.log(utils.getWorkDirectory())
         debug('Installer: Failed to install Python 2.7 according to tailer')
         resolve(undefined)
       }

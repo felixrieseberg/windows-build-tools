@@ -40,6 +40,7 @@ Optional arguments:
  - `--resume`: By default, `windows-build-tools` will resume aborted downloads. Set to `false` to disable.
  - `--sockets`: Specifies the number of http sockets to use at once (this controls concurrency). Defaults to infinity.
  - `--vcc-build-tools-parameters`: Specifies additional parameters for the Visual C++ Build Tools 2015. See below for more detailed usage instructions.
+ - `--silent`: The script will not output any information.
 
 ## Supplying Parameters to the VCC Build Tools
 You can pass additional parameters directly to the VCC Build Tools installer. This tool does not check if the parameters make sense - passing incorrect parameters might break the whole installation. As of January 2017, the following parameters are available:

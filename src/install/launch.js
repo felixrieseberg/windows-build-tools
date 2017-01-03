@@ -50,9 +50,9 @@ function launchInstaller () {
       debug(`Installer: Stdout from launch-installer.ps1: ${data.toString()}`)
 
       if (data.toString().includes('Please restart this script from an administrative PowerShell!')) {
-        console.log(chalk.bold.red('Please restart this script from an administrative PowerShell!'))
-        console.log('The build tools cannot be installed without administrative rights.')
-        console.log('To fix, right-click on PowerShell and run "as Administrator".')
+        utils.log(chalk.bold.red('Please restart this script from an administrative PowerShell!'))
+        utils.log('The build tools cannot be installed without administrative rights.')
+        utils.log('To fix, right-click on PowerShell and run "as Administrator".')
 
         // Bail out
         process.exit(1)
