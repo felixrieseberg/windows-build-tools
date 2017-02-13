@@ -29,10 +29,11 @@ Both installations are conflict-free, meaning that they do not mess with existin
 ## Usage
 
 ```
-npm [--python-mirror=''] [--proxy=''] [--verbose] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] install --global windows-build-tools
+npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] install --global windows-build-tools
 ```
 
 Optional arguments:
+ - `--add-python-to-path`: Add Python to the environment, allowing you to type `python.exe` in any shell. Defaults to `false`.
  - `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
  - `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
  - `--debug`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.

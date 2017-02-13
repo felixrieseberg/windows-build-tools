@@ -1,7 +1,10 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$True)]
-    [string]$pythonPath
+    [string]$pythonPath,
+    [Parameter(Mandatory=$True)]
+    [string]$pythonExePath,
+    [switch]$AddPythonToPath
 )
 
 # Setting the MSVS Version
@@ -9,13 +12,19 @@ Param(
 npm config set msvs_version 2015
 
 # Setting python path
-npm config set python $pythonPath
+npm config set python $pythonExePath
+
+# Add Python to path, if that's inteded by the User
+if ($AddPythonToPath.IsPresent) {
+    [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "User")
+    [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "Process")
+}
 
 # SIG # Begin signature block
 # MIINQAYJKoZIhvcNAQcCoIINMTCCDS0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUo5BckTGwFih1lovXny5VkwIC
-# T3Ogggp+MIIFJzCCBA+gAwIBAgIQBicsjH4LxacitIAMXdcrMDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUATK+i6ENi6uhyD/3EAUzfXBK
+# iFOgggp+MIIFJzCCBA+gAwIBAgIQBicsjH4LxacitIAMXdcrMDANBgkqhkiG9w0B
 # AQsFADB2MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
 # VQQLExB3d3cuZGlnaWNlcnQuY29tMTUwMwYDVQQDEyxEaWdpQ2VydCBTSEEyIEhp
 # Z2ggQXNzdXJhbmNlIENvZGUgU2lnbmluZyBDQTAeFw0xNjA3MjkwMDAwMDBaFw0x
@@ -76,11 +85,11 @@ npm config set python $pythonPath
 # Z2lDZXJ0IFNIQTIgSGlnaCBBc3N1cmFuY2UgQ29kZSBTaWduaW5nIENBAhAGJyyM
 # fgvFpyK0gAxd1yswMAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgACh
 # AoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAM
-# BgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBTahoYH1hUMeMiATn6XpZvuKIpP
-# 0TANBgkqhkiG9w0BAQEFAASCAQDYY2sdOPUJqEYNANdzYViFus3BwE0RmLu0RcBu
-# Mvf9ZX0G/UVyRJdCQKGMDSXcjCj5uoaWrw2wPeiC7/mynFZVDTTEaaOm2OQtiSBx
-# pzO/Yw4CMqvSK0DpWW8Y+rBuFD8EXfo5g4O5K9opZmPXAahAFV7GtlR0Nm3VWFGl
-# qP04bumv1ZN9H35ILD6OxWYVRWswqlbD/mmZhoRAOjWfI22B4HTWjx677nHCju25
-# JoERNGHDIKzVlxgYbydgpd1rmmtzpDv2kOm41Oo6n20O7vagZr9Lc/LA1KnxVsDL
-# cH4OwY+VTlN8fa/doQYEf6Y4DKZj5NEGIm8lQ0yAEdSGA3sa
+# BgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBRwvWqn9/Q4zAXtdMBNtwMdQ0Gv
+# zTANBgkqhkiG9w0BAQEFAASCAQCJOmQppsfmYg/9oKBxPXse2E0wgrtq8T1YnSrx
+# yGqQMfTeN0d2dT4l7Y+Jhz+aXzVeMNlb8rVV5f23WUa9FmhV5yQNIAz+d4sXOQs/
+# cW+N99uwnxtjlrAKV7wVRNgFBqD1/WuhKyUtjDjli8EZFozm4LkLaylgI/55nBeu
+# qoOe4JcKIyVByoe32l2hkC3s98+ydbcJybk0Sm+g1XiGqmGm3UB7w04hBAWrma0S
+# QZaO1uxuJO4fZVapYUfg/kvWM29wOCSxOnqUQYy9L6nnrbnKfWKKVVfJtG+d5uzJ
+# qO0xCDTK16ELdOH7kXBi5XYZL0z01VH509dqxVt6uEQXMs51
 # SIG # End signature block

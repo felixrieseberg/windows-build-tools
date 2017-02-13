@@ -12,9 +12,11 @@ const utils = require('./utils')
  * @returns {Promise}
  */
 function setEnvironment (variables) {
-  const pythonPath = path.join(variables.python.pythonPath, 'python.exe')
+  const pythonPath = path.join(variables.python.pythonPath)
+  const pythonExePath = path.join(pythonPath, 'python.exe')
   const scriptPath = path.join(__dirname, '..', 'ps1', 'set-environment.ps1')
-  const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' }`
+  const maybeAddToPath = process.env.npm_config_add_python_to_path ? ' -AddPythonToPath' : ''
+  const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath} -pythonExePath '${pythonExePath}${maybeAddToPath}' }`
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
   return utils.executeChildProcess('powershell.exe', args)
