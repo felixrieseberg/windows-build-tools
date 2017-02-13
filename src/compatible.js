@@ -1,6 +1,5 @@
 module.export = (function () {
   if (process.version === 'v7.1.0') {
-
     const utils = require('./utils')
 
     utils.warn('--------------------------------------------------------------')
