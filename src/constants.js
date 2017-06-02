@@ -7,8 +7,8 @@ var buildTools = {
 }
 
 var python = {
-  installerName: 'python-2.7.11.msi',
-  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.11/python-2.7.11.msi'),
+  installerName: 'python-2.7.12.msi',
+  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.13/python-2.7.13.msi'),
   targetName: 'python27',
   logName: 'python-log.txt'
 }
