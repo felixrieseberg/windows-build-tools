@@ -44,7 +44,7 @@ function downloadTools (installer) {
         if (error.message.indexOf('404') === -1) {
           return reject(error)
         } else {
-          return reject(`Could not find ${installer.fileName} at ${installer.url}`)
+          return reject(new Error(`Could not find ${installer.fileName} at ${installer.url}`))
         }
       }
 
