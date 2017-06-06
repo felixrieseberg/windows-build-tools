@@ -1,6 +1,5 @@
 'use strict'
 
-const fs = require('fs-extra')
 const path = require('path')
 const spawn = require('child_process').spawn
 const debug = require('debug')('windows-build-tools')
