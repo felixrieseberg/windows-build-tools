@@ -18,7 +18,7 @@ if (arch == "x64")
 {
   var python = {
   installerName: 'python-2.7.14.msi',
-  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.13/python-2.7.14.msi'),
+  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.14/python-2.7.14.msi'),
   targetName: 'python27',
   logName: 'python-log.txt'
   }
