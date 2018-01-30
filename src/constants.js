@@ -6,12 +6,24 @@ var buildTools = {
   logName: 'build-tools-log.txt'
 }
 
-var python = {
-  installerName: 'python-2.7.13.msi',
-  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.13/python-2.7.13.msi'),
+if (arch == "x64")
+{
+  var python = {
+  installerName: 'python-2.7.14.amd64.msi',
+  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.14/python-2.7.14.amd64.msi'),
   targetName: 'python27',
   logName: 'python-log.txt'
+  }
+} else
+{
+  var python = {
+  installerName: 'python-2.7.14.msi',
+  installerUrl: pythonMirror.replace(/\/*$/, '/2.7.14/python-2.7.14.msi'),
+  targetName: 'python27',
+  logName: 'python-log.txt'
+  }
 }
+
 
 module.exports = {
   buildTools,
