@@ -43,6 +43,8 @@ function launchInstaller () {
     try {
       child = spawn('powershell.exe', args)
     } catch (error) {
+      utils.log(chalk.bold.red('Error: failed while trying to run powershell.exe'))
+      utils.log('(Hint: Is "%SystemRoot%\\system32\\WindowsPowerShell\\v1.0" in your system path?)')
       return reject(error)
     }
 
