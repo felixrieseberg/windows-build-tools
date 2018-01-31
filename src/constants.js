@@ -1,3 +1,5 @@
+'use strict'
+
 const pythonMirror = process.env['npm_config_python_mirror'] || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
 
 const buildTools = {
