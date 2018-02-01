@@ -7,6 +7,7 @@ const debug = require('debug')('windows-build-tools')
 
 const utils = require('../utils')
 const installer = utils.getBuildToolsInstallerPath()
+const pythonInstaller = utils.getPythonInstallerPath()
 
 /**
  * Launches the installer, using a PS1 script as a middle-man
@@ -33,7 +34,7 @@ function launchInstaller () {
 
 
     const scriptPath = path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1')
-    const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' -extraBuildToolsParameters '${extraArgs}' }`
+    const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' -extraBuildToolsParameters '${extraArgs}' -pythonInstaller '${pythonInstaller.fileName}'}`
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
     debug(`Installer: Launching installer in ${installer.directory} with file ${installer.fileName}`)
