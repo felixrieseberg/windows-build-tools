@@ -12,7 +12,7 @@ describe('Environment', () => {
   const variables = {
     buildTools: undefined,
     python: {
-      pythonPath: require('../../src/utils').getPythonInstallerPath().targetPath
+      pythonPath: require('../../src/utils/get-python-installer-path').getPythonInstallerPath().targetPath
     }
   }
 

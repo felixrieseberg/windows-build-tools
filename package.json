@@ -1,6 +1,6 @@
 {
   "name": "windows-build-tools",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "lib/index.js",
   "scripts": {
@@ -47,7 +47,7 @@
     "chalk": "^2.3.0",
     "cli-spinner": "^0.2.7",
     "debug": "^3.1.0",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^5.0.0",
     "nugget": "^2.0.1"
   }
 }

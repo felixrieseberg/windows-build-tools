@@ -2,7 +2,9 @@
 
 const nugget = require('nugget')
 
-const utils = require('./utils')
+const { getBuildToolsInstallerPath } = require('./utils/get-build-tools-installer-path')
+const { getPythonInstallerPath } = require('./utils/get-python-installer-path')
+const { log } = require('./logging')
 
 /**
  * Downloads the Visual Studio C++ Build Tools and Python installer to a temporary folder
@@ -11,10 +13,10 @@ const utils = require('./utils')
  * @returns {Promise} - Promise
  */
 function download (cb) {
-  downloadTools(utils.getBuildToolsInstallerPath())
-    .then(() => downloadTools(utils.getPythonInstallerPath()))
+  downloadTools(getBuildToolsInstallerPath())
+    .then(() => downloadTools(getPythonInstallerPath()))
     .then(() => cb())
-    .catch((error) => utils.log(error))
+    .catch((error) => log(error))
 }
 
 /**
@@ -48,7 +50,7 @@ function downloadTools (installer) {
         }
       }
 
-      utils.log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`)
+      log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`)
       resolve(installer.path)
     })
   })

@@ -1,14 +1,14 @@
 'use strict'
 
-const path = require('path')
-const spawn = require('child_process').spawn
 const debug = require('debug')('windows-build-tools')
 const chalk = require('chalk')
 const Spinner = require('cli-spinner').Spinner
 
+const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
+const { getWorkDirectory } = require('../utils/get-work-dir')
+const { log } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
-const utils = require('../utils')
 
 let spinner
 
@@ -20,7 +20,7 @@ let spinner
  */
 
 function install (cb) {
-  utils.log(chalk.green('Starting installation...'))
+  log(chalk.green('Starting installation...'))
 
   launchInstaller()
     .then(() => launchSpinner())
@@ -37,19 +37,19 @@ function install (cb) {
     .catch((error) => {
       stopSpinner()
 
-      utils.log(error)
+      log(error)
     })
 }
 
-function stopSpinner() {
+function stopSpinner () {
   if (spinner) {
     spinner.stop(false)
   }
 }
 
-function launchSpinner() {
-  utils.log('Launched installers, now waiting for them to finish.')
-  utils.log('This will likely take some time - please be patient!')
+function launchSpinner () {
+  log('Launched installers, now waiting for them to finish.')
+  log('This will likely take some time - please be patient!')
 
   spinner = new Spinner(`Waiting for installers... %s`)
   spinner.setSpinnerDelay(180)
@@ -58,25 +58,26 @@ function launchSpinner() {
 
 function installBuildTools () {
   return new Promise((resolve, reject) => {
-    const tailer = new Tailer(utils.getBuildToolsInstallerPath().logPath)
+    const tailer = new Tailer()
 
     tailer.on('exit', (result, details) => {
-      debug('build tools tailer exited');
+      debug('Install: Build tools tailer exited')
+
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
-        reject(err)
+        reject()
       }
 
       if (result === 'success') {
-        utils.log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
+        log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer')
         resolve()
       }
 
       if (result === 'failure') {
-        utils.log(chalk.bold.red('Could not install Visual Studio Build Tools.'))
-        utils.log('Please find more details in the log files, which can be found at')
-        utils.log(utils.getWorkDirectory())
+        log(chalk.bold.red('Could not install Visual Studio Build Tools.'))
+        log('Please find more details in the log files, which can be found at')
+        log(getWorkDirectory())
         debug('Installer: Failed to install according to tailer')
         resolve()
       }
@@ -89,29 +90,29 @@ function installBuildTools () {
 function installPython () {
   return new Promise((resolve, reject) => {
     // The log file for msiexe is utf-16
-    const tailer = new Tailer(utils.getPythonInstallerPath().logPath, 'ucs2')
+    const tailer = new Tailer(getPythonInstallerPath().logPath, 'ucs2')
 
     tailer.on('exit', (result, details) => {
-      debug('python tailer exited');
+      debug('python tailer exited')
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
-        reject(err)
+        reject()
       }
 
       if (result === 'success') {
-        utils.log(chalk.bold.green('Successfully installed Python 2.7'))
+        log(chalk.bold.green('Successfully installed Python 2.7'))
         debug('Installer: Successfully installed Python 2.7 according to tailer')
 
         var variables = {
-          pythonPath: details || utils.getPythonInstallerPath().targetPath
+          pythonPath: details || getPythonInstallerPath().targetPath
         }
         resolve(variables)
       }
 
       if (result === 'failure') {
-        utils.log(chalk.bold.red('Could not install Python 2.7.'))
-        utils.log('Please find more details in the log files, which can be found at')
-        utils.log(utils.getWorkDirectory())
+        log(chalk.bold.red('Could not install Python 2.7.'))
+        log('Please find more details in the log files, which can be found at')
+        log(getWorkDirectory())
         debug('Installer: Failed to install Python 2.7 according to tailer')
         resolve(undefined)
       }

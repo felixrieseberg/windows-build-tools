@@ -2,13 +2,12 @@
 
 const pythonMirror = process.env['npm_config_python_mirror'] || process.env.PYTHON_MIRROR || 'https://www.python.org/ftp/python/'
 
-const buildTools = {
-  installerName: 'BuildTools_Full.exe',
-  installerUrl: 'https://download.microsoft.com/download/5/f/7/5f7acaeb-8363-451f-9425-68a90f98b238/visualcppbuildtools_full.exe',
-  logName: 'build-tools-log.txt'
-}
-
 let python = {}
+
+const buildTools = {
+  installerName: 'vs_BuildTools.exe',
+  installerUrl: 'https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe'
+}
 
 if (process.arch === 'x64') {
   python = {

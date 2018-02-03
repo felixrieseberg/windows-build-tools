@@ -4,12 +4,13 @@ const path = require('path')
 const mockery = require('mockery')
 const fs = require('fs')
 
+const installer = require('../../src/utils/get-build-tools-installer-path').getBuildToolsInstallerPath()
+
 describe('DownloadTools', () => {
   afterEach(() => mockery.deregisterAll())
 
   describe('downloadTools (installer)', () => {
     it('should attempt to download the installer', (done) => {
-      const installer = require('../../src/utils').getBuildToolsInstallerPath()
       const nuggetMock = function (url, options, cb) {
         url.should.equal(installer.url)
         options.should.be.ok

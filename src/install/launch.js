@@ -5,9 +5,12 @@ const spawn = require('child_process').spawn
 const chalk = require('chalk')
 const debug = require('debug')('windows-build-tools')
 
-const utils = require('../utils')
-const installer = utils.getBuildToolsInstallerPath()
-const pythonInstaller = utils.getPythonInstallerPath()
+const { log } = require('../logging')
+const { getBuildToolsInstallerPath } = require('../utils/get-build-tools-installer-path')
+const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
+
+const installer = getBuildToolsInstallerPath()
+const pythonInstaller = getPythonInstallerPath()
 
 /**
  * Launches the installer, using a PS1 script as a middle-man
@@ -32,7 +35,6 @@ function launchInstaller () {
       }
     }
 
-
     const scriptPath = path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1')
     const psArgs = `& {& '${scriptPath}' -path '${installer.directory}' -extraBuildToolsParameters '${extraArgs}' -pythonInstaller '${pythonInstaller.fileName}'}`
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
@@ -44,8 +46,8 @@ function launchInstaller () {
     try {
       child = spawn('powershell.exe', args)
     } catch (error) {
-      utils.log(chalk.bold.red('Error: failed while trying to run powershell.exe'))
-      utils.log('(Hint: Is "%SystemRoot%\\system32\\WindowsPowerShell\\v1.0" in your system path?)')
+      log(chalk.bold.red('Error: failed while trying to run powershell.exe'))
+      log('(Hint: Is "%SystemRoot%\\system32\\WindowsPowerShell\\v1.0" in your system path?)')
       return reject(error)
     }
 
@@ -53,9 +55,9 @@ function launchInstaller () {
       debug(`Installer: Stdout from launch-installer.ps1: ${data.toString()}`)
 
       if (data.toString().includes('Please restart this script from an administrative PowerShell!')) {
-        utils.log(chalk.bold.red('Please restart this script from an administrative PowerShell!'))
-        utils.log('The build tools cannot be installed without administrative rights.')
-        utils.log('To fix, right-click on PowerShell and run "as Administrator".')
+        log(chalk.bold.red('Please restart this script from an administrative PowerShell!'))
+        log('The build tools cannot be installed without administrative rights.')
+        log('To fix, right-click on PowerShell and run "as Administrator".')
 
         // Bail out
         process.exit(1)

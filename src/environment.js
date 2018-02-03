@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const utils = require('./utils')
+const { executeChildProcess } = require('./utils/execute-child-process')
 
 /**
  * Uses PowerShell to configure the environment for
@@ -19,7 +19,7 @@ function setEnvironment (variables) {
   const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeAddToPath} }`
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
-  return utils.executeChildProcess('powershell.exe', args)
+  return executeChildProcess('powershell.exe', args)
 }
 
 module.exports = setEnvironment
