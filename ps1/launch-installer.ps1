@@ -2,7 +2,8 @@
 Param(
     [Parameter(Mandatory=$True)]
     [string]$path,
-    [string]$extraBuildToolsParameters
+    [string]$extraBuildToolsParameters,
+    [string]$pythonInstaller
 )
 
 # Returns whether or not the current user has administrative privileges
@@ -46,7 +47,7 @@ function runPythonInstaller
     if (Test-Path $path)
     {
         cd $path
-        $pyParams = "/i", "python-2.7.13.msi", "TARGETDIR=```"$path\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$path\python-log.txt`""
+        $pyParams = "/i", $pythonInstaller, "TARGETDIR=```"$path\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$path\python-log.txt`""
         Invoke-Expression "msiexec.exe $pyParams"
     }
 }
