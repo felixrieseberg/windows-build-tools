@@ -31,7 +31,7 @@ describe('Environment', () => {
     passedProcess = undefined
   })
 
-  it('should attempt to lauch the environment script', (done) => {
+  it('should attempt to launch the environment script', (done) => {
     mockery.registerMock('child_process', cpMock)
     require('../../lib/environment')(variables).should.be.fulfilled
       .then(() => {
@@ -47,7 +47,7 @@ describe('Environment', () => {
       .should.notify(done)
   })
 
-  it('should attempt to lauch the environment script with the add to path variable', (done) => {
+  it('should attempt to launch the environment script with the add to path variable', (done) => {
     mockery.registerMock('child_process', cpMock)
 
     process.env.npm_config_add_python_to_path = true

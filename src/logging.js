@@ -19,7 +19,7 @@ function warn () {
 }
 
 /**
- * Error, unless logging is disabled. arameters identical with console.error.
+ * Error, unless logging is disabled. Parameters identical with console.error.
  */
 function error () {
   if (!process.env.npm_config_disable_logging) {
