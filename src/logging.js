@@ -1,10 +1,12 @@
 'use strict'
 
+const shouldLog = !process.env.npm_config_disable_logging
+
 /**
  * Log, unless logging is disabled. Parameters identical with console.log.
  */
 function log () {
-  if (!process.env.npm_config_disable_logging) {
+  if (shouldLog) {
     console.log.apply(this, arguments)
   }
 }
@@ -13,7 +15,7 @@ function log () {
  * Warn, unless logging is disabled. Parameters identical with console.error.
  */
 function warn () {
-  if (!process.env.npm_config_disable_logging) {
+  if (shouldLog) {
     console.warn.apply(this, arguments)
   }
 }
@@ -22,7 +24,7 @@ function warn () {
  * Error, unless logging is disabled. Parameters identical with console.error.
  */
 function error () {
-  if (!process.env.npm_config_disable_logging) {
+  if (shouldLog) {
     console.error.apply(this, arguments)
   }
 }
@@ -30,5 +32,6 @@ function error () {
 module.exports = {
   log,
   warn,
-  error
+  error,
+  shouldLog
 }

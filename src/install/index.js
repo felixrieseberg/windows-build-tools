@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
 const { getWorkDirectory } = require('../utils/get-work-dir')
 const { createSingleLineLogger } = require('../utils/single-line-log')
-const { log } = require('../logging')
+const { log, shouldLog } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 
@@ -42,6 +42,8 @@ function install (cb) {
 }
 
 function launchLog () {
+  if (!shouldLog) return
+
   log('Launched installers, now waiting for them to finish.')
   log('This will likely take some time - please be patient!\n')
 
@@ -54,6 +56,8 @@ function launchLog () {
 }
 
 function stopLog () {
+  if (!shouldLog) return
+
   clearInterval(lastLinesInterval)
 }
 
