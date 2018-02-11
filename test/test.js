@@ -11,7 +11,5 @@ mockery.enable({ warnOnUnregistered: false })
 global.testing = true
 
 // Run tests
-const download = require('./src/download');
-const environment = require('./src/environment');
-const installLaunch = require('./src/install/launch');
-const installTailer = require('./src/install/tailer');
+require('./src/download')
+require('./src/environment')

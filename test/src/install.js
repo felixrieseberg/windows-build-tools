@@ -1,6 +1,5 @@
 'use strict'
 
-const path = require('path')
 const mockery = require('mockery')
 
 const constants = require('../../src/constants')
@@ -21,7 +20,7 @@ describe('Install', () => {
 
       mockery.registerMock('nugget', nuggetMock)
       require('../../lib/download')().should.be.fulfilled.and.notify(done)
-      mockery.deregisterMock('nugget');
+      mockery.deregisterMock('nugget')
     })
   })
 })

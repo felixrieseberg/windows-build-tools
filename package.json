@@ -1,6 +1,6 @@
 {
   "name": "windows-build-tools",
-  "version": "1.4.2",
+  "version": "2.2.0",
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "lib/index.js",
   "scripts": {
@@ -45,9 +45,21 @@
   },
   "dependencies": {
     "chalk": "^2.3.0",
-    "cli-spinner": "^0.2.7",
     "debug": "^3.1.0",
-    "fs-extra": "^4.0.2",
-    "nugget": "^2.0.1"
+    "fs-extra": "^5.0.0",
+    "nugget": "^2.0.1",
+    "string-width": "^2.1.1"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "afterEach",
+      "it",
+      "expect"
+    ],
+    "env": {
+      "node": true,
+      "mocha": true
+    }
   }
 }
