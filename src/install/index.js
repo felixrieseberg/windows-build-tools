@@ -10,6 +10,8 @@ const { log, shouldLog } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 
+const singleLineLogger = createSingleLineLogger()
+
 let vccLastLines = [ 'Still waiting for installer log file...' ]
 let pythonLastLines = [ 'Still waiting for installer log file...' ]
 let lastLinesInterval = null
@@ -22,12 +24,13 @@ let lastLinesInterval = null
  */
 
 function install (cb) {
-  log(chalk.green('Starting installation...'))
+  log(chalk.green('\nStarting installation...'))
 
   launchInstaller()
     .then(() => launchLog())
     .then(() => Promise.all([installBuildTools(), installPython()]))
     .then((paths) => {
+      logStatus()
       stopLog()
 
       const variables = {
@@ -41,18 +44,19 @@ function install (cb) {
     })
 }
 
+function logStatus () {
+  const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
+  singleLineLogger(updatedLog.join('\n'))
+}
+
 function launchLog () {
   if (!shouldLog) return
 
   log('Launched installers, now waiting for them to finish.')
   log('This will likely take some time - please be patient!\n')
-
   log('Status from the installers:')
-  const singleLineLogger = createSingleLineLogger()
-  lastLinesInterval = setInterval(() => {
-    const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
-    singleLineLogger(updatedLog.join('\n'))
-  }, 2500)
+
+  lastLinesInterval = setInterval(logStatus, 1000)
 }
 
 function stopLog () {
@@ -64,6 +68,10 @@ function stopLog () {
 function installBuildTools () {
   return new Promise((resolve, reject) => {
     const tailer = new Tailer()
+
+    tailer.on('lastLines', (lastLines) => {
+      vccLastLines = lastLines
+    })
 
     tailer.on('exit', (result, details) => {
       debug('Install: Build tools tailer exited')
@@ -96,6 +104,10 @@ function installPython () {
   return new Promise((resolve, reject) => {
     // The log file for msiexe is utf-16
     const tailer = new Tailer(getPythonInstallerPath().logPath, 'ucs2')
+
+    tailer.on('lastLines', (lastLines) => {
+      pythonLastLines = lastLines
+    })
 
     tailer.on('exit', (result, details) => {
       debug('python tailer exited')
