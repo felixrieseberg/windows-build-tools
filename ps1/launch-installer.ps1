@@ -3,7 +3,8 @@ Param(
     [Parameter(Mandatory=$True)]
     [string]$path,
     [string]$extraBuildToolsParameters,
-    [string]$pythonInstaller
+    [string]$pythonInstaller,
+    [string]$visualStudioVersion
 )
 
 # Returns whether or not the current user has administrative privileges
@@ -25,7 +26,17 @@ function runInstaller
 {
     if (Test-Path $path)
     {
-        $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
+        if ($visualStudioVersion -eq "2017")
+        {
+            $executable = "vs_BuildTools.exe"
+            $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
+        }
+        else
+        {
+            $executable = "BuildTools_Full.exe"
+            $params = "/NoRestart", "/S", "/L", "`"$path\build-tools-log.txt`""
+        }
+        
         $extraParams = $extraBuildToolsParameters -split "%_; "
 
         if ($extraParams.count -gt 0)
@@ -37,7 +48,7 @@ function runInstaller
         }
 
         cd $path
-        ./vs_BuildTools.exe $params
+        ./$executable $params
 
     }
 }

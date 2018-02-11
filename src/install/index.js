@@ -6,11 +6,13 @@ const chalk = require('chalk')
 const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
 const { getWorkDirectory } = require('../utils/get-work-dir')
 const { createSingleLineLogger } = require('../utils/single-line-log')
+const { getBuildToolsInstallerPath } = require('../utils/get-build-tools-installer-path')
 const { log, shouldLog } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 
 const singleLineLogger = createSingleLineLogger()
+const vccInstaller = getBuildToolsInstallerPath()
 
 let vccLastLines = [ 'Still waiting for installer log file...' ]
 let pythonLastLines = [ 'Still waiting for installer log file...' ]
@@ -67,7 +69,7 @@ function stopLog () {
 
 function installBuildTools () {
   return new Promise((resolve, reject) => {
-    const tailer = new Tailer()
+    const tailer = new Tailer(vccInstaller.logPath)
 
     tailer.on('lastLines', (lastLines) => {
       vccLastLines = lastLines
