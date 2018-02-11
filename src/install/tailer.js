@@ -5,6 +5,7 @@ const debug = require('debug')('windows-build-tools')
 const EventEmitter = require('events')
 
 const { findVCCLogFile } = require('../utils/find-logfile')
+const { includesSuccess, includesFailure } = require('../utils/installation-sucess')
 
 class Tailer extends EventEmitter {
   constructor (logfile, encoding = 'utf8') {
@@ -63,15 +64,12 @@ class Tailer extends EventEmitter {
       this.emit('lastLines', lastLines)
     }
 
-    // Success strings for build tools
-    if (data.includes('Closing installer. Return code: 3010.') ||
-        data.includes('Closing installer. Return code: 0.')) {
+    const success = includesSuccess(data)
+
+    if (success.isBuildToolsSuccess) {
       debug(`Tail: Reporting success for VCC Build Tools`)
       this.stop('success')
-    // Success strings for python
-    } else if (data.includes('INSTALL. Return value 1') ||
-        data.includes('Installation completed successfully') ||
-        data.includes('Configuration completed successfully')) {
+    } else if (success.isPythonSuccess) {
       // Finding the python installation path from the log file
       const matches = data.match(/Property\(S\): TARGETDIR = (.*)\r\n/)
       let pythonPath
@@ -79,10 +77,10 @@ class Tailer extends EventEmitter {
       if (matches) {
         pythonPath = matches[1]
       }
+      
       debug(`Tail: Reporting success for Python`)
       this.stop('success', pythonPath)
-    } else if (data.includes('Closing installer. Return code:') ||
-               data.includes('Shutting down, exit code:')) {
+    } else if (includesFailure(data)) {
       debug(`Tail: Reporting failure in ${this.logFile}`)
       this.stop('failure')
     }
