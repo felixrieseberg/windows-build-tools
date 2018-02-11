@@ -71,6 +71,9 @@ function stopLog () {
   if (!shouldLog) return
 
   clearInterval(lastLinesInterval)
+
+  // Flush newlines
+  log('')
 }
 
 function installBuildTools () {
