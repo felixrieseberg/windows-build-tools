@@ -46,9 +46,10 @@ function launchLog () {
   log('This will likely take some time - please be patient!\n')
 
   log('Status from the installers:')
+  const singleLineLogger = singleLineLog()
   lastLinesInterval = setInterval(() => {
     const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
-    singleLineLog(updatedLog.join('\n'))
+    singleLineLogger.write(updatedLog.join('\n'))
   }, 2500)
 }
 
