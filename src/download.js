@@ -2,9 +2,9 @@
 
 const nugget = require('nugget')
 
-const { getBuildToolsInstallerPath } = require('./utils/get-build-tools-installer-path')
-const { getPythonInstallerPath } = require('./utils/get-python-installer-path')
-const { log } = require('./logging')
+const getBuildToolsInstallerPath = require('./utils/get-build-tools-installer-path').getBuildToolsInstallerPath
+const getPythonInstallerPath = require('./utils/get-python-installer-path').getPythonInstallerPath
+const log = require('./logging').log
 
 /**
  * Downloads the Visual Studio C++ Build Tools and Python installer to a temporary folder

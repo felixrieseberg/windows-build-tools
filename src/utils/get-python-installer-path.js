@@ -2,7 +2,7 @@
 
 const path = require('path')
 
-const { getWorkDirectory } = require('./get-work-dir')
+const getWorkDirectory = require('./get-work-dir').getWorkDirectory
 const constants = require('../constants')
 
 /**
