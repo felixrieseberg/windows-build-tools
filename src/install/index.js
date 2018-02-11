@@ -14,6 +14,8 @@ const Tailer = require('./tailer')
 const singleLineLogger = createSingleLineLogger()
 const vccInstaller = getBuildToolsInstallerPath()
 
+const vcLogTitle = chalk.bold.green('---------- Visual Studio Build Tools ----------')
+const pyLogTitle = chalk.bold.green('------------------- Python --------------------')
 let vccLastLines = [ 'Still waiting for installer log file...' ]
 let pythonLastLines = [ 'Still waiting for installer log file...' ]
 let lastLinesInterval = null
@@ -47,7 +49,7 @@ function install (cb) {
 }
 
 function logStatus () {
-  const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
+  const updatedLog = [ vcLogTitle, ...vccLastLines, pyLogTitle, ...pythonLastLines ]
   singleLineLogger(updatedLog.join('\n'))
 }
 
