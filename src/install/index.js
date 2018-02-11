@@ -69,7 +69,7 @@ function installBuildTools () {
       }
 
       if (result === 'success') {
-        log(chalk.bold.green('Successfully installed Visual Studio Build Tools.'))
+        vccLastLines = [ chalk.bold.green('ully installed Visual Studio Build Tools.') ]
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer')
         resolve()
       }
@@ -100,7 +100,7 @@ function installPython () {
       }
 
       if (result === 'success') {
-        log(chalk.bold.green('Successfully installed Python 2.7'))
+        pythonLastLines = [ chalk.bold.green('Successfully installed Python 2.7') ]
         debug('Installer: Successfully installed Python 2.7 according to tailer')
 
         var variables = {
