@@ -48,7 +48,7 @@ function runPythonInstaller
     {
         cd $path
         $pyParams = "/i", $pythonInstaller, "TARGETDIR=```"$path\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$path\python-log.txt`""
-        #Invoke-Expression "msiexec.exe $pyParams"
+        Invoke-Expression "msiexec.exe $pyParams"
     }
 }
 
