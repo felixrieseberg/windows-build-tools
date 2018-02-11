@@ -2,15 +2,17 @@
 
 const debug = require('debug')('windows-build-tools')
 const chalk = require('chalk')
-const Spinner = require('cli-spinner').Spinner
 
 const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
 const { getWorkDirectory } = require('../utils/get-work-dir')
+const { singleLineLog } = require('../utils/single-line-log')
 const { log } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
 
-let spinner
+let vccLastLines = [ 'Still waiting for installer log file...' ]
+let pythonLastLines = [ 'Still waiting for installer log file...' ]
+let lastLinesInterval = null
 
 /**
  * Installs the build tools, tailing the installation log file
@@ -23,10 +25,10 @@ function install (cb) {
   log(chalk.green('Starting installation...'))
 
   launchInstaller()
-    .then(() => launchSpinner())
+    .then(() => launchLog())
     .then(() => Promise.all([installBuildTools(), installPython()]))
     .then((paths) => {
-      stopSpinner()
+      stopLog()
 
       const variables = {
         buildTools: paths[0],
@@ -35,25 +37,23 @@ function install (cb) {
       cb(variables)
     })
     .catch((error) => {
-      stopSpinner()
-
       log(error)
     })
 }
 
-function stopSpinner () {
-  if (spinner) {
-    spinner.stop(false)
-  }
+function launchLog () {
+  log('Launched installers, now waiting for them to finish.')
+  log('This will likely take some time - please be patient!\n')
+
+  log('Status from the installers:')
+  lastLinesInterval = setInterval(() => {
+    const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
+    singleLineLog(updatedLog.join('\n'))
+  }, 2500)
 }
 
-function launchSpinner () {
-  log('Launched installers, now waiting for them to finish.')
-  log('This will likely take some time - please be patient!')
-
-  spinner = new Spinner(`Waiting for installers... %s`)
-  spinner.setSpinnerDelay(180)
-  spinner.start()
+function stopLog () {
+  clearInterval(lastLinesInterval)
 }
 
 function installBuildTools () {
@@ -65,7 +65,7 @@ function installBuildTools () {
 
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
-        reject()
+        reject(new Error(`Found error with VCC installer: ${details}`))
       }
 
       if (result === 'success') {
@@ -96,7 +96,7 @@ function installPython () {
       debug('python tailer exited')
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details)
-        reject()
+        reject(new Error(`Found error with Python installer: ${details}`))
       }
 
       if (result === 'success') {

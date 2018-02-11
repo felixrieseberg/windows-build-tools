@@ -41,7 +41,7 @@ class Tailer extends EventEmitter {
     debug(`Tail: Tailing ${this.logFile}`)
     this.tail = setInterval(() => {
       this.handleData()
-    }, 30000)
+    }, 5000)
   }
 
   /**
@@ -55,6 +55,12 @@ class Tailer extends EventEmitter {
     } catch (err) {
       debug(`Tail start: Could not read logfile ${this.logFile}: ${err}`)
       return
+    }
+
+    if (data && data.length > 0) {
+      const split = data.split(/\r?\n/) || [ 'Still looking for log file...' ]
+      const lastLines = split.slice(split.length - 3, split.length)
+      this.emit('lastLines', lastLines)
     }
 
     // Success strings for build tools
