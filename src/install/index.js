@@ -70,7 +70,7 @@ function installBuildTools () {
       }
 
       if (result === 'success') {
-        vccLastLines = [ chalk.bold.green('ully installed Visual Studio Build Tools.') ]
+        vccLastLines = [ chalk.bold.green('Successfully installed Visual Studio Build Tools.') ]
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer')
         resolve()
       }
