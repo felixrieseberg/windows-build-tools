@@ -5,7 +5,7 @@ const chalk = require('chalk')
 
 const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
 const { getWorkDirectory } = require('../utils/get-work-dir')
-const { singleLineLog } = require('../utils/single-line-log')
+const { createSingleLineLogger } = require('../utils/single-line-log')
 const { log } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
@@ -46,10 +46,10 @@ function launchLog () {
   log('This will likely take some time - please be patient!\n')
 
   log('Status from the installers:')
-  const singleLineLogger = singleLineLog()
+  const singleLineLogger = createSingleLineLogger()
   lastLinesInterval = setInterval(() => {
     const updatedLog = [ 'Visual Studio Build Tools:', ...vccLastLines, 'Python 2:', ...pythonLastLines ]
-    singleLineLogger.write(updatedLog.join('\n'))
+    singleLineLogger(updatedLog.join('\n'))
   }, 2500)
 }
 

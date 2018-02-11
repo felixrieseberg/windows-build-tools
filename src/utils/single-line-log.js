@@ -5,8 +5,9 @@ const stringWidth = require('string-width')
 const MOVE_LEFT = Buffer.from('1b5b3130303044', 'hex').toString()
 const MOVE_UP = Buffer.from('1b5b3141', 'hex').toString()
 const CLEAR_LINE = Buffer.from('1b5b304b', 'hex').toString()
+const stream = process.stdout
 
-function singleLineLog (stream = process.stdout) {
+function createSingleLineLogger () {
   const write = stream.write
   let str
 
@@ -15,11 +16,9 @@ function singleLineLog (stream = process.stdout) {
     return write.apply(this, arguments)
   }
 
-  if (stream === process.stderr || stream === process.stdout) {
-    process.on('exit', () => {
-      if (str !== null) stream.write('')
-    })
-  }
+  process.on('exit', () => {
+    if (str !== null) stream.write('')
+  })
 
   let prevLineCount = 0
   var log = function () {
@@ -51,4 +50,4 @@ function singleLineLog (stream = process.stdout) {
   return log
 }
 
-module.exports = { singleLineLog }
+module.exports = { createSingleLineLogger }
