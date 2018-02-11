@@ -44,7 +44,7 @@ the `--vs2017` parameter.
 ## Usage
 
 ```
-npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] install --global windows-build-tools
+npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] install --global windows-build-tools
 ```
 
 Optional arguments:

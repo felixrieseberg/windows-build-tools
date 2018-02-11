@@ -1,3 +1,5 @@
+'use strict'
+
 const { buildTools } = require('../constants')
 
 function includesSuccess (input = '') {

@@ -7,6 +7,8 @@ const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
 const { getWorkDirectory } = require('../utils/get-work-dir')
 const { createSingleLineLogger } = require('../utils/single-line-log')
 const { getBuildToolsInstallerPath } = require('../utils/get-build-tools-installer-path')
+const { cleanExistingLogFiles } = require('../utils/clean')
+
 const { log, shouldLog } = require('../logging')
 const launchInstaller = require('./launch')
 const Tailer = require('./tailer')
@@ -29,6 +31,8 @@ let lastLinesInterval = null
 
 function install (cb) {
   log(chalk.green('\nStarting installation...'))
+
+  cleanExistingLogFiles()
 
   launchInstaller()
     .then(() => launchLog())

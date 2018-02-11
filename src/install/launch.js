@@ -44,7 +44,7 @@ function launchInstaller () {
     const psArgs = `& {& '${scriptPath}' ${pathParam} ${buildToolsParam} ${pythonParam} ${vccParam} }`
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs]
 
-    debug(`Installer: Launching installer in ${vccInstaller.directory} with file ${vccInstaller.fileName}`)
+    debug(`Installer: Launching installer in ${vccInstaller.directory} with file ${vccInstaller.fileName}.`)
 
     let child
 
@@ -68,6 +68,8 @@ function launchInstaller () {
         process.exit(1)
       }
     })
+
+    child.stderr.on('data', (data) => debug(`Installer: Stderr from launch-installer.ps1: ${data.toString()}`))
 
     child.on('exit', () => resolve())
     child.stdin.end()

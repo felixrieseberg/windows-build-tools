@@ -49,5 +49,17 @@
     "fs-extra": "^5.0.0",
     "nugget": "^2.0.1",
     "string-width": "^2.1.1"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "afterEach",
+      "it",
+      "expect"
+    ],
+    "env": {
+      "node": true,
+      "mocha": true
+    }
   }
 }

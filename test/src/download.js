@@ -1,8 +1,6 @@
 'use strict'
 
-const path = require('path')
 const mockery = require('mockery')
-const fs = require('fs')
 
 const installer = require('../../src/utils/get-build-tools-installer-path').getBuildToolsInstallerPath()
 

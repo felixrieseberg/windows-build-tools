@@ -26,17 +26,6 @@ function runInstaller
 {
     if (Test-Path $path)
     {
-        if ($visualStudioVersion -eq "2017")
-        {
-            $executable = "vs_BuildTools.exe"
-            $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
-        }
-        else
-        {
-            $executable = "BuildTools_Full.exe"
-            $params = "/NoRestart", "/S", "/L", "`"$path\build-tools-log.txt`""
-        }
-        
         $extraParams = $extraBuildToolsParameters -split "%_; "
 
         if ($extraParams.count -gt 0)
@@ -48,8 +37,17 @@ function runInstaller
         }
 
         cd $path
-        ./$executable $params
 
+        if ($visualStudioVersion -eq "2017")
+        {
+            $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
+            ./vs_BuildTools.exe $params
+        }
+        else
+        {
+            $params = "/NoRestart", "/S", "/L", "`"$path\build-tools-log.txt`""
+            ./BuildTools_Full.exe $params
+        }
     }
 }
 

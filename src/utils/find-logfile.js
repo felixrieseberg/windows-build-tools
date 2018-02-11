@@ -58,7 +58,7 @@ function findVCCLogFile () {
           debug(`Find LogFile: Returning ${lastModified.file}`)
           matchingFile = path.join(tmp, lastModified.file)
         }
-        
+
         resolve(matchingFile)
       })
   })

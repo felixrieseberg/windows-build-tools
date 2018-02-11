@@ -17,7 +17,7 @@ describe('Environment', () => {
   }
 
   const cpMock = {
-    spawn(_process, _args) {
+    spawn (_process, _args) {
       passedProcess = _process
       passedArgs = _args
 
