@@ -46,20 +46,20 @@ function findVCCLogFile () {
               modifiedTime = new Date(stats.mtime).getTime()
             }
 
-            debug(`Find LogFile: Comparing ${modifiedTime} to ${previous.timestap}`)
+            debug(`Find LogFile: Comparing ${modifiedTime} to ${previous.timestamp}`)
 
-            if (modifiedTime && modifiedTime > previous.timestap) {
-              return { file: current, timestap: modifiedTime }
+            if (modifiedTime && modifiedTime > previous.timestamp) {
+              return { file: current, timestamp: modifiedTime }
             } else {
               return previous
             }
-          }, { file: null, timestap: 0 })
+          }, { file: null, timestamp: 0 })
 
           debug(`Find LogFile: Returning ${lastModified.file}`)
-          matchingFile = lastModified.file
+          matchingFile = path.join(tmp, lastModified.file)
         }
-
-        resolve(path.join(tmp, matchingFile))
+        
+        resolve(matchingFile)
       })
   })
 }
