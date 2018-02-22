@@ -22,24 +22,14 @@ Visual Studio, C++ Build Tools, or Python. If you see anything that indiciates o
 file a bug.
 
 ## Visual Studio 2017 vs Visual Studio 2015
-This module is capable of installing either the build tools from Visual Studio 2017 or Visual
-Studio 2015. Since Node's underlying build tools still don't fully support 2017, you might
+This module is capable of installing either the build tools from Visual Studio [2017](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/introducing-the-visual-studio-build-tools/) or Visual
+Studio [2015](https://blogs.msdn.microsoft.com/vcblog/2016/03/31/announcing-the-official-release-of-the-visual-c-build-tools-2015/). Since Node's underlying build tools still don't fully support 2017, you might
 have a better experience with 2015 - even if it sounds a bit outdated. On the other hand, if
 you are only trying to compile a certain set of modules, the 2017 build tools are smaller and
 install a bit quicker.
 
 By default, this tool will install the 2015 build tools. To change that, run this script with
 the `--vs2017` parameter.
-
-## Contents
-
-* Visual C++ Compilers (targeting x86, X64 and ARM)
-* Visual C++ headers & libraries (CRT & STL)
-* Visual C++ build scripts (targeting Windows desktop)
-* Microsoft Build Tools 2017 (MSBuild)
-* Windows SDK 10 (optional, on by default)
-* ATL and MFC (optional, on by default)
-* C++ Build tools specific command prompts
 
 ## Usage
 
