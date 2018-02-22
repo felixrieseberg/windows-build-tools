@@ -31,7 +31,7 @@ function launchInstaller () {
           extraArgs = parsedArgs.join('%_; ')
         }
       } catch (e) {
-        debug(`Installer: Parsing additional arguments for VCC build tools failed: ${JSON.stringify(e)}`)
+        debug(`Installer: Parsing additional arguments for VCC build tools failed: ${e.message}`)
         debug(`Input received: ${process.env.npm_config_vcc_build_tools_parameters}`)
       }
     }
