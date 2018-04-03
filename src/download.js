@@ -13,8 +13,10 @@ const log = require('./logging').log
  * @returns {Promise} - Promise
  */
 function download (cb) {
-  downloadTools(getBuildToolsInstallerPath())
-    .then(() => downloadTools(getPythonInstallerPath()))
+  Promise.all([
+    downloadTools(getBuildToolsInstallerPath()),
+    downloadTools(getPythonInstallerPath())
+  ])
     .then(() => cb())
     .catch((error) => log(error))
 }
