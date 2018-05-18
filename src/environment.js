@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('path')
 const { executeChildProcess } = require('./utils/execute-child-process')
 

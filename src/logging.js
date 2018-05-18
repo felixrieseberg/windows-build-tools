@@ -1,5 +1,3 @@
-'use strict'
-
 const shouldLog = !process.env.npm_config_disable_logging
 
 /**

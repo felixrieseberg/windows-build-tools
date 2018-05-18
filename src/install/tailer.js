@@ -1,5 +1,3 @@
-'use strict'
-
 const fs = require('fs-extra')
 const debug = require('debug')('windows-build-tools')
 const EventEmitter = require('events')
@@ -77,7 +75,7 @@ class Tailer extends EventEmitter {
       if (matches) {
         pythonPath = matches[1]
       }
-      
+
       debug(`Tail: Reporting success for Python`)
       this.stop('success', pythonPath)
     } else if (includesFailure(data)) {

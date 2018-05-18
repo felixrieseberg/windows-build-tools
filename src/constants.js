@@ -1,4 +1,3 @@
-'use strict'
 const inGFW = require('in-gfw')
 const pythonMirror = process.env['npm_config_python_mirror'] || process.env.PYTHON_MIRROR || (inGFW.osSync() ? 'https://npm.taobao.org/mirrors/python' : 'https://www.python.org/ftp/python')
 

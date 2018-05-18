@@ -1,5 +1,3 @@
-'use strict'
-
 const debug = require('debug')('windows-build-tools')
 const chalk = require('chalk')
 

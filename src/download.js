@@ -1,5 +1,3 @@
-'use strict'
-
 const nugget = require('nugget')
 
 const getBuildToolsInstallerPath = require('./utils/get-build-tools-installer-path').getBuildToolsInstallerPath
