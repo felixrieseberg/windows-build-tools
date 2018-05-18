@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tslint && npm run build && mocha",
     "postinstall": "node ./dist/index.js",
-    "build": "babel src -d lib",
+    "build": "tsc",
     "prepublish": "npm run build",
     "start": "npm run build && npm run postinstall",
     "lint": "tslint -c tslint.json -p tsconfig.json \"src/**/*.ts\""
@@ -54,17 +54,5 @@
     "in-gfw": "^1.1.1",
     "nugget": "^2.0.1",
     "string-width": "^2.1.1"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "afterEach",
-      "it",
-      "expect"
-    ],
-    "env": {
-      "node": true,
-      "mocha": true
-    }
   }
 }

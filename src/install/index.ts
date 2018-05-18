@@ -36,12 +36,12 @@ export function install(cb: (details: InstallationDetails) => void) {
   launchInstaller()
     .then(() => launchLog())
     .then(() => Promise.all([tailBuildInstallation(), tailPythonInstallation()]))
-    .then((details: [ undefined, { path: string } ]) => {
+    .then((details: [ undefined, { path: string, toConfigure: boolean } ]) => {
       logStatus();
       stopLog();
 
       cb({
-        buildTools: details[0],
+        buildTools: { toConfigure: true },
         python: details[1]
       });
     })
@@ -109,7 +109,7 @@ function tailBuildInstallation(): Promise<void> {
   });
 }
 
-function tailPythonInstallation(): Promise<{ path: string }> {
+function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string }> {
   return new Promise((resolve, reject) => {
     // Let's first check if we need to install Python
     const pythonVersion = getIsPythonInstalled();
@@ -118,7 +118,7 @@ function tailPythonInstallation(): Promise<{ path: string }> {
       debug('Installer: Python is already installed');
       log(chalk.bold.green(`${pythonVersion} is already installed, not installing again`));
 
-      return resolve();
+      return resolve({ toConfigure: false, path: '' });
     }
 
     // The log file for msiexe is utf-16
@@ -139,7 +139,7 @@ function tailPythonInstallation(): Promise<{ path: string }> {
         pythonLastLines = [ chalk.bold.green('Successfully installed Python 2.7') ];
 
         debug('Installer: Successfully installed Python 2.7 according to tailer');
-        resolve({ path: details || getPythonInstallerPath().targetPath });
+        resolve({ path: details || getPythonInstallerPath().targetPath, toConfigure: true });
       }
 
       if (result === 'failure') {

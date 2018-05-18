@@ -6,8 +6,11 @@ export interface Installer {
 }
 
 export interface InstallationDetails {
-  buildTools: undefined;
+  buildTools: {
+    toConfigure: boolean;
+  };
   python: {
+    toConfigure: boolean;
     path: string;
   };
 }

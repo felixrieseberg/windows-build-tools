@@ -15,9 +15,13 @@ export function setEnvironment(env: InstallationDetails) {
   const pythonPath = path.join(env.python.path);
   const pythonExePath = path.join(pythonPath, 'python.exe');
   const scriptPath = path.join(__dirname, '..', 'ps1', 'set-environment.ps1');
-  const maybeAddToPath = process.env.npm_config_add_python_to_path ? ' -AddPythonToPath' : '';
 
-  const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeAddToPath} }`;
+  const maybeAddPythonToPath = process.env.npm_config_add_python_to_path ? ' -AddPythonToPath' : '';
+  const maybePython = env.python.toConfigure ? ' -ConfigurePython' : '';
+  const maybeBuildTools = env.buildTools.toConfigure ? ' -ConfigurePython' : '';
+  const maybeArgs = `${maybeBuildTools}${maybePython}${maybeAddPythonToPath}`;
+
+  const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeArgs} }`;
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 
   executeChildProcess('powershell.exe', args)
