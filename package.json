@@ -2,13 +2,14 @@
   "name": "windows-build-tools",
   "version": "2.3.0",
   "description": "Install C++ Build Tools for Windows using npm",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "standard \"src/*.js\" && npm run build && mocha",
-    "postinstall": "node ./lib/index.js",
+    "test": "tslint && npm run build && mocha",
+    "postinstall": "node ./dist/index.js",
     "build": "babel src -d lib",
     "prepublish": "npm run build",
-    "start": "npm run build && npm run postinstall"
+    "start": "npm run build && npm run postinstall",
+    "lint": "tslint -c tslint.json -p tsconfig.json \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -34,15 +35,17 @@
   },
   "homepage": "https://github.com/felixrieseberg/windows-build-tools#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-strict-mode": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
+    "@types/chalk": "^2.2.0",
+    "@types/fs-extra": "^5.0.2",
+    "@types/node": "^6.0.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.0.0",
     "mockery": "^2.1.0",
     "rewire": "^3.0.2",
-    "standard": "^11.0.1"
+    "tslint": "^5.10.0",
+    "tslint-microsoft-contrib": "^5.0.3",
+    "typescript": "^2.8.3"
   },
   "dependencies": {
     "chalk": "^2.3.0",

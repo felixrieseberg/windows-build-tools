@@ -1,9 +1,7 @@
-'use strict'
+import * as path from 'path';
 
-const path = require('path')
-
-const getWorkDirectory = require('./get-work-dir').getWorkDirectory
-const constants = require('../constants')
+import { buildTools } from '../constants';
+import { getWorkDirectory } from './get-work-dir';
 
 /**
  * Ensures that %USERPROFILE%/.windows-build-tools exists
@@ -11,9 +9,8 @@ const constants = require('../constants')
  *
  * @returns {Object} - Object containing path and fileName of installer
  */
-function getBuildToolsInstallerPath () {
-  const directory = getWorkDirectory()
-  const buildTools = constants.buildTools
+export function getBuildToolsInstallerPath() {
+  const directory = getWorkDirectory();
 
   return {
     path: path.join(directory, buildTools.installerName),
@@ -21,7 +18,5 @@ function getBuildToolsInstallerPath () {
     url: buildTools.installerUrl,
     logPath: buildTools.logName ? path.join(directory, buildTools.logName) : null,
     directory
-  }
+  };
 }
-
-module.exports = { getBuildToolsInstallerPath }
