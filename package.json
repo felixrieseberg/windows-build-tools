@@ -41,7 +41,7 @@
     "mocha": "^5.0.0",
     "mockery": "^2.1.0",
     "rewire": "^3.0.2",
-    "standard": "^10.0.3"
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "chalk": "^2.3.0",
