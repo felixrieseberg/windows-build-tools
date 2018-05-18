@@ -1,11 +1,12 @@
-const { execSync } = require('child_process')
+const { spawnSync } = require('child_process')
 
 function getIsPythonInstalled() {
   try {
-    const output = execSync('python -V')
+    const { output } = spawnSync('python', [ '-V' ], { windowsHide: true, stdio: null })
+    const version = output.toString().trim().replace(/,/g, '')
 
-    if (output && output.includes(' 2.')) {
-      return output
+    if (version && version.includes(' 2.')) {
+      return version
     } else {
       return null
     }
