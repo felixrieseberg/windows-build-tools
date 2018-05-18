@@ -4,6 +4,7 @@ const debug = require('debug')('windows-build-tools')
 const chalk = require('chalk')
 
 const { getPythonInstallerPath } = require('../utils/get-python-installer-path')
+const { getIsPythonInstalled } = require('../utils/get-is-python-installed')
 const { getWorkDirectory } = require('../utils/get-work-dir')
 const { createSingleLineLogger } = require('../utils/single-line-log')
 const { getBuildToolsInstallerPath } = require('../utils/get-build-tools-installer-path')
@@ -113,6 +114,16 @@ function installBuildTools () {
 
 function installPython () {
   return new Promise((resolve, reject) => {
+    // Let's first check if we need to install Python
+    const pythonVersion = getIsPythonInstalled()
+
+    if (pythonVersion) {
+      debug('Installer: Python is already installed')
+      log(chalk.bold.green(`${pythonVersion} is already installed, not installing again`))
+
+      return resolve()
+    }
+
     // The log file for msiexe is utf-16
     const tailer = new Tailer(getPythonInstallerPath().logPath, 'ucs2')
 
@@ -129,18 +140,16 @@ function installPython () {
 
       if (result === 'success') {
         pythonLastLines = [ chalk.bold.green('Successfully installed Python 2.7') ]
-        debug('Installer: Successfully installed Python 2.7 according to tailer')
 
-        var variables = {
-          pythonPath: details || getPythonInstallerPath().targetPath
-        }
-        resolve(variables)
+        debug('Installer: Successfully installed Python 2.7 according to tailer')
+        resolve({ pythonPath: details || getPythonInstallerPath().targetPath })
       }
 
       if (result === 'failure') {
         log(chalk.bold.red('Could not install Python 2.7.'))
         log('Please find more details in the log files, which can be found at')
         log(getWorkDirectory())
+
         debug('Installer: Failed to install Python 2.7 according to tailer')
         resolve(undefined)
       }
