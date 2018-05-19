@@ -4,6 +4,7 @@ import { Installer } from './interfaces';
 import { log } from './logging';
 import { getBuildToolsInstallerPath } from './utils/get-build-tools-installer-path';
 import { getPythonInstallerPath } from './utils/get-python-installer-path';
+import { isDryRun } from './constants';
 
 /**
  * Downloads the Visual Studio C++ Build Tools and Python installer to a temporary folder
@@ -33,7 +34,7 @@ function downloadTools(installer: Installer) {
       sockets: process.env.npm_config_sockets || undefined
     };
 
-    nugget(installer.url, nuggetOptions, (errors) => {
+    const nuggetCallback = (errors?: Array<Error>) => {
       if (errors) {
         // nugget returns an array of errors but we only need 1st because we only have 1 url
         const error = errors[0];
@@ -47,6 +48,12 @@ function downloadTools(installer: Installer) {
 
       log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`);
       resolve(installer.path);
-    });
+    }
+
+    if (isDryRun) {
+      nuggetCallback();
+    } else {
+      nugget(installer.url, nuggetOptions, nuggetCallback);
+    }
   });
 }

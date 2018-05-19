@@ -8,9 +8,9 @@ import { getIsPythonInstalled } from '../utils/get-is-python-installed';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
 import { getWorkDirectory } from '../utils/get-work-dir';
 import { createSingleLineLogger } from '../utils/single-line-log';
-
-const launchInstaller = require('./launch');
-const Tailer = require('./tailer');
+import { Tailer } from './tailer';
+import { launchInstaller } from './launch';
+import { installedPythonVersion, isPythonInstalled } from '../constants';
 
 const singleLineLogger = createSingleLineLogger();
 const vccInstaller = getBuildToolsInstallerPath();
@@ -111,12 +111,9 @@ function tailBuildInstallation(): Promise<void> {
 
 function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string }> {
   return new Promise((resolve, reject) => {
-    // Let's first check if we need to install Python
-    const pythonVersion = getIsPythonInstalled();
-
-    if (pythonVersion) {
+    if (isPythonInstalled) {
       debug('Installer: Python is already installed');
-      log(chalk.bold.green(`${pythonVersion} is already installed, not installing again`));
+      pythonLastLines = [ chalk.bold.green(`${installedPythonVersion} is already installed, not installing again`) ];
 
       return resolve({ toConfigure: false, path: '' });
     }

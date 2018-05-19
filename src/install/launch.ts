@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { spawn } from 'child_process';
 import * as path from 'path';
 
-import { buildTools } from '../constants';
+import { buildTools, isDryRun, isPythonInstalled } from '../constants';
 import { log } from '../logging';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
@@ -35,11 +35,13 @@ export function launchInstaller() {
       }
     }
 
-    const scriptPath = path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1');
+    const scriptPath = isDryRun
+      ? path.join(__dirname, '..', '..', 'ps1', 'dry-run.ps1')
+      : path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1');
     const vccParam = `-visualStudioVersion '${buildTools.version.toString()}'`;
     const pathParam = `-path '${vccInstaller.directory}'`;
     const buildToolsParam = `-extraBuildToolsParameters '${extraArgs}'`;
-    const pythonParam = `-pythonInstaller '${pythonInstaller.fileName}'`;
+    const pythonParam = `-pythonInstaller '${isPythonInstalled ? 'nope' : pythonInstaller.fileName}'`;
     const psArgs = `& {& '${scriptPath}' ${pathParam} ${buildToolsParam} ${pythonParam} ${vccParam} }`;
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 

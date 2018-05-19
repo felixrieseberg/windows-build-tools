@@ -1,7 +1,15 @@
-const inGFW = require('in-gfw');
+import { getIsPythonInstalled } from "./utils/get-is-python-installed";
+import * as inGFW from 'in-gfw';
+
 const pythonMirror = process.env.npm_config_python_mirror
   || process.env.PYTHON_MIRROR
   || (inGFW.osSync() ? 'https://npm.taobao.org/mirrors/python' : 'https://www.python.org/ftp/python');
+
+export const isDryRun = !!process.env.npm_config_dry_run_only;
+
+export const installedPythonVersion = getIsPythonInstalled();
+
+export const isPythonInstalled = !!installedPythonVersion;
 
 export const python = process.arch === 'x64'
   ? {

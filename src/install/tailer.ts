@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import * as fs from 'fs-extra';
+import { isDryRun } from '../constants';
 
 const debug = require('debug')('windows-build-tools');
 
@@ -44,9 +45,8 @@ export class Tailer extends EventEmitter {
    */
   public tail() {
     debug(`Tail: Tailing ${this.logFile}`);
-    this.tailInterval = setInterval(() => {
-      this.handleData();
-    }, 5000);
+
+    this.tailInterval = setInterval(() => this.handleData(), 5000);
   }
 
   /**
@@ -54,6 +54,11 @@ export class Tailer extends EventEmitter {
    */
   public handleData() {
     let data;
+
+    if (isDryRun) {
+      this.emit('lastLines', `Dry run, we're all done`);
+      return this.stop('success');
+    }
 
     try {
       data = fs.readFileSync(this.logFile, this.encoding);
@@ -100,6 +105,8 @@ export class Tailer extends EventEmitter {
    * @returns {Promise.<Object>} - Promise resolving with fs.stats object
    */
   public waitForLogFile() {
+    if (isDryRun) return this.tail();
+
     const handleStillWaiting = () => {
       debug('Tail: waitForFile: still waiting');
       setTimeout(this.waitForLogFile.bind(this), 2000);

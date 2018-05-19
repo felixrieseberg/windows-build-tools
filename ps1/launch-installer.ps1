@@ -53,7 +53,7 @@ function runInstaller
 
 function runPythonInstaller
 {
-    if (Test-Path $path)
+    if (Test-Path $path -and Test-Path $pythonInstaller)
     {
         cd $path
         $pyParams = "/i", $pythonInstaller, "TARGETDIR=```"$path\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$path\python-log.txt`""

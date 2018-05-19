@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tslint && npm run build && mocha",
     "postinstall": "node ./dist/index.js",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json",
     "prepublish": "npm run build",
     "start": "npm run build && npm run postinstall",
     "lint": "tslint -c tslint.json -p tsconfig.json \"src/**/*.ts\""
