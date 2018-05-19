@@ -1,10 +1,10 @@
-import * as path from 'path';
 import chalk from 'chalk';
+import * as path from 'path';
 
-import { InstallationDetails } from './interfaces';
-import { executeChildProcess } from './utils/execute-child-process';
 import { isDryRun } from './constants';
+import { InstallationDetails } from './interfaces';
 import { log } from './logging';
+import { executeChildProcess } from './utils/execute-child-process';
 
 const debug = require('debug')('windows-build-tools');
 

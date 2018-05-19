@@ -1,5 +1,5 @@
-import { getIsPythonInstalled } from "./utils/get-is-python-installed";
 import * as inGFW from 'in-gfw';
+import { getIsPythonInstalled } from './utils/get-is-python-installed';
 
 const pythonMirror = process.env.npm_config_python_mirror
   || process.env.PYTHON_MIRROR

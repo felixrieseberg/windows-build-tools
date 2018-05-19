@@ -1,10 +1,10 @@
 import * as nugget from 'nugget';
 
+import { isDryRun } from './constants';
 import { Installer } from './interfaces';
 import { log } from './logging';
 import { getBuildToolsInstallerPath } from './utils/get-build-tools-installer-path';
 import { getPythonInstallerPath } from './utils/get-python-installer-path';
-import { isDryRun } from './constants';
 
 /**
  * Downloads the Visual Studio C++ Build Tools and Python installer to a temporary folder
@@ -48,7 +48,7 @@ function downloadTools(installer: Installer) {
 
       log(`Downloaded ${installer.fileName}. Saved to ${installer.path}.`);
       resolve(installer.path);
-    }
+    };
 
     if (isDryRun) {
       nuggetCallback();

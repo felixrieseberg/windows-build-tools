@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 
+import { installedPythonVersion, isPythonInstalled } from '../constants';
 import { InstallationDetails } from '../interfaces';
 import { log, shouldLog } from '../logging';
 import { cleanExistingLogFiles } from '../utils/clean';
@@ -8,9 +9,8 @@ import { getIsPythonInstalled } from '../utils/get-is-python-installed';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
 import { getWorkDirectory } from '../utils/get-work-dir';
 import { createSingleLineLogger } from '../utils/single-line-log';
-import { Tailer } from './tailer';
 import { launchInstaller } from './launch';
-import { installedPythonVersion, isPythonInstalled } from '../constants';
+import { Tailer } from './tailer';
 
 const singleLineLogger = createSingleLineLogger();
 const vccInstaller = getBuildToolsInstallerPath();
