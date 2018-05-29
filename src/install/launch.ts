@@ -35,12 +35,12 @@ export function launchInstaller(): Promise<void> {
 
     const pythonParam = isPythonInstalled
       ? ``
-      : `-PythonInstaller '${pythonInstaller.fileName} -InstallPython'`;
+      : `-PythonInstaller '${pythonInstaller.fileName}' -InstallPython`;
 
     const psArgs = `& {& '${installerScriptPath}' ${pathParam} ${buildToolsParam} ${pythonParam} ${vccParam} }`;
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 
-    debug(`Installer: Launching installer in ${vccInstaller.directory} with file ${vccInstaller.fileName}.`);
+    debug(`Installer: Launching installer in ${vccInstaller.directory} with parameters ${args}.`);
 
     let child;
 

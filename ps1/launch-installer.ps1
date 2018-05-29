@@ -49,6 +49,8 @@ function runPythonInstaller {
     cd $BuildToolsInstallerPath
     $pyParams = "/i", $PythonInstaller, "TARGETDIR=```"$BuildToolsInstallerPath\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$BuildToolsInstallerPath\python-log.txt`""
     Invoke-Expression "msiexec.exe $pyParams"
+  } else {
+    Write-Output "Tried to start Python installer, but couldn't find paths."
   }
 }
 
@@ -59,6 +61,8 @@ if (!(IsAdministrator)) {
   return
 }
 
+# Print Arguments
+Write-Output "Passed arguments: $args"
 
 if ($InstallBuildTools.IsPresent) {
   runInstaller;
