@@ -10,13 +10,15 @@ jest.mock('../../src/utils/get-is-python-installed', () => ({
 
 describe('getPythonInstallerPath', () => {
   it('gets the correct information', () => {
+    const amd64 = process.arch === 'x64' ? 'amd64.' : '';
+
     expect(getPythonInstallerPath()).toEqual({
       directory: 'C:\\workDir',
-      fileName: 'python-2.7.14.amd64.msi',
+      fileName: `python-2.7.14.${amd64}msi`,
       logPath: 'C:\\workDir\\python-log.txt',
-      path: 'C:\\workDir\\python-2.7.14.amd64.msi',
+      path: `C:\\workDir\\python-2.7.14.${amd64}msi`,
       targetPath: 'C:\\workDir\\python27',
-      url: 'https://www.python.org/ftp/python/2.7.14/python-2.7.14.amd64.msi',
+      url: `https://www.python.org/ftp/python/2.7.14/python-2.7.14.${amd64}msi`,
     });
   });
 });
