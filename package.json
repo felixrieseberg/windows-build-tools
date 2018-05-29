@@ -4,7 +4,7 @@
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run lint && npm run jest",
+    "test": "npm run lint && npm run unit",
     "unit": "jest",
     "postinstall": "node ./dist/index.js",
     "build": "tsc -p tsconfig.json",
