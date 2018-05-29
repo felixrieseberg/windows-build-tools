@@ -39,11 +39,11 @@
     "@types/chalk": "^2.2.0",
     "@types/fs-extra": "^5.0.2",
     "@types/jest": "^22.2.3",
-    "@types/node": "^6.0.0",
+    "@types/node": "^6.0.111",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "jest": "^23.0.1",
-    "mocha": "^5.0.0",
+    "mocha": "^5.2.0",
     "mockery": "^2.1.0",
     "rewire": "^3.0.2",
     "ts-jest": "^22.4.6",
@@ -52,7 +52,7 @@
     "typescript": "^2.8.3"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.4.1",
     "debug": "^3.1.0",
     "fs-extra": "^5.0.0",
     "in-gfw": "^1.1.1",
