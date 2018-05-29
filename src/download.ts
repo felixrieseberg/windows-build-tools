@@ -1,6 +1,6 @@
 import * as nugget from 'nugget';
 
-import { isDryRun } from './constants';
+import { isDryRun, isPythonInstalled } from './constants';
 import { Installer } from './interfaces';
 import { log } from './logging';
 import { getBuildToolsInstallerPath } from './utils/get-build-tools-installer-path';
@@ -11,10 +11,13 @@ import { getPythonInstallerPath } from './utils/get-python-installer-path';
  * at %USERPROFILE%\.windows-build-tools
  */
 export function download(cb: () => void) {
-  Promise.all([
-    downloadTools(getBuildToolsInstallerPath()),
-    downloadTools(getPythonInstallerPath())
-  ])
+  const downloads: Array<Promise<string>> = [downloadTools(getBuildToolsInstallerPath())];
+
+  if (!isPythonInstalled) {
+    downloads.push(downloadTools(getPythonInstallerPath()));
+  }
+
+  Promise.all(downloads)
     .then(() => cb())
     .catch((error) => log(error));
 }
@@ -22,7 +25,7 @@ export function download(cb: () => void) {
 /**
  * Downloads specified file with a url from the installer.
  */
-function downloadTools(installer: Installer) {
+function downloadTools(installer: Installer): Promise<string> {
   return new Promise((resolve, reject) => {
     const nuggetOptions = {
       target: installer.fileName,

@@ -2,9 +2,16 @@ import chalk from 'chalk';
 import { spawn } from 'child_process';
 import * as path from 'path';
 
-import { buildTools, isDryRun, isPythonInstalled } from '../constants';
+import {
+  buildTools,
+  installerScriptPath,
+  isBuildToolsInstalled,
+  isDryRun,
+  isPythonInstalled
+} from '../constants';
 import { log } from '../logging';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
+import { getBuildToolsExtraParameters } from '../utils/get-build-tools-parameters';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
 
 const debug = require('debug')('windows-build-tools');
@@ -15,34 +22,22 @@ const pythonInstaller = getPythonInstallerPath();
 /**
  * Launches the installer, using a PS1 script as a middle-man
  *
- * @returns {Promise.<Object>} - Promise that resolves with the launch-installer result
+ * @returns {Promise<void>} - Promise that resolves once done
  */
-export function launchInstaller() {
+export function launchInstaller(): Promise<void> {
   return new Promise((resolve, reject) => {
-    let extraArgs = '';
-    let parsedArgs = [];
+    const vccParam = `-VisualStudioVersion '${buildTools.version.toString()}'`;
+    const pathParam = `-BuildToolsInstallerPath '${vccInstaller.directory}'`;
 
-    if (process.env.npm_config_vcc_build_tools_parameters) {
-      try {
-        parsedArgs = JSON.parse(process.env.npm_config_vcc_build_tools_parameters);
+    const buildToolsParam = isBuildToolsInstalled
+      ? ``
+      : `-InstallBuildTools -ExtraBuildToolsParameters '${getBuildToolsExtraParameters()}'`;
 
-        if (parsedArgs && parsedArgs.length > 0) {
-          extraArgs = parsedArgs.join('%_; ');
-        }
-      } catch (e) {
-        debug(`Installer: Parsing additional arguments for VCC build tools failed: ${e.message}`);
-        debug(`Input received: ${process.env.npm_config_vcc_build_tools_parameters}`);
-      }
-    }
+    const pythonParam = isPythonInstalled
+      ? ``
+      : `-PythonInstaller '${pythonInstaller.fileName} -InstallPython'`;
 
-    const scriptPath = isDryRun
-      ? path.join(__dirname, '..', '..', 'ps1', 'dry-run.ps1')
-      : path.join(__dirname, '..', '..', 'ps1', 'launch-installer.ps1');
-    const vccParam = `-visualStudioVersion '${buildTools.version.toString()}'`;
-    const pathParam = `-path '${vccInstaller.directory}'`;
-    const buildToolsParam = `-extraBuildToolsParameters '${extraArgs}'`;
-    const pythonParam = `-pythonInstaller '${isPythonInstalled ? 'nope' : pythonInstaller.fileName}'`;
-    const psArgs = `& {& '${scriptPath}' ${pathParam} ${buildToolsParam} ${pythonParam} ${vccParam} }`;
+    const psArgs = `& {& '${installerScriptPath}' ${pathParam} ${buildToolsParam} ${pythonParam} ${vccParam} }`;
     const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 
     debug(`Installer: Launching installer in ${vccInstaller.directory} with file ${vccInstaller.fileName}.`);

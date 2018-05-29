@@ -1,9 +1,14 @@
 import * as inGFW from 'in-gfw';
+import * as path from 'path';
+
 import { getIsPythonInstalled } from './utils/get-is-python-installed';
 
 const pythonMirror = process.env.npm_config_python_mirror
   || process.env.PYTHON_MIRROR
   || (inGFW.osSync() ? 'https://npm.taobao.org/mirrors/python' : 'https://www.python.org/ftp/python');
+
+// To implement
+export const isBuildToolsInstalled = false;
 
 export const isDryRun = !!process.env.npm_config_dry_run_only;
 
@@ -36,3 +41,7 @@ export const buildTools = process.env.npm_config_vs2017
     logName: 'build-tools-log.txt',
     version: 2015
   };
+
+export const installerScriptPath = isDryRun
+  ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
+  : path.join(__dirname, '..', 'ps1', 'launch-installer.ps1');
