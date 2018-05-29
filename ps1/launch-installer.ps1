@@ -36,21 +36,22 @@ function runInstaller {
     if ($VisualStudioVersion -eq "2017") {
       $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
       ./vs_BuildTools.exe $params
-    }
-    else {
+    } else {
       $params = "/NoRestart", "/S", "/L", "`"$BuildToolsInstallerPath\build-tools-log.txt`""
       ./BuildTools_Full.exe $params
     }
+  } else {
+    Write-Output "Tried to start Python installer, but couldn't find $BuildToolsInstallerPath."
   }
 }
 
 function runPythonInstaller {
-  if (Test-Path $BuildToolsInstallerPath -and Test-Path $PythonInstaller) {
+  if (Test-Path $BuildToolsInstallerPath) {
     cd $BuildToolsInstallerPath
     $pyParams = "/i", $PythonInstaller, "TARGETDIR=```"$BuildToolsInstallerPath\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$BuildToolsInstallerPath\python-log.txt`""
     Invoke-Expression "msiexec.exe $pyParams"
   } else {
-    Write-Output "Tried to start Python installer, but couldn't find paths."
+    Write-Output "Tried to start Python installer, but couldn't find $BuildToolsInstallerPath."
   }
 }
 
