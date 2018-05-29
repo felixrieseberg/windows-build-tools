@@ -1,3 +1,5 @@
+import { spawn } from 'child_process';
+
 /**
  * Starts a child process using the provided executable
  *
@@ -5,7 +7,7 @@
  */
 export function executeChildProcess(fileName: string, args: Array<any>): Promise<void> {
   return new Promise((resolve, reject) => {
-    const child = require('child_process').spawn(fileName, args);
+    const child = spawn(fileName, args);
 
     child.on('exit', (code) => {
       if (code !== 0) {

@@ -4,10 +4,11 @@
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "dist/index.js",
   "scripts": {
-    "test": "tslint && npm run build && mocha",
+    "test": "npm run lint && npm run jest",
+    "unit": "jest",
     "postinstall": "node ./dist/index.js",
     "build": "tsc -p tsconfig.json",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "start": "npm run build && npm run postinstall",
     "lint": "tslint -c tslint.json -p tsconfig.json \"src/**/*.ts\""
   },
@@ -37,12 +38,15 @@
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/fs-extra": "^5.0.2",
+    "@types/jest": "^22.2.3",
     "@types/node": "^6.0.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "jest": "^23.0.1",
     "mocha": "^5.0.0",
     "mockery": "^2.1.0",
     "rewire": "^3.0.2",
+    "ts-jest": "^22.4.6",
     "tslint": "^5.10.0",
     "tslint-microsoft-contrib": "^5.0.3",
     "typescript": "^2.8.3"
@@ -54,5 +58,23 @@
     "in-gfw": "^1.1.1",
     "nugget": "^2.0.1",
     "string-width": "^2.1.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/**/*-test.+(ts|tsx|js)"
+    ]
   }
 }
