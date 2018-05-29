@@ -23,7 +23,7 @@ export function setEnvironment(env: InstallationDetails) {
 
   const maybeAddPythonToPath = process.env.npm_config_add_python_to_path ? ' -AddPythonToPath' : '';
   const maybePython = env.python.toConfigure ? ' -ConfigurePython' : '';
-  const maybeBuildTools = env.buildTools.toConfigure ? ' -ConfigurePython' : '';
+  const maybeBuildTools = env.buildTools.toConfigure ? ' -ConfigureBuildTools' : '';
   const maybeArgs = `${maybeBuildTools}${maybePython}${maybeAddPythonToPath}`;
 
   const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeArgs} }`;

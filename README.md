@@ -34,7 +34,7 @@ the `--vs2017` parameter.
 ## Usage
 
 ```
-npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] install --global windows-build-tools
+npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] [--dry-run-only] install --global windows-build-tools
 ```
 
 Optional arguments:
@@ -49,6 +49,7 @@ Optional arguments:
 * `--vcc-build-tools-parameters`: Specifies additional parameters for the Visual C++ Build Tools 2015. See below for more detailed usage instructions.
 * `--silent`: The script will not output any information.
 * `--vs2017`: Install the Visual Studio 2017 Build Tools instead of the Visual Studio 2015 ones.
+* `--dry-run-only`: Don't actually do anything, just print what the script would have done.
 
 ## Supplying Parameters to the VCC Build Tools
 

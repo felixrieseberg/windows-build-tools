@@ -113,7 +113,7 @@ function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string 
   return new Promise((resolve, reject) => {
     if (isPythonInstalled) {
       debug('Installer: Python is already installed');
-      pythonLastLines = [ chalk.bold.green(`${installedPythonVersion} is already installed, not installing again`) ];
+      pythonLastLines = [ chalk.bold.green(`${installedPythonVersion} is already installed, not installing again.`) ];
 
       return resolve({ toConfigure: false, path: '' });
     }

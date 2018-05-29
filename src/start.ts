@@ -12,6 +12,9 @@ function main() {
     log(chalk.bold.green(`Dry run: Not actually doing anything.`));
   }
 
+  // The dumbest callbacks. All other methods resulted
+  // in stacks that we're too deep and errored out on some
+  // machines.
   download(function() {
     install(function(variables: InstallationDetails) {
       setEnvironment(variables);
