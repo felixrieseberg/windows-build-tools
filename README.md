@@ -3,7 +3,7 @@
 <a href="https://ci.appveyor.com/project/felixrieseberg/windows-build-tools"><img src="https://ci.appveyor.com/api/projects/status/gpna6y54wnfp07xr?svg=true" /></a>
 <a href="http://badge.fury.io/js/windows-build-tools"><img src="https://badge.fury.io/js/windows-build-tools.svg" alt="npm version" height="18"></a> <a href="https://david-dm.org/felixrieseberg/windows-build-tools"><img src="https://david-dm.org/felixrieseberg/windows-build-tools.svg" alt="dependencies" height="18px"></a> <img src="https://img.shields.io/npm/dm/windows-build-tools.svg" height="18px" />
 
-On Windows? Want to compile native Node modules? Install the build tools with this one-liner:
+On Windows? Want to compile native Node modules? Install the build tools with this one-liner. Start PowerShell as Administrator and run:
 
 ```
 npm install --global --production windows-build-tools
