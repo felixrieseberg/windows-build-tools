@@ -103,6 +103,6 @@ folder `%USERPROFILE%\.windows-build-tools\python27` to your environment variabl
 
 ## License & Credits
 
-The Python installation was made possible by [Ali Hajimirza](https://github.com/A92hm), who kindly wrestled with Python's MSIs until they surrendered.
+The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered.
 
 Copyright (C) 2018 Felix Rieseberg. Licensed MIT. For more details, please see LICENSE.
