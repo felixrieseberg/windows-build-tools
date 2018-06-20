@@ -37,20 +37,20 @@
   "homepage": "https://github.com/felixrieseberg/windows-build-tools#readme",
   "devDependencies": {
     "@types/chalk": "^2.2.0",
-    "@types/fs-extra": "^5.0.2",
-    "@types/jest": "^22.2.3",
+    "@types/fs-extra": "^5.0.3",
+    "@types/jest": "^23.1.1",
     "@types/node": "^6.0.111",
-    "jest": "^23.0.1",
+    "jest": "^23.1.0",
     "ts-jest": "^22.4.6",
     "tslint": "^5.10.0",
     "tslint-microsoft-contrib": "^5.0.3",
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   },
   "dependencies": {
     "chalk": "^2.4.1",
     "debug": "^3.1.0",
     "fs-extra": "^5.0.0",
-    "in-gfw": "^1.1.1",
+    "in-gfw": "^1.1.2",
     "nugget": "^2.0.1",
     "string-width": "^2.1.1"
   },
