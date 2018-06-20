@@ -8,7 +8,8 @@ export function includesSuccess(input: string = '') {
     // Success strings for build tools (2015)
     isBuildToolsSuccess = input.includes('Variable: IsInstalled = 1') ||
       input.includes('Variable: BuildTools_Core_Installed = ') ||
-      input.includes('WixBundleInstalled = 1');
+      input.includes('WixBundleInstalled = 1') ||
+      input.includes('Setting string variable \'IsInstalled\' to value \'1\'');
   } else {
     // Success strings for build tools (2017)
     isBuildToolsSuccess = input.includes('Closing installer. Return code: 3010.') ||
