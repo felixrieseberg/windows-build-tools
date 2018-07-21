@@ -101,6 +101,27 @@ To not mess with your machine in unnecessary ways, Python is only installed to d
 with npm. If you'd like for the `python` command to work in `cmd.exe` and PowerShell, add the
 folder `%USERPROFILE%\.windows-build-tools\python27` to your environment variables.
 
+#### Installing as a Non-Administrator
+`windows-build-tools` works best if installed from an account with administrative rights. However,
+thanks to @brucejo75, the following steps can be taken to install to a different user account:
+
+1. From your non-admin account (e.g. **\<Me\>**) run `cmd.exe` as administrator.
+2. Set the following environment variables in the new command shell:
+
+```
+set APPDATA=C:\Users\<Me>\AppData\Roaming
+npm config set prefix C:\Users\<Me>\AppData\Roaming\npm
+set USERNAME=<Me>
+set USERPROFILE=C:\Users\<Me>
+```
+
+Ensure that the variables passed match your location of npm's roaming data and the location
+of user profiles on your machine. For `<me>`, substitute the name of the account you want to
+install `windows-build-tools` for. For more information, see the `npm config set prefix`
+description [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+
+3. Run `npm install -g --production windows-build-tools`
+
 ## License & Credits
 
 The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered.
