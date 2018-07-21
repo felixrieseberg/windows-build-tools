@@ -13,6 +13,7 @@ export function executeChildProcess(fileName: string, args: Array<any>): Promise
       if (code !== 0) {
         return reject(new Error(fileName + ' exited with code: ' + code));
       }
+
       return resolve();
     });
 

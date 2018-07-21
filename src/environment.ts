@@ -29,7 +29,7 @@ export function setEnvironment(env: InstallationDetails) {
   const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeArgs} }`;
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 
-  executeChildProcess('powershell.exe', args)
+  return executeChildProcess('powershell.exe', args)
     .then(() => log(chalk.bold.green(`\nAll done!\n`)))
     .catch((error) => debug(`Encountered environment setting error: ${error}`));
 }

@@ -15,9 +15,10 @@ function main() {
   // The dumbest callbacks. All other methods resulted
   // in stacks that we're too deep and errored out on some
   // machines.
-  download(function() {
-    install(function(variables: InstallationDetails) {
-      setEnvironment(variables);
+  download(() => {
+    install((variables: InstallationDetails) => {
+      setEnvironment(variables)
+        .then(() => process.exit(0));
     });
   });
 }
