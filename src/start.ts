@@ -18,7 +18,8 @@ function main() {
   download(() => {
     install((variables: InstallationDetails) => {
       setEnvironment(variables)
-        .then(() => process.exit(0));
+        .then(() => process.exit(0))
+        .catch(() => process.exit(1));
     });
   });
 }
