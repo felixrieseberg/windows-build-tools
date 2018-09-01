@@ -8,6 +8,7 @@ import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-p
 import { getIsPythonInstalled } from '../utils/get-is-python-installed';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
 import { getWorkDirectory } from '../utils/get-work-dir';
+import { removePath } from '../utils/remove-path';
 import { createSingleLineLogger } from '../utils/single-line-log';
 import { launchInstaller } from './launch';
 import { Tailer } from './tailer';
@@ -32,6 +33,7 @@ export function install(cb: (details: InstallationDetails) => void) {
   log(chalk.green('\nStarting installation...'));
 
   cleanExistingLogFiles();
+  removePath();
 
   launchInstaller()
     .then(() => launchLog())
