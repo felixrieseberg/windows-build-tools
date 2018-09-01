@@ -1,6 +1,6 @@
 import * as nugget from 'nugget';
 
-import { isDryRun, isPythonInstalled } from './constants';
+import { IS_DRY_RUN, IS_PYTHON_INSTALLED } from './constants';
 import { Installer } from './interfaces';
 import { log } from './logging';
 import { getBuildToolsInstallerPath } from './utils/get-build-tools-installer-path';
@@ -13,7 +13,7 @@ import { getPythonInstallerPath } from './utils/get-python-installer-path';
 export function download(cb: () => void) {
   const downloads: Array<Promise<string>> = [downloadTools(getBuildToolsInstallerPath())];
 
-  if (!isPythonInstalled) {
+  if (!IS_PYTHON_INSTALLED) {
     downloads.push(downloadTools(getPythonInstallerPath()));
   }
 
@@ -53,7 +53,7 @@ function downloadTools(installer: Installer): Promise<string> {
       resolve(installer.path);
     };
 
-    if (isDryRun) {
+    if (IS_DRY_RUN) {
       nuggetCallback();
     } else {
       nugget(installer.url, nuggetOptions, nuggetCallback);

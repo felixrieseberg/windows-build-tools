@@ -1,10 +1,10 @@
-import { buildTools } from '../constants';
+import { BUILD_TOOLS } from '../constants';
 
 export function includesSuccess(input: string = '') {
   let isBuildToolsSuccess;
   let isPythonSuccess;
 
-  if (buildTools.version === 2015) {
+  if (BUILD_TOOLS.version === 2015) {
     // Success strings for build tools (2015)
     isBuildToolsSuccess = input.includes('Variable: IsInstalled = 1') ||
       input.includes('Variable: BuildTools_Core_Installed = ') ||

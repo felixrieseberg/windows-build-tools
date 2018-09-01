@@ -3,11 +3,11 @@ import { spawn } from 'child_process';
 import * as path from 'path';
 
 import {
-  buildTools,
+  BUILD_TOOLS,
   installerScriptPath,
-  isBuildToolsInstalled,
-  isDryRun,
-  isPythonInstalled
+  IS_BUILD_TOOLS_INSTALLED,
+  IS_DRY_RUN,
+  IS_PYTHON_INSTALLED
 } from '../constants';
 import { log } from '../logging';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
@@ -26,14 +26,14 @@ const pythonInstaller = getPythonInstallerPath();
  */
 export function launchInstaller(): Promise<void> {
   return new Promise((resolve, reject) => {
-    const vccParam = `-VisualStudioVersion '${buildTools.version.toString()}'`;
+    const vccParam = `-VisualStudioVersion '${BUILD_TOOLS.version.toString()}'`;
     const pathParam = `-BuildToolsInstallerPath '${vccInstaller.directory}'`;
 
-    const buildToolsParam = isBuildToolsInstalled
+    const buildToolsParam = IS_BUILD_TOOLS_INSTALLED
       ? ``
       : `-InstallBuildTools -ExtraBuildToolsParameters '${getBuildToolsExtraParameters()}'`;
 
-    const pythonParam = isPythonInstalled
+    const pythonParam = IS_PYTHON_INSTALLED
       ? ``
       : `-PythonInstaller '${pythonInstaller.fileName}' -InstallPython`;
 

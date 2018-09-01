@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import * as fs from 'fs-extra';
-import { isDryRun } from '../constants';
+import { IS_DRY_RUN } from '../constants';
 
 const debug = require('debug')('windows-build-tools');
 
@@ -55,7 +55,7 @@ export class Tailer extends EventEmitter {
   public handleData() {
     let data;
 
-    if (isDryRun) {
+    if (IS_DRY_RUN) {
       this.emit('lastLines', `Dry run, we're all done`);
       return this.stop('success');
     }
@@ -105,7 +105,7 @@ export class Tailer extends EventEmitter {
    * @returns {Promise.<Object>} - Promise resolving with fs.stats object
    */
   public waitForLogFile() {
-    if (isDryRun) return this.tail();
+    if (IS_DRY_RUN) return this.tail();
 
     const handleStillWaiting = () => {
       debug('Tail: waitForFile: still waiting');

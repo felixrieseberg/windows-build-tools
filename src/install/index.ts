@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { installedPythonVersion, isPythonInstalled } from '../constants';
+import { INSTALLED_PYTHON_VERSION, IS_PYTHON_INSTALLED } from '../constants';
 import { InstallationDetails } from '../interfaces';
 import { log, shouldLog } from '../logging';
 import { cleanExistingLogFiles } from '../utils/clean';
@@ -113,9 +113,9 @@ function tailBuildInstallation(): Promise<void> {
 
 function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string }> {
   return new Promise((resolve, reject) => {
-    if (isPythonInstalled) {
+    if (IS_PYTHON_INSTALLED) {
       debug('Installer: Python is already installed');
-      pythonLastLines = [ chalk.bold.green(`${installedPythonVersion} is already installed, not installing again.`) ];
+      pythonLastLines = [ chalk.bold.green(`${INSTALLED_PYTHON_VERSION} is already installed, not installing again.`) ];
 
       return resolve({ toConfigure: false, path: '' });
     }

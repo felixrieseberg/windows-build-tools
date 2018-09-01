@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { buildTools } from '../constants';
+import { BUILD_TOOLS } from '../constants';
 import { getWorkDirectory } from './get-work-dir';
 
 /**
@@ -13,10 +13,10 @@ export function getBuildToolsInstallerPath() {
   const directory = getWorkDirectory();
 
   return {
-    path: path.join(directory, buildTools.installerName),
-    fileName: buildTools.installerName,
-    url: buildTools.installerUrl,
-    logPath: buildTools.logName ? path.join(directory, buildTools.logName) : null,
+    path: path.join(directory, BUILD_TOOLS.installerName),
+    fileName: BUILD_TOOLS.installerName,
+    url: BUILD_TOOLS.installerUrl,
+    logPath: BUILD_TOOLS.logName ? path.join(directory, BUILD_TOOLS.logName) : null,
     directory
   };
 }

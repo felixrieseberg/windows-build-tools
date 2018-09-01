@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import * as path from 'path';
 
-import { isDryRun } from './constants';
+import { IS_DRY_RUN } from './constants';
 import { InstallationDetails } from './interfaces';
 import { log } from './logging';
 import { executeChildProcess } from './utils/execute-child-process';
@@ -17,7 +17,7 @@ const debug = require('debug')('windows-build-tools');
 export function setEnvironment(env: InstallationDetails) {
   const pythonPath = path.join(env.python.path);
   const pythonExePath = path.join(pythonPath, 'python.exe');
-  const scriptPath = isDryRun
+  const scriptPath = IS_DRY_RUN
     ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
     : path.join(__dirname, '..', 'ps1', 'set-environment.ps1');
 
