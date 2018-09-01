@@ -21,10 +21,9 @@ export function setEnvironment(env: InstallationDetails) {
     ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
     : path.join(__dirname, '..', 'ps1', 'set-environment.ps1');
 
-  const maybeAddPythonToPath = process.env.npm_config_add_python_to_path ? ' -AddPythonToPath' : '';
   const maybePython = env.python.toConfigure ? ' -ConfigurePython' : '';
   const maybeBuildTools = env.buildTools.toConfigure ? ' -ConfigureBuildTools' : '';
-  const maybeArgs = `${maybeBuildTools}${maybePython}${maybeAddPythonToPath}`;
+  const maybeArgs = `${maybeBuildTools}${maybePython}`;
 
   const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeArgs} }`;
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];

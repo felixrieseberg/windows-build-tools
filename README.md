@@ -13,12 +13,12 @@ npm install --global --production windows-build-tools
 
 After installation, npm will automatically execute this module, which downloads and installs Visual
 C++ Build Tools, provided free of charge by Microsoft. These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
-It will also install Python 2.7, configuring your machine and npm appropriately.
+If not already installed, it will also install Python 2.7, configuring your machine and npm appropriately.
 
 > :bulb: [Windows Vista / 7 only] requires [.NET Framework 4.5.1](http://www.microsoft.com/en-us/download/details.aspx?id=40773) (Currently not installed automatically by this package)
 
 Both installations are conflict-free, meaning that they do not mess with existing installations of
-Visual Studio, C++ Build Tools, or Python. If you see anything that indiciates otherwise, please
+Visual Studio, C++ Build Tools, or Python. If you see anything that indicates otherwise, please
 file a bug.
 
 ## Visual Studio 2017 vs Visual Studio 2015
@@ -34,12 +34,11 @@ the `--vs2017` parameter.
 ## Usage
 
 ```
-npm [--add-python-to-path] [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] [--dry-run-only] install --global windows-build-tools
+npm [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] [--dry-run-only] install --global windows-build-tools
 ```
 
 Optional arguments:
 
-* `--add-python-to-path`: Add Python to the environment, allowing you to type `python.exe` in any shell. Defaults to `false`.
 * `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
 * `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
 * `--debug`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.

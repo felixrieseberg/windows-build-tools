@@ -2,7 +2,6 @@
 Param(
   [string]$pythonPath,
   [string]$pythonExePath,
-  [switch]$AddPythonToPath,
   [switch]$ConfigurePython,
   [switch]$ConfigureBuildTools
 )
@@ -19,11 +18,9 @@ function configurePython() {
   # Setting python path
   npm config set python $pythonExePath
 
-  # Add Python to path, if that's inteded by the User
-  if ($AddPythonToPath.IsPresent) {
-    [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "User")
-    [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "Process")
-  }
+  # Add Python to path
+  [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "User")
+  [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "Process")
 }
 
 if ($ConfigureBuildTools.IsPresent) {
