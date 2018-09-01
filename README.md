@@ -39,6 +39,7 @@ npm [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--soc
 
 Optional arguments:
 
+* `--offline-installers`: Path to a folder with already downloaded installers. See
 * `--python-mirror`: Use a given mirror to download Python (like `--python_mirror=https://npm.taobao.org/mirrors/python/`). You can alternatively set a `PYTHON_MIRROR` environment variable.
 * `--proxy`: Use a given proxy. You can alternatively set a `PROXY` environment variable.
 * `--debug`: Be extra verbose in the logger output. Equal to setting the environment variable `DEBUG` to `*`.
@@ -86,6 +87,21 @@ npm --vcc-build-tools-parameters='[""--allWorkloads""]' install --global windows
 
 If you run `windows-build-tools` with `--vs2017`, the available parameters [are documented here](https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio).
 
+### Offline Installation
+
+By default, `windows-build-tools` will download the latest installers from Microsoft each time
+it's installed. Alternatively, you can prepare a folder that contains installers. They need to
+have their original names:
+
+ * Visual Studio Build Tools: `vs_BuildTools.exe` or `BuildTools_Full.exe`
+ * Python: `python-2.7.14.amd64.msi` or `python-2.7.14.msi`
+
+Then, run `windows-build-tools` with the `--offline-installers` argument:
+
+```ps1
+npm install -g --production windows-build-tools --offline-installers="C:\Users\John\installers"
+```
+
 ## Support & Help
 
 This package currently only handles the most common use case, none of the edge cases. If you encounter errors, we'd greatly appreciate [error reports](https://github.com/felixrieseberg/windows-build-tools) (and even pull requests). This is currently tested on Windows 10.
@@ -93,12 +109,6 @@ This package currently only handles the most common use case, none of the edge c
 #### Where is Python installed?
 
 It's saved under `%USERPROFILE%\.windows-build-tools\python27`.
-
-#### 'Python' is not recognized as a command
-
-To not mess with your machine in unnecessary ways, Python is only installed to disk and configured
-with npm. If you'd like for the `python` command to work in `cmd.exe` and PowerShell, add the
-folder `%USERPROFILE%\.windows-build-tools\python27` to your environment variables.
 
 #### Installing as a Non-Administrator
 `windows-build-tools` works best if installed from an account with administrative rights. However,

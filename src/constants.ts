@@ -8,15 +8,17 @@ const pythonMirror = process.env.npm_config_python_mirror
   || (inGFW.osSync() ? 'https://npm.taobao.org/mirrors/python' : 'https://www.python.org/ftp/python');
 
 // To implement
-export const isBuildToolsInstalled = false;
+export const IS_BUILD_TOOLS_INSTALLED = false;
 
-export const isDryRun = !!process.env.npm_config_dry_run_only;
+export const OFFLINE_PATH = process.env.npm_config_offline_path;
 
-export const installedPythonVersion = getIsPythonInstalled();
+export const IS_DRY_RUN = !!process.env.npm_config_dry_run_only;
 
-export const isPythonInstalled = !!installedPythonVersion;
+export const INSTALLED_PYTHON_VERSION = getIsPythonInstalled();
 
-export const python = process.arch === 'x64'
+export const IS_PYTHON_INSTALLED = !!INSTALLED_PYTHON_VERSION;
+
+export const PYTHON = process.arch === 'x64'
   ? {
     installerName: 'python-2.7.14.amd64.msi',
     installerUrl: pythonMirror.replace(/\/*$/, '/2.7.14/python-2.7.14.amd64.msi'),
@@ -29,7 +31,7 @@ export const python = process.arch === 'x64'
     logName: 'python-log.txt'
   };
 
-export const buildTools = process.env.npm_config_vs2017
+export const BUILD_TOOLS = process.env.npm_config_vs2017
   ? {
     installerName: 'vs_BuildTools.exe',
     installerUrl: 'https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe',
@@ -42,6 +44,6 @@ export const buildTools = process.env.npm_config_vs2017
     version: 2015
   };
 
-export const installerScriptPath = isDryRun
+export const installerScriptPath = IS_DRY_RUN
   ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
   : path.join(__dirname, '..', 'ps1', 'launch-installer.ps1');
