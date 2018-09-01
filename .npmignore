@@ -26,3 +26,5 @@ appveyor.yml
 .npmignore
 tsconfig.json
 tslint.json
+__tests__
+lib
