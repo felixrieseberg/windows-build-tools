@@ -20,7 +20,7 @@ describe('getBuildToolsInstallerPath', () => {
   });
 
   it('gets the correct information (2017)', () => {
-    process.env.npm_config_vs2017 = true;
+    process.env.npm_config_vs2017 = 'true';
 
     jest.resetModules();
 
