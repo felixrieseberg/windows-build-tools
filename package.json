@@ -38,13 +38,13 @@
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/fs-extra": "^5.0.3",
-    "@types/jest": "^23.1.1",
-    "@types/node": "^10.3.4",
-    "jest": "^23.1.0",
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.9.4",
+    "jest": "^23.5.0",
     "ts-jest": "^22.4.6",
-    "tslint": "^5.10.0",
-    "tslint-microsoft-contrib": "^5.0.3",
-    "typescript": "^2.9.2"
+    "tslint": "^5.11.0",
+    "tslint-microsoft-contrib": "^5.2.1",
+    "typescript": "^3.0.3"
   },
   "dependencies": {
     "chalk": "^2.4.1",
