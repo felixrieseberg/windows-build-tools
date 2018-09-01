@@ -27,7 +27,7 @@
     "c++"
   ],
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "author": "Felix Rieseberg <felix@felixrieseberg.com>",
   "license": "MIT",
