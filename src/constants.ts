@@ -10,7 +10,7 @@ const pythonMirror = process.env.npm_config_python_mirror
 // To implement
 export const IS_BUILD_TOOLS_INSTALLED = false;
 
-export const OFFLINE_PATH = process.env.npm_config_offline_path;
+export const OFFLINE_PATH = process.env.npm_config_offline_installers;
 
 export const IS_DRY_RUN = !!process.env.npm_config_dry_run_only;
 

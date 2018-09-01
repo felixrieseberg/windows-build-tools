@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { BUILD_TOOLS, OFFLINE_PATH, PYTHON } from './constants';
-import { error } from './logging';
+import { BUILD_TOOLS, IS_DRY_RUN, OFFLINE_PATH, PYTHON } from './constants';
+import { error, log } from './logging';
 import { getBuildToolsInstallerPath } from './utils/get-build-tools-installer-path';
 import { getPythonInstallerPath } from './utils/get-python-installer-path';
 
@@ -16,8 +16,13 @@ const VS_INSTALLER = path.join(OFFLINE_PATH || '', BUILD_TOOLS.installerName);
  * @param {string} installerName
  * @returns {boolean}
  */
-function ensureInstaller(installerPath: string, installerName: string): boolean {
+function ensureInstaller(installerPath: string, installerName: string): void {
   if (!fs.existsSync(installerPath)) {
+    if (IS_DRY_RUN) {
+      log(`Dry run: Installer ${installerPath} not found, would have stopped here.`);
+      return;
+    }
+
     let message = `Offline installation: Offline path ${OFFLINE_PATH} was passed, `;
     message += `but we could not find ${installerName} in that path. `;
     message += `Aborting installation now.`;
@@ -26,8 +31,6 @@ function ensureInstaller(installerPath: string, installerName: string): boolean 
 
     process.exit(1);
   }
-
-  return true;
 }
 
 /**
@@ -42,6 +45,11 @@ export async function copyInstallers(): Promise<void> {
 
   ensureInstaller(PYTHON_INSTALLER, PYTHON.installerName);
   ensureInstaller(VS_INSTALLER, BUILD_TOOLS.installerName);
+
+  if (IS_DRY_RUN) {
+    log(`Dry run: Would have copied installers.`);
+    return;
+  }
 
   try {
     await fs.copy(PYTHON_INSTALLER, getPythonInstallerPath().path);
