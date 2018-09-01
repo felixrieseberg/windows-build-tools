@@ -5,7 +5,6 @@ import { InstallationDetails } from '../interfaces';
 import { log, shouldLog } from '../logging';
 import { cleanExistingLogFiles } from '../utils/clean';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
-import { getIsPythonInstalled } from '../utils/get-is-python-installed';
 import { getPythonInstallerPath } from '../utils/get-python-installer-path';
 import { getWorkDirectory } from '../utils/get-work-dir';
 import { removePath } from '../utils/remove-path';

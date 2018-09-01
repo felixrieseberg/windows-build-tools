@@ -1,13 +1,11 @@
 import chalk from 'chalk';
 import { spawn } from 'child_process';
-import * as path from 'path';
 
 import {
   BUILD_TOOLS,
-  installerScriptPath,
   IS_BUILD_TOOLS_INSTALLED,
-  IS_DRY_RUN,
-  IS_PYTHON_INSTALLED
+  IS_PYTHON_INSTALLED,
+  installerScriptPath
 } from '../constants';
 import { log } from '../logging';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
