@@ -30,5 +30,6 @@ export function includesSuccess(input: string = '') {
 
 export function includesFailure(input: string = '') {
   return input.includes('Closing installer. Return code:') ||
-    input.includes('Shutting down, exit code:');
+    input.includes('Shutting down, exit code:') ||
+    input.includes(' -- Installation failed.');
 }
