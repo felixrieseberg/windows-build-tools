@@ -45,8 +45,10 @@ export function launchInstaller(): Promise<void> {
     try {
       child = spawn('powershell.exe', args);
     } catch (error) {
-      log(chalk.bold.red('Error: failed while trying to run powershell.exe'));
-      log('(Hint: Is "%SystemRoot%\\system32\\WindowsPowerShell\\v1.0" in your system path?)');
+      log(chalk.bold.red('Error: failed while trying to run powershell.exe.'));
+      log(chalk.bold.greenBright('Hint: Is "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0" in your system path?'));
+      log(`\nTried to execute: "powershell.exe ${args.join(' ')}\n`);
+
       return reject(error);
     }
 
