@@ -141,16 +141,20 @@ export class Tailer extends EventEmitter {
     // If don't have a logfile, we need to find one. The only one
     // we need to find right now is the VCC 2017 logfile.
     if (!this.logFile) {
-      findVCCLogFile().then((logFile) => {
-        debug(`Tail: LogFile found: ${logFile}`);
+      findVCCLogFile()
+        .then((logFile) => {
+          debug(`Tail: LogFile found: ${logFile}`);
 
-        if (!logFile) {
-          handleStillWaiting();
-        } else {
-          this.logFile = logFile;
-          handleKnownPath(logFile);
-        }
-      });
+          if (!logFile) {
+            handleStillWaiting();
+          } else {
+            this.logFile = logFile;
+            handleKnownPath(logFile);
+          }
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
     } else {
       handleKnownPath(this.logFile);
     }

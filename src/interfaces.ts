@@ -6,11 +6,12 @@ export interface Installer {
 }
 
 export interface InstallationDetails {
-  buildTools: {
-    toConfigure: boolean;
-  };
-  python: {
-    toConfigure: boolean;
-    path: string;
-  };
+  buildTools: InstallationReport;
+  python: InstallationReport;
+}
+
+export interface InstallationReport {
+  success: boolean;
+  toConfigure?: boolean;
+  installPath?: string;
 }

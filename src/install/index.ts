@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
 import { INSTALLED_PYTHON_VERSION, IS_PYTHON_INSTALLED } from '../constants';
-import { InstallationDetails } from '../interfaces';
+import { InstallationDetails, InstallationReport } from '../interfaces';
 import { log, shouldLog } from '../logging';
 import { cleanExistingLogFiles } from '../utils/clean';
 import { getBuildToolsInstallerPath } from '../utils/get-build-tools-installer-path';
@@ -37,9 +37,18 @@ export function install(cb: (details: InstallationDetails) => void) {
   launchInstaller()
     .then(() => launchLog())
     .then(() => Promise.all([tailBuildInstallation(), tailPythonInstallation()]))
-    .then((details: [ undefined, { path: string, toConfigure: boolean } ]) => {
+    .then((details: [ InstallationReport, InstallationReport ]) => {
+      const buildToolsReport = details[0];
+      const pythonReport = details[1];
+
+      // If we failed here, let's stop.
+      if (!buildToolsReport.success || !pythonReport.success) {
+        log(chalk.bold.red(`Installation failed. Exiting now.`));
+        process.exit(1);
+      }
+
       cb({
-        buildTools: { toConfigure: true },
+        buildTools: details[0],
         python: details[1]
       });
     })
@@ -77,7 +86,7 @@ function stopLog() {
   log('');
 }
 
-function tailBuildInstallation(): Promise<void> {
+function tailBuildInstallation(): Promise<InstallationReport> {
   return new Promise((resolve, reject) => {
     const tailer = new Tailer(vccInstaller.logPath);
 
@@ -99,15 +108,15 @@ function tailBuildInstallation(): Promise<void> {
       if (result === 'success') {
         vccLastLines = [ chalk.bold.green('Successfully installed Visual Studio Build Tools.') ];
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer');
-        resolve();
+        resolve({ success: true, toConfigure: true });
       }
 
       if (result === 'failure') {
-        log(chalk.bold.red('Could not install Visual Studio Build Tools.'));
+        log(chalk.bold.red('\nCould not install Visual Studio Build Tools.'));
         log('Please find more details in the log files, which can be found at');
-        log(getWorkDirectory());
+        log(getWorkDirectory() + '\n');
         debug('Installer: Failed to install according to tailer');
-        resolve();
+        resolve({ success: false });
       }
     });
 
@@ -115,13 +124,13 @@ function tailBuildInstallation(): Promise<void> {
   });
 }
 
-function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string }> {
+function tailPythonInstallation(): Promise<InstallationReport> {
   return new Promise((resolve, reject) => {
     if (IS_PYTHON_INSTALLED) {
       debug('Installer: Python is already installed');
       pythonLastLines = [ chalk.bold.green(`${INSTALLED_PYTHON_VERSION} is already installed, not installing again.`) ];
 
-      return resolve({ toConfigure: false, path: '' });
+      return resolve({ toConfigure: false, installPath: '', success: true });
     }
 
     // The log file for msiexe is utf-16
@@ -142,16 +151,22 @@ function tailPythonInstallation(): Promise<{ toConfigure: boolean; path: string 
         pythonLastLines = [ chalk.bold.green('Successfully installed Python 2.7') ];
 
         debug('Installer: Successfully installed Python 2.7 according to tailer');
-        resolve({ path: details || getPythonInstallerPath().targetPath, toConfigure: true });
+        resolve({
+          installPath: details || getPythonInstallerPath().targetPath,
+          toConfigure: true,
+          success: true
+        });
       }
 
       if (result === 'failure') {
-        log(chalk.bold.red('Could not install Python 2.7.'));
+        log(chalk.bold.red('\nCould not install Python 2.7.'));
         log('Please find more details in the log files, which can be found at');
-        log(getWorkDirectory());
+        log(getWorkDirectory() + '\n');
 
         debug('Installer: Failed to install Python 2.7 according to tailer');
-        resolve(undefined);
+        resolve({
+          success: false
+        });
       }
     });
 
