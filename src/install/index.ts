@@ -53,7 +53,12 @@ export function install(cb: (details: InstallationDetails) => void) {
 
 function logStatus() {
   const updatedLog = [ vcLogTitle, ...vccLastLines, pyLogTitle, ...pythonLastLines ];
-  singleLineLogger.log(updatedLog.join('\n'));
+
+  if (debug.enabled) {
+    updatedLog.forEach((s) => debug(s));
+  } else {
+    singleLineLogger.log(updatedLog.join('\n'));
+  }
 }
 
 function launchLog() {
@@ -63,7 +68,7 @@ function launchLog() {
   log('This will likely take some time - please be patient!\n');
   log('Status from the installers:');
 
-  lastLinesInterval = setInterval(logStatus, 1000);
+  lastLinesInterval = setInterval(logStatus, 500);
 }
 
 function stopLog() {

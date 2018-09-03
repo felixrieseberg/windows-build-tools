@@ -3,8 +3,8 @@ module.exports = (wallaby) => ({
     'src/**/*.js?(x)',
     'src/**/*.ts?(x)',
     'src/**/*.html',
-    { pattern: '__tests__/**/*-spec.ts?(x)', ignore: true },
-    { pattern: '__tests__/**/!(*-spec)', instrument: false, load: true },
+    { pattern: '__tests__/**/*-test.ts?(x)', ignore: true },
+    { pattern: '__tests__/**/!(*-test)', instrument: false, load: true },
     { pattern: 'package.json', instrument: false, load: true }
   ],
 
@@ -46,10 +46,6 @@ module.exports = (wallaby) => ({
         'ts',
         'tsx'
       ],
-      moduleNameMapper: {
-        ".*releases.json$": path.join(wallaby.localProjectDir, 'static/releases.json'),
-      },
-      setupTestFrameworkScriptFile: path.join(wallaby.projectCacheDir, 'tests/setup.js'),
       globals: { __JEST_DEV__: true }
     };
 

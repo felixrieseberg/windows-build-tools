@@ -1,11 +1,11 @@
 import { EventEmitter } from 'events';
 import * as fs from 'fs-extra';
+
 import { IS_DRY_RUN } from '../constants';
+import { findVCCLogFile } from '../utils/find-logfile';
+import { includesFailure, includesSuccess } from '../utils/installation-sucess';
 
 const debug = require('debug')('windows-build-tools');
-
-const { findVCCLogFile } = require('../utils/find-logfile');
-const { includesSuccess, includesFailure } = require('../utils/installation-sucess');
 
 export class Tailer extends EventEmitter {
   public logFile: string;
@@ -46,20 +46,18 @@ export class Tailer extends EventEmitter {
   public tail() {
     debug(`Tail: Tailing ${this.logFile}`);
 
-    this.tailInterval = setInterval(() => this.handleData(), 1500);
+    this.tailInterval = setInterval(() => this.readData(), 500);
   }
 
-  /**
-   * Handle data and see if there's something we'd like to report
-   */
-  public handleData() {
-    let data;
-
+  public readData() {
     if (IS_DRY_RUN) {
       this.emit('lastLines', `Dry run, we're all done`);
       return this.stop('success');
     }
 
+    let data = '';
+
+    // Read the log file
     try {
       data = fs.readFileSync(this.logFile, this.encoding);
     } catch (err) {
@@ -71,14 +69,25 @@ export class Tailer extends EventEmitter {
       const split = data.split(/\r?\n/) || [ 'Still looking for log file...' ];
       const lastLines = split.slice(split.length - 10, split.length);
       this.emit('lastLines', lastLines);
+      this.handleData(data);
     }
+  }
 
-    const success = includesSuccess(data);
+  /**
+   * Handle data and see if there's something we'd like to report
+   *
+   * @param {string} data
+   */
+  public handleData(data: string) {
+    // Handle Success
+    const { isBuildToolsSuccess, isPythonSuccess } = includesSuccess(data);
 
-    if (success.isBuildToolsSuccess) {
+    if (isBuildToolsSuccess) {
       debug(`Tail: Reporting success for VCC Build Tools`);
       this.stop('success');
-    } else if (success.isPythonSuccess) {
+    }
+
+    if (isPythonSuccess) {
       // Finding the python installation path from the log file
       const matches = data.match(/Property\(S\): TARGETDIR = (.*)\r\n/);
       let pythonPath;
@@ -89,13 +98,15 @@ export class Tailer extends EventEmitter {
 
       debug(`Tail: Reporting success for Python`);
       this.stop('success', pythonPath);
-    } else if (includesFailure(data)) {
+    }
+
+    // Handle Failure
+    const { isPythonFailure, isBuildToolsFailure } = includesFailure(data);
+
+    if (isPythonFailure || isBuildToolsFailure) {
       debug(`Tail: Reporting failure in ${this.logFile}`);
       this.stop('failure');
     }
-
-    // Aid garbage collector
-    data = undefined;
   }
 
   /**

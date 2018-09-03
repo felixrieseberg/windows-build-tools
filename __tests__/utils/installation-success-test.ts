@@ -51,9 +51,23 @@ describe('installation-success', () => {
   });
 
   describe('includesFailure', () => {
-    it('correctly reports failure', () => {
-      expect(includesFailure('Closing installer. Return code: -13')).toBeTruthy();
-      expect(includesFailure('Shutting down, exit code: -13')).toBeTruthy();
+    it('correctly reports failure for build tools', () => {
+      expect(includesFailure('Closing installer. Return code: -13')).toEqual({
+        isBuildToolsFailure: true,
+        isPythonFailure: false
+      });
+
+      expect(includesFailure('Shutting down, exit code: -13')).toEqual({
+        isBuildToolsFailure: true,
+        isPythonFailure: false
+      });
+    });
+
+    it('correctly reports failure for Python', () => {
+      expect(includesFailure('(64-bit) -- Installation failed.')).toEqual({
+        isBuildToolsFailure: false,
+        isPythonFailure: true
+      });
     });
   });
 });

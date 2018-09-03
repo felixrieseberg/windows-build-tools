@@ -1,8 +1,14 @@
 import { BUILD_TOOLS } from '../constants';
 
+/**
+ * Dumb string comparison: Can we assume installation success
+ * after taking a look at the logs?
+ *
+ * @param {string} [input='']
+ */
 export function includesSuccess(input: string = '') {
-  let isBuildToolsSuccess;
-  let isPythonSuccess;
+  let isBuildToolsSuccess = false;
+  let isPythonSuccess = false;
 
   if (BUILD_TOOLS.version === 2015) {
     // Success strings for build tools (2015)
@@ -28,8 +34,23 @@ export function includesSuccess(input: string = '') {
   };
 }
 
+/**
+ * Dumb string comparison: Can we assume installation success
+ * after taking a look at the logs?
+ *
+ * @param {string} [input='']
+ */
 export function includesFailure(input: string = '') {
-  return input.includes('Closing installer. Return code:') ||
-    input.includes('Shutting down, exit code:') ||
-    input.includes(' -- Installation failed.');
+  let isBuildToolsFailure = false;
+  let isPythonFailure = false;
+
+  isBuildToolsFailure = input.includes('Closing installer. Return code:') ||
+    input.includes('Shutting down, exit code:');
+
+  isPythonFailure = input.includes(' -- Installation failed.');
+
+  return {
+    isBuildToolsFailure,
+    isPythonFailure
+  };
 }
