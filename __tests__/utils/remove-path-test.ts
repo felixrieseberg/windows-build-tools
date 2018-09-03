@@ -6,7 +6,11 @@ describe('removePath', () => {
 
     removePath();
 
-    expect(process.env.PATH).toBeUndefined();
-    expect(process.env.path).toBeUndefined();
+    // process.env.path is weird and we
+    // need a weird test for it
+    Object.keys(process.env).forEach((k) => {
+      expect(k !== 'PATH').toBe(true);
+      expect(k !== 'path').toBe(true);
+    });
   });
 });

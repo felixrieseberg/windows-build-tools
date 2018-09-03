@@ -7,6 +7,9 @@ const savedPath = process.env.Path;
  * @returns {void}
  */
 export function removePath(): void {
+  Object.defineProperty(process.env, 'PATH', { value: undefined });
+  Object.defineProperty(process.env, 'path', { value: undefined });
+
   delete process.env.PATH;
   delete process.env.path;
 

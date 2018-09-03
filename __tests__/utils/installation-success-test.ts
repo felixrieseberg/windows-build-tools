@@ -2,7 +2,7 @@ import * as fs from 'fs-extra';
 import { includesFailure, includesSuccess } from '../../src/utils/installation-sucess';
 
 jest.mock('../../src/constants', () => ({
-  buildTools: { version: 2015 }
+  BUILD_TOOLS: { version: 2015 }
 }));
 
 describe('installation-success', () => {
