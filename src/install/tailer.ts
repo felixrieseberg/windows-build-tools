@@ -67,7 +67,8 @@ export class Tailer extends EventEmitter {
 
     if (data && data.length > 0) {
       const split = data.split(/\r?\n/) || [ 'Still looking for log file...' ];
-      const lastLines = split.slice(split.length - 10, split.length);
+      const lastLines = split.slice(split.length - 4, split.length);
+
       this.emit('lastLines', lastLines);
       this.handleData(data);
     }

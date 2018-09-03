@@ -38,9 +38,6 @@ export function install(cb: (details: InstallationDetails) => void) {
     .then(() => launchLog())
     .then(() => Promise.all([tailBuildInstallation(), tailPythonInstallation()]))
     .then((details: [ undefined, { path: string, toConfigure: boolean } ]) => {
-      logStatus();
-      stopLog();
-
       cb({
         buildTools: { toConfigure: true },
         python: details[1]
@@ -90,6 +87,9 @@ function tailBuildInstallation(): Promise<void> {
 
     tailer.on('exit', (result, details) => {
       debug('Install: Build tools tailer exited');
+
+      logStatus();
+      stopLog();
 
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details);
