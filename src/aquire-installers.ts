@@ -1,6 +1,10 @@
+import chalk from 'chalk';
+
 import { OFFLINE_PATH } from './constants';
 import { download } from './download';
+import { log } from './logging';
 import { copyInstallers } from './offline';
+
 
 /**
  * Aquire the installers, either by copying them from
@@ -10,11 +14,26 @@ import { copyInstallers } from './offline';
  * @returns {Promise.void}
  */
 export async function aquireInstallers(cb: () => void): Promise<void> {
-  if (OFFLINE_PATH) {
-    await copyInstallers();
+  const handleFailure = (error: Error) => {
+    log(chalk.bold.red(`Downloading installers failed. Error:`), error);
+    log(chalk.bold.red(`windows-build-tools will now exit.`));
 
-    cb();
+    process.exit(1);
+  };
+
+  if (OFFLINE_PATH) {
+    try {
+      await copyInstallers();
+
+      cb();
+    } catch (error) {
+      handleFailure(error);
+    }
   } else {
-    download(cb);
+    try {
+      await download(cb);
+    } catch (error) {
+      handleFailure(error);
+    }
   }
 }

@@ -92,9 +92,7 @@
       "single",
       "avoid-escape"
     ],
-    "max-classes-per-file": [
-      false
-    ],
+    "max-classes-per-file": false,
     "semicolon": [
       true,
       "always"
