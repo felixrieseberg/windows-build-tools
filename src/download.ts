@@ -71,6 +71,9 @@ function downloadTools(installer: Installer): Promise<string> {
     if (IS_DRY_RUN) {
       nuggetCallback();
     } else {
+      // Log double newline because Nugget is the worst about overwriting
+      // output
+      log('\n');
       nugget(installer.url, nuggetOptions, nuggetCallback);
     }
   });
