@@ -33,6 +33,8 @@ export async function download(cb: () => void) {
       handleFailure(error, 'Visual Studio Build Tools');
     }
   }
+
+  cb();
 }
 
 /**
