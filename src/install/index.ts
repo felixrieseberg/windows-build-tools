@@ -36,7 +36,7 @@ export function install(cb: (details: InstallationDetails) => void) {
 
   launchInstaller()
     .then(() => launchLog())
-    .then(() => Promise.all([tailBuildInstallation(), tailPythonInstallation()]))
+    .then(() => Promise.all([ tailBuildInstallation(), tailPythonInstallation() ]))
     .then((details: [ InstallationReport, InstallationReport ]) => {
       cb({ buildTools: details[0], python: details[1] });
     })
@@ -90,9 +90,6 @@ function tailBuildInstallation(): Promise<InstallationReport> {
     tailer.on('exit', (result, details) => {
       debug('Install: Build tools tailer exited');
 
-      logStatus();
-      stopLog();
-
       if (result === 'error') {
         debug('Installer: Tailer found error with installer', details);
         reject(new Error(`Found error with VCC installer: ${details}`));
@@ -103,6 +100,12 @@ function tailBuildInstallation(): Promise<InstallationReport> {
         debug('Installer: Successfully installed Visual Studio Build Tools according to tailer');
         resolve({ success: true, toConfigure: true });
       }
+
+      // Stop the log now. If we need to report failures, we need
+      // to do it after the single-line-logger has stopped messing
+      // with the terminal.
+      logStatus();
+      stopLog();
 
       if (result === 'failure') {
         log(chalk.bold.red('\nCould not install Visual Studio Build Tools.'));
