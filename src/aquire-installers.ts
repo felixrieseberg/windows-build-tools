@@ -10,8 +10,6 @@ import { copyInstallers } from './offline';
  * @returns {Promise.void}
  */
 export async function aquireInstallers(cb: () => void): Promise<void> {
-  console.log(OFFLINE_PATH);
-
   if (OFFLINE_PATH) {
     await copyInstallers();
 
