@@ -3,7 +3,7 @@
 <a href="https://ci.appveyor.com/project/felixrieseberg/windows-build-tools"><img src="https://ci.appveyor.com/api/projects/status/gpna6y54wnfp07xr?svg=true" /></a>
 <a href="http://badge.fury.io/js/windows-build-tools"><img src="https://badge.fury.io/js/windows-build-tools.svg" alt="npm version" height="18"></a> <a href="https://david-dm.org/felixrieseberg/windows-build-tools"><img src="https://david-dm.org/felixrieseberg/windows-build-tools.svg" alt="dependencies" height="18px"></a> <img src="https://img.shields.io/npm/dm/windows-build-tools.svg" height="18px" />
 
-On Windows? Want to compile native Node modules? Install the build tools with this one-liner. Start PowerShell as Administrator and run:
+On Windows? Want to compile [native Node modules](#examples-of-modules-supported)? Install the build tools with this one-liner. Start PowerShell as Administrator and run:
 
 ```
 npm install --global --production windows-build-tools
@@ -130,6 +130,15 @@ install `windows-build-tools` for. For more information, see the `npm config set
 description [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
 3. Run `npm install -g --production windows-build-tools`
+
+## Examples of Modules Supported
+In theory, `windows-build-tools` supports all pure C++ addons for Node.js (and virtually everything
+else that requires a native compiler toolchain to be installed on your machine).
+
+To ensure that that's true, we take a fresh Windows 10 installation, add `windows-build-tools`, and
+ensure that the most popular native Node addons compile from source. Those are: [node-sass](https://www.npmjs.com/package/node-sass), [bcrypt](https://www.npmjs.com/package/bcrypt), [sqlite3](https://www.npmjs.com/package/sqlite3), serialport, websocket, deasync, grpc, canvas, sharp,
+hiredis, leveldown, nodegit, zqm, ffi, libxmljs, iconv, ref, sleep, microtime, couchbase, bignum,
+kerberos, and ursa.
 
 ## License & Credits
 
