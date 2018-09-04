@@ -48,8 +48,13 @@ export function install(cb: (details: InstallationDetails) => void) {
 function logStatus() {
   const updatedLog = [ vcLogTitle, ...vccLastLines, pyLogTitle, ...pythonLastLines ];
 
+  // We expect a length of 16
+  if (updatedLog.length < 16) {
+    updatedLog.fill('', updatedLog.length, 16);
+  }
+
   if (debug.enabled) {
-    updatedLog.forEach((s) => debug(s));
+  updatedLog.forEach((s) => debug(s));
   } else {
     singleLineLogger.log(updatedLog.join('\n'));
   }
@@ -71,7 +76,7 @@ function stopLog() {
   clearInterval(lastLinesInterval);
 
   // Flush newlines
-  log('');
+  log('\n');
 }
 
 function tailBuildInstallation(): Promise<InstallationReport> {
