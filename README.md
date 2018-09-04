@@ -15,7 +15,7 @@ Or, if you are using Yarn:
 yarn global add windows-build-tools
 ```
 
-![Gif](https://user-images.githubusercontent.com/1426799/36077410-66a1d122-0f1f-11e8-9730-3ca50af1e4e6.gif)
+![Gif](https://user-images.githubusercontent.com/1426799/45007904-bde9f280-afb4-11e8-8a35-c77dffaffa2a.gif)
 
 After installation, npm will automatically execute this module, which downloads and installs Visual
 C++ Build Tools, provided free of charge by Microsoft. These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
