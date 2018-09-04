@@ -26,7 +26,7 @@ export async function download(cb: () => void) {
     }
   }
 
-  if (IS_BUILD_TOOLS_INSTALLED) {
+  if (!IS_BUILD_TOOLS_INSTALLED) {
     try {
       await downloadTools(getBuildToolsInstallerPath());
     } catch (error) {
