@@ -38,19 +38,7 @@ export function install(cb: (details: InstallationDetails) => void) {
     .then(() => launchLog())
     .then(() => Promise.all([tailBuildInstallation(), tailPythonInstallation()]))
     .then((details: [ InstallationReport, InstallationReport ]) => {
-      const buildToolsReport = details[0];
-      const pythonReport = details[1];
-
-      // If we failed here, let's stop.
-      if (!buildToolsReport.success || !pythonReport.success) {
-        log(chalk.bold.red(`Installation failed. Exiting now.`));
-        process.exit(1);
-      }
-
-      cb({
-        buildTools: details[0],
-        python: details[1]
-      });
+      cb({ buildTools: details[0], python: details[1] });
     })
     .catch((error) => {
       log(error);

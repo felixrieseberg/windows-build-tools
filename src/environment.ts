@@ -15,17 +15,40 @@ const debug = require('debug')('windows-build-tools');
  * @params variables an object with paths for different environmental variables
  */
 export function setEnvironment(env: InstallationDetails) {
-  const pythonPath = path.join(env.python.installPath);
-  const pythonExePath = path.join(pythonPath, 'python.exe');
   const scriptPath = IS_DRY_RUN
     ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
     : path.join(__dirname, '..', 'ps1', 'set-environment.ps1');
 
-  const maybePython = env.python.toConfigure ? ' -ConfigurePython' : '';
-  const maybeBuildTools = env.buildTools.toConfigure ? ' -ConfigureBuildTools' : '';
-  const maybeArgs = `${maybeBuildTools}${maybePython}`;
+  let pythonArguments = '';
+  let buildArguments = '';
 
-  const psArgs = `& {& '${scriptPath}' -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'${maybeArgs} }`;
+  // Should we configure Python?
+  if (env.python.toConfigure) {
+    const pythonPath = path.join(env.python.installPath);
+    const pythonExePath = path.join(pythonPath, 'python.exe');
+
+    pythonArguments += ` -ConfigurePython -pythonPath '${pythonPath}' -pythonExePath '${pythonExePath}'`;
+  }
+
+  // Should we configure the VS Build Tools?
+  if (env.buildTools.toConfigure) {
+    buildArguments += ` -ConfigureBuildTools`;
+  }
+
+  // Log what we're doing
+  if (pythonArguments && buildArguments) {
+    log(chalk.bold.green(`Now configuring the Visual Studio Build Tools and Python...`));
+  } else if (pythonArguments) {
+    log(chalk.bold.green(`Now configuring Python...`));
+  } else if (buildArguments) {
+    log(chalk.bold.green(`Now configuring the Visual Studio Build Tools..`));
+  } else {
+    log(chalk.bold.green(`Skipping configuration: No configuration for Python or Visual Studio Build Tools required.`));
+    return;
+  }
+
+  const maybeArgs = `${pythonArguments}${buildArguments}`;
+  const psArgs = `& {& '${scriptPath}' ${maybeArgs} }`;
   const args = ['-ExecutionPolicy', 'Bypass', '-NoProfile', '-NoLogo', psArgs];
 
   return executeChildProcess('powershell.exe', args)
