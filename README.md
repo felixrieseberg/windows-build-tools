@@ -9,6 +9,12 @@ On Windows? Want to compile [native Node modules](#examples-of-modules-supported
 npm install --global --production windows-build-tools
 ```
 
+Or, if you are using Yarn:
+
+```
+yarn global add windows-build-tools
+```
+
 ![Gif](https://user-images.githubusercontent.com/1426799/36077410-66a1d122-0f1f-11e8-9730-3ca50af1e4e6.gif)
 
 After installation, npm will automatically execute this module, which downloads and installs Visual
@@ -106,6 +112,12 @@ npm install -g --production windows-build-tools --offline-installers="C:\Users\J
 
 This package currently only handles the most common use case, none of the edge cases. If you encounter errors, we'd greatly appreciate [error reports](https://github.com/felixrieseberg/windows-build-tools) (and even pull requests). This is currently tested on Windows 10.
 
+#### Node versions
+ * `windows-build-tools` 4.0 and up require at least Node v8.
+ * `windows-build-tools` 3.0 and up require at least Node v6.
+ * `windows-build-tools` 1.0 and up require at least Node v4.
+
+
 #### Where is Python installed?
 
 It's saved under `%USERPROFILE%\.windows-build-tools\python27`.
@@ -136,9 +148,9 @@ In theory, `windows-build-tools` supports all pure C++ addons for Node.js (and v
 else that requires a native compiler toolchain to be installed on your machine).
 
 To ensure that that's true, we take a fresh Windows 10 installation, add `windows-build-tools`, and
-ensure that the most popular native Node addons compile from source. Those are: [node-sass](https://www.npmjs.com/package/node-sass), [bcrypt](https://www.npmjs.com/package/bcrypt), [sqlite3](https://www.npmjs.com/package/sqlite3), serialport, websocket, deasync, grpc, canvas, sharp,
-hiredis, leveldown, nodegit, zqm, ffi, libxmljs, iconv, ref, sleep, microtime, couchbase, bignum,
-kerberos, and ursa.
+ensure that the most popular native Node addons compile from source. Those are: [node-sass](https://www.npmjs.com/package/node-sass), [bcrypt](https://www.npmjs.com/package/bcrypt), [sqlite3](https://www.npmjs.com/package/sqlite3), [serialport](https://www.npmjs.com/package/serialport), [websocket](https://www.npmjs.com/package/websocket), [deasync](https://www.npmjs.com/package/deasync), [grpc](https://www.npmjs.com/package/grpc), [canvas](https://www.npmjs.com/package/canvas), [sharp](https://www.npmjs.com/package/sharp),
+[hiredis](https://www.npmjs.com/package/hiredis), [leveldown](https://www.npmjs.com/package/leveldown), [nodegit](https://www.npmjs.com/package/nodegit), [zqm](https://www.npmjs.com/package/zqm), [ffi](https://www.npmjs.com/package/ffi), [libxmljs](https://www.npmjs.com/package/libxmljs), [iconv](https://www.npmjs.com/package/iconv), [ref](https://www.npmjs.com/package/ref), [sleep](https://www.npmjs.com/package/sleep), [microtime](https://www.npmjs.com/package/microtime), [couchbase](https://www.npmjs.com/package/couchbase), [bignum](https://www.npmjs.com/package/bignum),
+[kerberos](https://www.npmjs.com/package/kerberos), and [ursa](https://www.npmjs.com/package/ursa).
 
 ## License & Credits
 
