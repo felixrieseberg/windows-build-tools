@@ -100,7 +100,7 @@ it's installed. Alternatively, you can prepare a folder that contains installers
 have their original names:
 
  * Visual Studio Build Tools: `vs_BuildTools.exe` or `BuildTools_Full.exe`
- * Python: `python-2.7.14.amd64.msi` or `python-2.7.14.msi`
+ * Python: `python-2.7.15.amd64.msi` or `python-2.7.15.msi`
 
 Then, run `windows-build-tools` with the `--offline-installers` argument:
 
