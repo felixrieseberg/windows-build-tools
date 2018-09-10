@@ -6,7 +6,7 @@
 On Windows? Want to compile [native Node modules](#examples-of-modules-supported)? Install the build tools with this one-liner. Start PowerShell as Administrator and run:
 
 ```
-npm install --global --production windows-build-tools
+npm install --global windows-build-tools
 ```
 
 Or, if you are using Yarn:
@@ -105,7 +105,7 @@ have their original names:
 Then, run `windows-build-tools` with the `--offline-installers` argument:
 
 ```ps1
-npm install -g --production windows-build-tools --offline-installers="C:\Users\John\installers"
+npm install -g windows-build-tools --offline-installers="C:\Users\John\installers"
 ```
 
 ## Support & Help
@@ -141,7 +141,7 @@ of user profiles on your machine. For `<me>`, substitute the name of the account
 install `windows-build-tools` for. For more information, see the `npm config set prefix`
 description [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-3. Run `npm install -g --production windows-build-tools`
+3. Run `npm install -g windows-build-tools`
 
 ## Examples of Modules Supported
 In theory, `windows-build-tools` supports all pure C++ addons for Node.js (and virtually everything
