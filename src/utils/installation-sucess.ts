@@ -15,7 +15,6 @@ export function includesSuccess(input: string = '') {
     isBuildToolsSuccess = input.includes('Variable: IsInstalled = 1') ||
       input.includes('Variable: BuildTools_Core_Installed = ') ||
       input.includes('WixBundleInstalled = 1') ||
-      input.includes('Setting string variable \'IsInstalled\' to value \'1\'') ||
       input.includes('Apply complete, result: 0x0, restart: None, ba requested restart:');
   } else {
     // Success strings for build tools (2017)

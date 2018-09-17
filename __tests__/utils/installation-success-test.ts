@@ -23,11 +23,6 @@ describe('installation-success', () => {
         isPythonSuccess: false
       });
 
-      expect(includesSuccess('Setting string variable \'IsInstalled\' to value \'1\'')).toEqual({
-        isBuildToolsSuccess: true,
-        isPythonSuccess: false
-      });
-
       expect(includesSuccess('Blubblub')).toEqual({
         isBuildToolsSuccess: false,
         isPythonSuccess: false
