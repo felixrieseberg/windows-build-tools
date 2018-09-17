@@ -34,7 +34,7 @@ function runInstaller {
     cd $BuildToolsInstallerPath
 
     if ($VisualStudioVersion -eq "2017") {
-      $params = "--norestart", "--quiet", "--add", "Microsoft.VisualStudio.Workload.VCTools"
+      $params = "--norestart", "--quiet", "--includeRecommended", "--add", "Microsoft.VisualStudio.Workload.VCTools"
       ./vs_BuildTools.exe $params
     } else {
       $params = "/NoRestart", "/S", "/L", "`"$BuildToolsInstallerPath\build-tools-log.txt`""
