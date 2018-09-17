@@ -88,6 +88,7 @@ export class Tailer extends EventEmitter {
     if (isBuildToolsSuccess) {
       debug(`Tail: Reporting success for VCC Build Tools`);
       this.stop('success');
+      return;
     }
 
     if (isPythonSuccess) {
@@ -101,6 +102,7 @@ export class Tailer extends EventEmitter {
 
       debug(`Tail: Reporting success for Python`);
       this.stop('success', pythonPath);
+      return;
     }
 
     // Handle Failure
