@@ -29,18 +29,15 @@ file a bug.
 
 ## Visual Studio 2017 vs Visual Studio 2015
 This module is capable of installing either the build tools from Visual Studio [2017](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/introducing-the-visual-studio-build-tools/) or Visual
-Studio [2015](https://blogs.msdn.microsoft.com/vcblog/2016/03/31/announcing-the-official-release-of-the-visual-c-build-tools-2015/). Since Node's underlying build tools still don't fully support 2017, you might
-have a better experience with 2015 - even if it sounds a bit outdated. On the other hand, if
-you are only trying to compile a certain set of modules, the 2017 build tools are smaller and
-install a bit quicker.
+Studio [2015](https://blogs.msdn.microsoft.com/vcblog/2016/03/31/announcing-the-official-release-of-the-visual-c-build-tools-2015/).
 
-By default, this tool will install the 2015 build tools. To change that, run this script with
-the `--vs2017` parameter.
+By default, this tool will install the 2017 build tools. To change that, run this script with
+the `--vs2015` parameter.
 
 ## Usage
 
 ```
-npm [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2017] [--dry-run-only] install --global windows-build-tools
+npm [--python-mirror=''] [--proxy=''] [--debug] [--strict-ssl] [--resume] [--sockets=5] [--vcc-build-tools-parameters=''] [--vs2015] [--dry-run-only] install --global windows-build-tools
 ```
 
 Optional arguments:
@@ -54,7 +51,7 @@ Optional arguments:
 * `--sockets`: Specifies the number of http sockets to use at once (this controls concurrency). Defaults to infinity.
 * `--vcc-build-tools-parameters`: Specifies additional parameters for the Visual C++ Build Tools 2015. See below for more detailed usage instructions.
 * `--silent`: The script will not output any information.
-* `--vs2017`: Install the Visual Studio 2017 Build Tools instead of the Visual Studio 2015 ones.
+* `--vs2015`: Install the Visual Studio 2015 Build Tools instead of the Visual Studio 2017 ones.
 * `--dry-run-only`: Don't actually do anything, just print what the script would have done.
 
 ## Supplying Parameters to the VCC Build Tools
@@ -70,6 +67,8 @@ npm --vcc-build-tools-parameters='[""--allWorkloads""]' install --global windows
 ```
 
 ### Visual Studio 2015 Parameters
+
+If you run `windows-build-tools` with `--vs2015`, these parameters are available:
 
  - `/AdminFile`: <filename> Specifies the installation control file.
  - `/CreateAdminFile`: <filename> Specifies the location to create a control file that can then be used
@@ -91,7 +90,7 @@ npm --vcc-build-tools-parameters='[""--allWorkloads""]' install --global windows
 
 ### Visual Studio 2017 Parameters
 
-If you run `windows-build-tools` with `--vs2017`, the available parameters [are documented here](https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio).
+The available parameters [are documented here](https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio).
 
 ### Offline Installation
 
