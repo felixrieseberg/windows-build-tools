@@ -1,6 +1,6 @@
 {
   "name": "windows-build-tools",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Install C++ Build Tools for Windows using npm",
   "main": "dist/index.js",
   "scripts": {
