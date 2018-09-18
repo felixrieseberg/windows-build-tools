@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import * as path from 'path';
 
-import { IS_DRY_RUN } from './constants';
+import { BUILD_TOOLS, IS_DRY_RUN } from './constants';
 import { InstallationDetails } from './interfaces';
 import { log } from './logging';
 import { executeChildProcess } from './utils/execute-child-process';
@@ -32,7 +32,8 @@ export function setEnvironment(env: InstallationDetails) {
 
   // Should we configure the VS Build Tools?
   if (env.buildTools.toConfigure) {
-    buildArguments += ` -ConfigureBuildTools`;
+    const vccParam = `-VisualStudioVersion '${BUILD_TOOLS.version.toString()}'`;
+    buildArguments += ` -ConfigureBuildTools ${vccParam}`;
   }
 
   // Log what we're doing

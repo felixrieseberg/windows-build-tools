@@ -2,16 +2,23 @@
 Param(
   [string]$pythonPath,
   [string]$pythonExePath,
+  [string]$VisualStudioVersion,
   [switch]$ConfigurePython,
   [switch]$ConfigureBuildTools
 )
 
 function configureBuildTools() {
-  # Setting the MSVS Version
-  # We need to set it to 2015 for both Visual Studio 2015 and Visual Studio 2017 -
-  # at least as long as the underlying gyp tools don't understand 2017
-  [Environment]::SetEnvironmentVariable("GYP_MSVS_VERSION", "2015", "User")
-  npm config set msvs_version 2015
+  if ($VisualStudioVersion -eq "2015") {
+    # Setting MSVS version is needed only for the VS2015 Build Tools, not for other editions
+    [Environment]::SetEnvironmentVariable("GYP_MSVS_VERSION", "2015", "User")
+    npm config set msvs_version 2015
+  } else {
+    # Rely on node-gyp/gyp autodetection
+    npm config delete msvs_version
+    npm config delete msvs_version --global
+    [Environment]::SetEnvironmentVariable("GYP_MSVS_VERSION", $null, "User")
+    [Environment]::SetEnvironmentVariable("GYP_MSVS_VERSION", $null, "Machine")
+  }
 }
 
 function configurePython() {

@@ -8,6 +8,8 @@ jest.mock('../../src/utils/get-is-python-installed', () => ({
 
 describe('getBuildToolsInstallerPath', () => {
   it('gets the correct information (2015)', () => {
+    process.env.npm_config_vs2015 = 'true';
+
     const { getBuildToolsInstallerPath } = require('../../src/utils/get-build-tools-installer-path');
 
     expect(getBuildToolsInstallerPath()).toEqual({
@@ -17,6 +19,8 @@ describe('getBuildToolsInstallerPath', () => {
       path: 'C:\\workDir\\BuildTools_Full.exe',
       url: 'https://download.microsoft.com/download/5/f/7/5f7acaeb-8363-451f-9425-68a90f98b238/visualcppbuildtools_full.exe',
     });
+
+    delete process.env.npm_config_vs2015;
   });
 
   it('gets the correct information (2017)', () => {
