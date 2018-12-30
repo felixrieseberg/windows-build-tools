@@ -28,3 +28,6 @@ tsconfig.json
 tslint.json
 __tests__
 lib
+
+# Do not publish this thing
+.npmrc
