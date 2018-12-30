@@ -4,7 +4,7 @@ init:
 # Test against these versions of Node.js.
 environment:
   matrix:
-    - nodejs_version: "9.0"
+    - nodejs_version: "10.0"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -19,8 +19,5 @@ test_script:
   # run tests
   - npm test
 
-# Don't actually build.
-build: off
-
-# Set build version format here instead of in the admin panel.
-version: "{build}"
+build_script:
+  - if %APPVEYOR_REPO_TAG% EQU true npm publish .
