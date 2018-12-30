@@ -48,11 +48,11 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "debug": "^3.1.0",
-    "fs-extra": "^7.0.0",
+    "debug": "^4.1.1",
+    "fs-extra": "^7.0.1",
     "in-gfw": "^1.2.0",
     "nugget": "^2.0.1",
-    "string-width": "^2.1.1"
+    "string-width": "^3.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
