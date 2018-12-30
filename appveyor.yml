@@ -19,5 +19,7 @@ test_script:
   # run tests
   - npm test
 
-build_script:
+build: off
+
+deploy_script:
   - if %APPVEYOR_REPO_TAG% EQU true npm publish .
