@@ -153,6 +153,9 @@ ensure that the most popular native Node addons compile from source. Those are: 
 
 ## License & Credits
 
-The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered.
+The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered. For details regarding the license agreements applicable to Python, see *History and License* [2.x](https://docs.python.org/2/license.html) and [3.x](https://docs.python.org/3/license.html).
+
+Use of Microsoft software is subject to the terms of the corresponding license agreements. For details regarding the license agreements applicable to Visual Studio products, refer to their [*License Directory* page](https://visualstudio.microsoft.com/license-terms/). (See also [this discussion](https://social.msdn.microsoft.com/Forums/en-US/08d62115-0b51-484f-afda-229989be9263/license-for-visual-c-2017-build-tools?forum=visualstudiogeneral) for the gist of it.)
 
 Copyright (C) 2018 Felix Rieseberg. Licensed MIT. For more details, please see LICENSE.
+This license applies to this package only, not to its dependencies or the 3rd party software that it installs.
