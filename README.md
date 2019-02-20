@@ -18,7 +18,7 @@ yarn global add windows-build-tools
 ![Gif](https://user-images.githubusercontent.com/1426799/45007904-bde9f280-afb4-11e8-8a35-c77dffaffa2a.gif)
 
 After installation, npm will automatically execute this module, which downloads and installs Visual
-C++ Build Tools, provided free of charge by Microsoft. These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
+C++ Build Tools, provided free of charge for most users by Microsoft (as part of Visual Studio Community, please consult the license to determine whether or not you're eligible). These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
 If not already installed, it will also install Python 2.7, configuring your machine and npm appropriately.
 
 > :bulb: [Windows Vista / 7 only] requires [.NET Framework 4.5.1](http://www.microsoft.com/en-us/download/details.aspx?id=40773) (Currently not installed automatically by this package)
