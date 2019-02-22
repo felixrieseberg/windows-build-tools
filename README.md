@@ -53,6 +53,7 @@ Optional arguments:
 * `--silent`: The script will not output any information.
 * `--vs2015`: Install the Visual Studio 2015 Build Tools instead of the Visual Studio 2017 ones.
 * `--dry-run-only`: Don't actually do anything, just print what the script would have done.
+* `--include-arm64-tools`: Include the optional Visual Studio components required to build binaries for ARM64 Windows. Only available with the 2017 and newer build tools and Node.js v12 and up.
 
 ## Supplying Parameters to the VCC Build Tools
 
