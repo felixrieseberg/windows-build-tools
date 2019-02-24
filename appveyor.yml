@@ -8,6 +8,7 @@ environment:
 
 # Install scripts. (runs after repo cloning)
 install:
+  - ps: if (!(Test-Path $env:NPM_TOKEN)) { Rename-Item -Path .\.npmrc -NameName "npmrcdisabled"; }
   - ps: Install-Product node $env:nodejs_version
   - npm install --ignore-scripts
 
