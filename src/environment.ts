@@ -14,7 +14,7 @@ const debug = require('debug')('windows-build-tools');
  *
  * @params variables an object with paths for different environmental variables
  */
-export function setEnvironment(env: InstallationDetails) {
+export function setEnvironment(env: InstallationDetails): Promise<void> {
   const scriptPath = IS_DRY_RUN
     ? path.join(__dirname, '..', 'ps1', 'dry-run.ps1')
     : path.join(__dirname, '..', 'ps1', 'set-environment.ps1');
@@ -45,7 +45,8 @@ export function setEnvironment(env: InstallationDetails) {
     log(chalk.bold.green(`Now configuring the Visual Studio Build Tools..`));
   } else {
     log(chalk.bold.green(`Skipping configuration: No configuration for Python or Visual Studio Build Tools required.`));
-    return;
+    return(new Promise((resolve, reject) => resolve()))
+      .then(() => log(chalk.bold.green(`\nAll done!\n`)));
   }
 
   const maybeArgs = `${pythonArguments}${buildArguments}`;
