@@ -41,7 +41,7 @@ function runInstaller {
       ./BuildTools_Full.exe $params
     }
   } else {
-    Write-Output "Tried to start Python installer, but couldn't find $BuildToolsInstallerPath."
+    Write-Output "Tried to start Windows Build Tools installer, but couldn't find $BuildToolsInstallerPath."
   }
 }
 
