@@ -8,7 +8,14 @@ environment:
 
 # Install scripts. (runs after repo cloning)
 install:
-  - ps: if (!(Test-Path $env:NPM_TOKEN)) { Rename-Item -Path .\.npmrc -NameName "npmrcdisabled"; }
+  - ps: |
+      if ($env:NPM_TOKEN.length -eq 0) {
+        Write-Host "This job originated from an untrusted source.";
+        if (Test-Path ./.npmrc) {
+          Write-Host "Renaming .npmrc to disable it";
+          Rename-Item -Path ./.npmrc -NewName "npmrcdisabled";
+        }
+      }
   - ps: Install-Product node $env:nodejs_version
   - npm install --ignore-scripts
 
