@@ -26,7 +26,7 @@ function configurePython() {
   npm config set python $pythonExePath
 
   # Add Python to path
-  [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "User")
+  [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;" + [System.Environment]::GetEnvironmentVariable("Path", "User"), "User")
   [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;$env:Path", "Process")
 }
 
