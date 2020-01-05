@@ -48,7 +48,7 @@ function runInstaller {
 function runPythonInstaller {
   if (Test-Path $BuildToolsInstallerPath) {
     cd $BuildToolsInstallerPath
-    $pyParams = "/i", $PythonInstaller, "TARGETDIR=```"$BuildToolsInstallerPath\python27```"", "ALLUSERS=0", "/qn", "/L*P", "`"$BuildToolsInstallerPath\python-log.txt`""
+    $pyParams = "/i", $PythonInstaller, "TARGETDIR=```"$BuildToolsInstallerPath\python38```"", "ALLUSERS=0", "/qn", "/L*P", "`"$BuildToolsInstallerPath\python-log.txt`""
     Invoke-Expression "msiexec.exe $pyParams"
   } else {
     Write-Output "Tried to start Python installer, but couldn't find $BuildToolsInstallerPath."

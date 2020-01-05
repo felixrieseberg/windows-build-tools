@@ -10,7 +10,7 @@ const debug = require('debug')('windows-build-tools');
 
 /**
  * Uses PowerShell to configure the environment for
- * msvs_version 2015 and npm python 2.7
+ * msvs_version 2015 and npm python 3.8
  *
  * @params variables an object with paths for different environmental variables
  */

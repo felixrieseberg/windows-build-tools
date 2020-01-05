@@ -144,9 +144,9 @@ function tailPythonInstallation(): Promise<InstallationReport> {
       }
 
       if (result === 'success') {
-        pythonLastLines = [ chalk.bold.green('Successfully installed Python 2.7') ];
+        pythonLastLines = [ chalk.bold.green('Successfully installed Python 3.8') ];
 
-        debug('Installer: Successfully installed Python 2.7 according to tailer');
+        debug('Installer: Successfully installed Python 3.8 according to tailer');
         resolve({
           installPath: details || getPythonInstallerPath().targetPath,
           toConfigure: true,
@@ -155,11 +155,11 @@ function tailPythonInstallation(): Promise<InstallationReport> {
       }
 
       if (result === 'failure') {
-        log(chalk.bold.red('\nCould not install Python 2.7.'));
+        log(chalk.bold.red('\nCould not install Python 3.8.'));
         log('Please find more details in the log files, which can be found at');
         log(getWorkDirectory() + '\n');
 
-        debug('Installer: Failed to install Python 2.7 according to tailer');
+        debug('Installer: Failed to install Python 3.8 according to tailer');
         resolve({
           success: false
         });

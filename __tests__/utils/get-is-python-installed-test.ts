@@ -11,9 +11,9 @@ describe('get-is-python-installed', () => {
   });
 
   it('correctly returns the Python version if installed', async () => {
-    (spawnSync as any).mockReturnValue({ output: '\nPython 2.7.15\n' });
+    (spawnSync as any).mockReturnValue({ output: '\nPython 3.8.1\n' });
 
-    expect(getIsPythonInstalled()).toBe('Python 2.7.15');
+    expect(getIsPythonInstalled()).toBe('Python 3.8.1');
   });
 
   it('correctly returns the Python version if installed', async () => {
