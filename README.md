@@ -158,5 +158,5 @@ The Python installation was made possible by [Ali Hajimirza](https://github.com/
 
 Use of Microsoft software is subject to the terms of the corresponding license agreements. For details regarding the license agreements applicable to Visual Studio products, refer to their [*License Directory* page](https://visualstudio.microsoft.com/license-terms/). (See also [this discussion](https://social.msdn.microsoft.com/Forums/en-US/08d62115-0b51-484f-afda-229989be9263/license-for-visual-c-2017-build-tools?forum=visualstudiogeneral) for the gist of it.)
 
-Copyright (C) 2020 Felix Rieseberg. Licensed MIT. For more details, please see LICENSE.
+Copyright (C) 2018 Felix Rieseberg. Licensed MIT. For more details, please see LICENSE.
 This license applies to this package only, not to its dependencies or the 3rd party software that it installs.
