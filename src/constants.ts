@@ -20,14 +20,14 @@ export const IS_PYTHON_INSTALLED = !!INSTALLED_PYTHON_VERSION;
 
 export const PYTHON = process.arch === 'x64'
   ? {
-    installerName: 'python-2.7.17.amd64.msi',
-    installerUrl: pythonMirror.replace(/\/*$/, '/2.7.17/python-2.7.17.amd64.msi'),
-    targetName: 'python27',
+    installerName: 'python-3.8.1.amd64.msi',
+    installerUrl: pythonMirror.replace(/\/*$/, '/3.8.1/python-3.8.1.amd64.msi'),
+    targetName: 'python38',
     logName: 'python-log.txt'
   } : {
-    installerName: 'python-2.7.17.msi',
-    installerUrl: pythonMirror.replace(/\/*$/, '/2.7.17/python-2.7.17.msi'),
-    targetName: 'python27',
+    installerName: 'python-3.8.1.msi',
+    installerUrl: pythonMirror.replace(/\/*$/, '/3.8.1/python-3.8.1.msi'),
+    targetName: 'python38',
     logName: 'python-log.txt'
   };
 

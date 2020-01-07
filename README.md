@@ -19,7 +19,7 @@ yarn global add windows-build-tools
 
 After installation, npm will automatically execute this module, which downloads and installs Visual
 C++ Build Tools, provided free of charge for most users by Microsoft (as part of Visual Studio Community, please consult the license to determine whether or not you're eligible). These tools are [required to compile popular native modules](https://github.com/nodejs/node-gyp).
-If not already installed, it will also install Python 2.7, configuring your machine and npm appropriately.
+If not already installed, it will also install Python 3.8, configuring your machine and npm appropriately.
 
 > :bulb: [Windows Vista / 7 only] requires [.NET Framework 4.5.1](http://www.microsoft.com/en-us/download/details.aspx?id=40773) (Currently not installed automatically by this package)
 
@@ -100,7 +100,7 @@ it's installed. Alternatively, you can prepare a folder that contains installers
 have their original names:
 
  * Visual Studio Build Tools: `vs_BuildTools.exe` or `BuildTools_Full.exe`
- * Python: `python-2.7.15.amd64.msi` or `python-2.7.15.msi`
+ * Python: `python-3.8.1.amd64.msi` or `python-3.8.1.msi`
 
 Then, run `windows-build-tools` with the `--offline-installers` argument:
 
@@ -120,7 +120,7 @@ This package currently only handles the most common use case, none of the edge c
 
 #### Where is Python installed?
 
-It's saved under `%USERPROFILE%\.windows-build-tools\python27`.
+It's saved under `%USERPROFILE%\.windows-build-tools\python38`.
 
 #### Installing as a Non-Administrator
 `windows-build-tools` works best if installed from an account with administrative rights. However,
@@ -154,7 +154,7 @@ ensure that the most popular native Node addons compile from source. Those are: 
 
 ## License & Credits
 
-The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered. For details regarding the license agreements applicable to Python, see *History and License* [2.x](https://docs.python.org/2/license.html) and [3.x](https://docs.python.org/3/license.html).
+The Python installation was made possible by [Ali Hajimirza](https://github.com/ali92hm), who kindly wrestled with Python's MSIs until they surrendered. For details regarding the license agreements applicable to Python, see *History and License* [3.x](https://docs.python.org/3/license.html).
 
 Use of Microsoft software is subject to the terms of the corresponding license agreements. For details regarding the license agreements applicable to Visual Studio products, refer to their [*License Directory* page](https://visualstudio.microsoft.com/license-terms/). (See also [this discussion](https://social.msdn.microsoft.com/Forums/en-US/08d62115-0b51-484f-afda-229989be9263/license-for-visual-c-2017-build-tools?forum=visualstudiogeneral) for the gist of it.)
 

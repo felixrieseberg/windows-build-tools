@@ -10,7 +10,7 @@ export function getIsPythonInstalled() {
     const { output } = spawnSync('python', [ '-V' ], options as any);
     const version = output.toString().trim().replace(/,/g, '');
 
-    if (version && version.includes(' 2.')) {
+    if (version && version.includes(' 3.')) {
       return _isPythonInstalled = version;
     } else {
       return _isPythonInstalled = null;
