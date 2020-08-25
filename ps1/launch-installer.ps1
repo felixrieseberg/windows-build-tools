@@ -33,7 +33,8 @@ function runInstaller {
 
     cd $BuildToolsInstallerPath
 
-    if ($VisualStudioVersion -eq "2017") {
+    $WillowVS2017OrLater = "2017", "2019"
+    if ( $WillowVS2017OrLater -contains $VisualStudioVersion) {
       $params = "--norestart", "--quiet", "--includeRecommended", "--add", "Microsoft.VisualStudio.Workload.VCTools"
       ./vs_BuildTools.exe $params
     } else {
