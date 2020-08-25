@@ -33,6 +33,13 @@ export const PYTHON = process.arch === 'x64'
 
 export const BUILD_TOOLS = getBuildTools();
 function getBuildTools() {
+  const vs2019 = {
+    installerName: 'vs_BuildTools.exe',
+    // tslint:disable-next-line
+    installerUrl: 'https://download.visualstudio.microsoft.com/download/pr/befdb1f9-8676-4693-b031-65ee44835915/fc7680c10773759e4522f5c1ca2ce07fd01f61d7b9efa68b346c0b0da6a0b125/vs_BuildTools.exe',
+    logName: null,
+    version: 2019
+  };
   const vs2017 = {
     installerName: 'vs_BuildTools.exe',
     installerUrl: 'https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe',
@@ -45,8 +52,9 @@ function getBuildTools() {
     logName: 'build-tools-log.txt',
     version: 2015
   };
-
-  if (process.env.npm_config_vs2017) {
+  if (process.env.npm_config_vs2019) {
+    return vs2019;
+  } else if (process.env.npm_config_vs2017) {
     return vs2017;
   } else if (process.env.npm_config_vs2015) {
     return vs2015;
