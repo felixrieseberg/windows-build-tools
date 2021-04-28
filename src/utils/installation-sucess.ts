@@ -19,7 +19,7 @@ export function includesSuccess(input: string = '') {
   } else {
     // Success strings for build tools (2017)
     isBuildToolsSuccess = input.includes('Closing installer. Return code: 3010.') ||
-      input.includes('Closing installer. Return code: 0.');
+      input.includes('Closing installer. Return code: 0.') || input.includes('Closing the installer with exit code 0');
   }
 
   // Success strings for Python

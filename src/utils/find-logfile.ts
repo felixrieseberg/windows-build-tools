@@ -16,7 +16,9 @@ export function findVCCLogFile(): Promise<string> {
     fs.readdir(tmp)
       .then((contents) => {
         // Files that begin with dd_client_
-        const matchingFiles = contents.filter((f) => f.startsWith('dd_client_'));
+        // const matchingFiles = contents.filter((f) => f.startsWith('dd_client_'));
+        const matchingFiles = contents.filter((f) => f.startsWith('dd_installer_'));
+        console.log(matchingFiles)
         let matchingFile = null;
 
         if (matchingFiles && matchingFiles.length === 1) {
