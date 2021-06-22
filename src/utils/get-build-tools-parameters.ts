@@ -18,7 +18,8 @@ export function getBuildToolsExtraParameters() {
     }
   }
 
-  if (!!process.env.npm_config_include_arm64_tools && BUILD_TOOLS.version === 2017) {
+  const WillowVS2017OrLater = [2017, 2019];
+  if (!!process.env.npm_config_include_arm64_tools && WillowVS2017OrLater.includes(BUILD_TOOLS.version)) {
     extraArgs += ' --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.ATL.ARM64';
   }
 

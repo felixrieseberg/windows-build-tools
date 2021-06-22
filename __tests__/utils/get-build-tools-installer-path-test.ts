@@ -40,4 +40,22 @@ describe('getBuildToolsInstallerPath', () => {
 
     delete process.env.npm_config_vs2017;
   });
+
+  it('gets the correct information (2019)', () => {
+    process.env.npm_config_vs2019 = 'true';
+
+    jest.resetModules();
+
+    const { getBuildToolsInstallerPath } = require('../../src/utils/get-build-tools-installer-path');
+
+    expect(getBuildToolsInstallerPath()).toEqual({
+      directory: 'C:\\workDir',
+      fileName: 'vs_BuildTools.exe',
+      logPath: null,
+      path: 'C:\\workDir\\vs_BuildTools.exe',
+      url: 'https://download.visualstudio.microsoft.com/download/pr/befdb1f9-8676-4693-b031-65ee44835915/fc7680c10773759e4522f5c1ca2ce07fd01f61d7b9efa68b346c0b0da6a0b125/vs_BuildTools.exe',
+    });
+
+    delete process.env.npm_config_vs2017;
+  });
 });

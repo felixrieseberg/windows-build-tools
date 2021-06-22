@@ -103,5 +103,9 @@ describe('installation-success', () => {
     it('VS2017 successful intallation', () => {
       testLog('vs2017-success', 75, true, 2017);
     });
+
+    it('VS2019 successful intallation', () => {
+      testLog('vs2019-success', 75, true, 2019);
+    });
   });
 });
